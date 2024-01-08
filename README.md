@@ -3,11 +3,11 @@
 *Ruby
 *Rails
 ## 実行手順
-$ git clone 
+`$ git clone 
 $ cd shared_household_account_book
 $ bundl install
 $ rails db:create && rails db:migrate
-$ rails s
+$ rails s`
 ## カタログ設計
 ## テーブル定義書
 ## ワイヤーフレーム
