@@ -4,7 +4,7 @@
 * Rails
 ## 実行手順
 ```
-$ git clone 
+$ git clone git@github.com:KeiSuzukiNishi/shared_household_account_book.git
 $ cd shared_household_account_book
 $ bundl install
 $ rails db:create && rails db:migrate
