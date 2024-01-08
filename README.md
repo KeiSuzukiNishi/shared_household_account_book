@@ -1,7 +1,7 @@
 # README
 ## 開発言語
-*Ruby
-*Rails
+* Ruby
+* Rails
 ## 実行手順
 ```
 $ git clone 
