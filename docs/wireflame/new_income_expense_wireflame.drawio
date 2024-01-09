@@ -120,8 +120,11 @@
                 <mxCell id="33" value="登録" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="447" y="440" width="82" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="44" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;収入支出一覧　項目一覧　カレンダー一覧　月別グラフ　割勘一覧　アカウント　ログアウト&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+                <mxCell id="44" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;収入支出一覧　項目一覧　カレンダー一覧　月別グラフ　割勘一覧　アカウント　ログアウト&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;" parent="1" vertex="1">
                     <mxGeometry x="250" width="600" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="@ 2024 Shared Book ALL RIGHTS RESERVED." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry y="510" width="850" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
