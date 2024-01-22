@@ -19,4 +19,4 @@ https://app.diagrams.net/#G1Vqa4a3cGnBcsw4bcd9CckrZkp7NOQ5Wj
 ## ER図
 ![無題](https://github.com/KeiSuzukiNishi/shared_household_account_book/assets/113779940/56cfa654-bc2c-4732-8075-6b9d43a6aaa5)
 ## 画面遷移図
-![無題](https://github.com/KeiSuzukiNishi/shared_household_account_book/assets/113779940/92e28c4a-f67e-472f-b662-f2c01d024894)
+![無題2](https://github.com/KeiSuzukiNishi/shared_household_account_book/assets/113779940/cbc274bc-d1cf-42a9-b4b1-841208fcf3c9)
