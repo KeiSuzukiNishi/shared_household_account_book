@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dealt_on: 2024-02-07
+  income_expense_type: 1
+  company: MyString
+  description: MyText
+  remarks: MyText
+  amount: 
+  image: 
+
+two:
+  dealt_on: 2024-02-07
+  income_expense_type: 1
+  company: MyString
+  description: MyText
+  remarks: MyText
+  amount: 
+  image: 
