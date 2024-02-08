@@ -1,0 +1,52 @@
+<%= form_with(model: incomes_expense) do |form| %>
+  <% if incomes_expense.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(incomes_expense.errors.count, "error") %> prohibited this incomes_expense from being saved:</h2>
+
+      <ul>
+        <% incomes_expense.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :dealt_on, style: "display: block" %>
+    <%= form.date_field :dealt_on %>
+  </div>
+
+  <div>
+    <%= form.label :income_expense_type, style: "display: block" %>
+    <%= form.number_field :income_expense_type %>
+  </div>
+
+  <div>
+    <%= form.label :company, style: "display: block" %>
+    <%= form.text_field :company %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :remarks, style: "display: block" %>
+    <%= form.text_area :remarks %>
+  </div>
+
+  <div>
+    <%= form.label :amount, style: "display: block" %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div>
+    <%= form.label :image, style: "display: block" %>
+    <%= form.text_field :image %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

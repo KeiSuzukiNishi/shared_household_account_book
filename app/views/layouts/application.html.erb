@@ -11,6 +11,17 @@
   </head>
 
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <% if user_signed_in? %>
+      <%= link_to "収支一覧", incomes_expenses_path %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :get %>
+    <% else %>
+      <%= link_to "新規登録", new_user_registration_path %>
+      <%= link_to "ログイン", new_user_session_path %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,12 @@
+<h1>Incomes expenses</h1>
+
+<div id="incomes_expenses">
+  <% @incomes_expenses.each do |incomes_expense| %>
+    <%= render incomes_expense %>
+    <p>
+      <%= link_to "Show this incomes expense", incomes_expense %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New incomes expense", new_incomes_expense_path %>
