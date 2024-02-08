@@ -1,4 +1,5 @@
 class IncomesExpensesController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   before_action :set_incomes_expense, only: %i[ show edit update destroy ]
 
   # GET /incomes_expenses or /incomes_expenses.json
