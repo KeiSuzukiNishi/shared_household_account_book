@@ -1,8 +1,8 @@
 <%= render @incomes_expense %>
 
 <div>
-  <%= link_to "Edit this incomes expense", edit_incomes_expense_path(@incomes_expense) %> |
-  <%= link_to "Back to incomes expenses", incomes_expenses_path %>
+  <%= link_to t('shared_book.edit'), edit_incomes_expense_path(@incomes_expense) %> |
+  <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
 
-  <%= button_to "Destroy this incomes expense", @incomes_expense, method: :delete %>
+  <%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete %>
 </div>
