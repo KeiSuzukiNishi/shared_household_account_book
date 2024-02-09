@@ -169,3 +169,5 @@ ja:
     incomes_expenses_updated: 収入支出内容が更新されました。
     incomes_expenses_destroyed: 収入支出内容が削除されました。
     incomes_expenses_created: 収入支出内容が作成されました。
+    forgot_password?: パスワードをお忘れの方はこちら
+    characters_minimum: 文字以上
