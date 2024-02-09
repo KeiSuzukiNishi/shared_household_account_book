@@ -1,10 +1,10 @@
-<h1>Editing incomes expense</h1>
+<h1><%= t('shared_book.incomes_expenses_edit') %></h1>
 
 <%= render "form", incomes_expense: @incomes_expense %>
 
 <br>
 
 <div>
-  <%= link_to "Show this incomes expense", @incomes_expense %> |
-  <%= link_to "Back to incomes expenses", incomes_expenses_path %>
+  <%= link_to t('shared_book.details'), @incomes_expense %> |
+  <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
 </div>

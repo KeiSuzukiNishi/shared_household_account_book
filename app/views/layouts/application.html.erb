@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SharedHouseholdAccountBook</title>
+    <title><%= t('shared_book.title') %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,11 +15,12 @@
     <p class="alert"><%= alert %></p>
 
     <% if user_signed_in? %>
-      <%= link_to "収支一覧", incomes_expenses_path %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :get %>
+      <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
+      <%#= link_to t('shared_book.user_show'), users_path %>
+      <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
     <% else %>
-      <%= link_to "新規登録", new_user_registration_path %>
-      <%= link_to "ログイン", new_user_session_path %>
+      <%= link_to t('shared_book.sign_up'), new_user_registration_path %>
+      <%= link_to t('shared_book.sign_in'), new_user_session_path %>
     <% end %>
 
     <%= yield %>

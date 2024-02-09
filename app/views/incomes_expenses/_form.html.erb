@@ -12,41 +12,41 @@
   <% end %>
 
   <div>
-    <%= form.label :dealt_on, style: "display: block" %>
+    <%= form.label t('shared_book.dealt_on'), style: "display: block" %>
     <%= form.date_field :dealt_on %>
   </div>
 
   <div>
-    <%= form.label :income_expense_type, style: "display: block" %>
+    <%= form.label t('shared_book.income_expense_type'), style: "display: block" %>
     <%= form.number_field :income_expense_type %>
   </div>
 
   <div>
-    <%= form.label :company, style: "display: block" %>
+    <%= form.label t('shared_book.company'), style: "display: block" %>
     <%= form.text_field :company %>
   </div>
 
   <div>
-    <%= form.label :description, style: "display: block" %>
+    <%= form.label t('shared_book.description'), style: "display: block" %>
     <%= form.text_area :description %>
   </div>
 
   <div>
-    <%= form.label :remarks, style: "display: block" %>
+    <%= form.label t('shared_book.remarks'), style: "display: block" %>
     <%= form.text_area :remarks %>
   </div>
 
   <div>
-    <%= form.label :amount, style: "display: block" %>
+    <%= form.label t('shared_book.amount'), style: "display: block" %>
     <%= form.text_field :amount %>
   </div>
 
   <div>
-    <%= form.label :image, style: "display: block" %>
+    <%= form.label t('shared_book.image'), style: "display: block" %>
     <%= form.text_field :image %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit t('shared_book.create') %>
   </div>
 <% end %>

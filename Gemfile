@@ -69,4 +69,4 @@ end
 
 gem 'devise'
 gem 'rexml'
-# gem 'rails'
+gem 'devise-i18n'

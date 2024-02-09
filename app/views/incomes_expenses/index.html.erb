@@ -1,12 +1,12 @@
-<h1>Incomes expenses</h1>
+<h1><%= t('shared_book.incomes_expenses_index') %></h1>
 
 <div id="incomes_expenses">
   <% @incomes_expenses.each do |incomes_expense| %>
     <%= render incomes_expense %>
     <p>
-      <%= link_to "Show this incomes expense", incomes_expense %>
+      <%= link_to t('shared_book.details'), incomes_expense %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New incomes expense", new_incomes_expense_path %>
+<%= link_to t('shared_book.new_incomes_expenses'), new_incomes_expense_path %>
