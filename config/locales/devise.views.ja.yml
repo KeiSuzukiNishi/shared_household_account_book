@@ -172,3 +172,5 @@ ja:
     forgot_password?: パスワードをお忘れの方はこちら
     characters_minimum: 文字以上
     name: 名前
+    passsowd_reset: パスワードリセット
+    send: 送信
