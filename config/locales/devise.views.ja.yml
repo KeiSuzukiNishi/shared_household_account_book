@@ -165,3 +165,7 @@ ja:
     destroy: 削除
     create: 登録
     user_show: アカウント
+    incomes_expenses_edit: 収入支出編集
+    incomes_expenses_updated: 収入支出内容が更新されました。
+    incomes_expenses_destroyed: 収入支出内容が削除されました。
+    incomes_expenses_created: 収入支出内容が作成されました。
