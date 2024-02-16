@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_16_031933) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_16_034409) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_031933) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_incomes_expenses", id: false, force: :cascade do |t|
+    t.bigint "incomes_expense_id", null: false
+    t.bigint "category_id", null: false
+    t.index ["category_id", "incomes_expense_id"], name: "idx_on_category_id_incomes_expense_id_d1e6c13e0f"
+    t.index ["incomes_expense_id", "category_id"], name: "idx_on_incomes_expense_id_category_id_2a86cf5414"
   end
 
   create_table "incomes_expenses", force: :cascade do |t|
