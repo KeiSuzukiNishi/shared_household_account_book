@@ -30,8 +30,12 @@
   </p>
 
   <p>
-    <strong><%= t('shared_book.image') %>:</strong>
-    <%= incomes_expense.image %>
+    <% if incomes_expense.image.attached? %>
+      <div>
+        <strong><%= t('shared_book.image') %>:</strong> 
+        <%= link_to t('shared_book.view_image'), incomes_expense.image %>
+      </div>
+    <% end %>
   </p>
 
 </div>

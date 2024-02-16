@@ -18,7 +18,7 @@
 
   <div>
     <%= form.label t('shared_book.income_expense_type'), style: "display: block" %>
-    <%= form.number_field :income_expense_type %>
+    <%= form.select :income_expense_type, IncomesExpense.income_expense_types.keys, {include_blank: true} %>
   </div>
 
   <div>
@@ -43,7 +43,7 @@
 
   <div>
     <%= form.label t('shared_book.image'), style: "display: block" %>
-    <%= form.text_field :image %>
+    <%= form.file_field :image %>
   </div>
 
   <div>
