@@ -1,8 +1,13 @@
 class CategoriesController < ApplicationController
-    before_action :set_category, only: [:show, :edit, :update, :destroy]
+    before_action :set_category, only: [:edit, :update, :destroy]
 
     def index
       @categories = Category.all
+
+      respond_to do |format|
+          format.html
+          format.json { render :index, location: categories_url }
+      end
     end
   
     def new
@@ -11,16 +16,24 @@ class CategoriesController < ApplicationController
   
     def create
       @category = Category.new(category_params)
-      if @category.save
-        redirect_to categories_path, notice: 'Category was successfully created.'
-      else
-        render :new
+      
+      respond_to do |format|
+        if @category.save
+          format.html { redirect_to category_url(@category), notice: t('shared_book.categorys_created') }
+          format.json { render :index, status: :created, location: @category }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @category.errors, status: :unprocessable_entity }
+        end
       end
     end
   
     def edit
     end
   
+    def show
+    end
+
     def update
       if @category.update(category_params)
         redirect_to categories_path, notice: 'Category was successfully updated.'
@@ -29,6 +42,15 @@ class CategoriesController < ApplicationController
       end
     end
   
+    def destroy
+        @category.destroy!
+        # binding.pry
+        respond_to do |format|
+          format.html { redirect_to categories_url, notice: t('shared_book.categories_destroyed') }
+          format.json { head :no_content }
+        end
+    end
+
     private
   
     def set_category
