@@ -14,6 +14,15 @@
     <%= incomes_expense.company %>
   </p>
 
+<p>
+  <strong><%= t('shared_book.categories') %>:</strong>
+  <% @incomes_expenses.each do |incomes_expense| %>
+    <% incomes_expense.categories.each do |category| %>
+      <%= category.name %>
+    <% end %>
+  <% end %>
+</p>
+
   <p>
     <strong><%= t('shared_book.description') %>:</strong>
     <%= incomes_expense.description %>

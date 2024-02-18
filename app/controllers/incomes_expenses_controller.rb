@@ -5,19 +5,24 @@ class IncomesExpensesController < ApplicationController
   # GET /incomes_expenses or /incomes_expenses.json
   def index
     @incomes_expenses = IncomesExpense.all
+    @categories = Category.all
   end
 
   # GET /incomes_expenses/1 or /incomes_expenses/1.json
   def show
+    @incomes_expenses = IncomesExpense.all
+    @categories = Category.all
   end
 
   # GET /incomes_expenses/new
   def new
     @incomes_expense = IncomesExpense.new
+    @categories = Category.all
   end
 
   # GET /incomes_expenses/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /incomes_expenses or /incomes_expenses.json

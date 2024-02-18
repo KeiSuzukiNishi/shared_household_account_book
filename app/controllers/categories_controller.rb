@@ -19,11 +19,11 @@ class CategoriesController < ApplicationController
       
       respond_to do |format|
         if @category.save
-          format.html { redirect_to category_url(@category), notice: t('shared_book.categorys_created') }
-          format.json { render :index, status: :created, location: @category }
+            format.html { redirect_to categories_url, notice: t('shared_book.categorys_created') }
+            format.json { render :index, status: :created, location: @category }
         else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @category.errors, status: :unprocessable_entity }
+            format.html { render :new, status: :unprocessable_entity }
+            format.json { render json: @category.errors, status: :unprocessable_entity }
         end
       end
     end
