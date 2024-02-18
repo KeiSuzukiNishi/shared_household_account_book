@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_16_034409) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_18_144846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,13 +48,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_034409) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories_incomes_expenses", id: false, force: :cascade do |t|
-    t.bigint "incomes_expense_id", null: false
-    t.bigint "category_id", null: false
-    t.index ["category_id", "incomes_expense_id"], name: "idx_on_category_id_incomes_expense_id_d1e6c13e0f"
-    t.index ["incomes_expense_id", "category_id"], name: "idx_on_incomes_expense_id_category_id_2a86cf5414"
-  end
-
   create_table "incomes_expenses", force: :cascade do |t|
     t.date "dealt_on"
     t.integer "income_expense_type"
@@ -65,6 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_034409) do
     t.binary "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_incomes_expenses_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,4 +78,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_034409) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "incomes_expenses", "categories"
 end

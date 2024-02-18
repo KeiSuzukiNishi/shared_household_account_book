@@ -7,6 +7,6 @@ class IncomesExpense < ApplicationRecord
     enum income_expense_type: { "収入": 0, "支出": 1 }
     has_one_attached :image
 
-    has_and_belongs_to_many :categories
+    belongs_to :category
 
 end
