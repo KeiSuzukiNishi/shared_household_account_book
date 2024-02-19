@@ -174,3 +174,9 @@ ja:
     name: 名前
     passsowd_reset: パスワードリセット
     send: 送信
+    view_image: 画像
+    category_index: 項目一覧
+    categorys_created: 項目が作成されました。
+    categories_destroyed: 項目が削除されました。
+    are_you_sure: 本当によろしいですか？
+    category: 項目
