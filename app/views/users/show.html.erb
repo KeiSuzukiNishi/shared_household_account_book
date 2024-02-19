@@ -1,0 +1,7 @@
+  <h1><%= t("user-show-page") %></h1>
+
+  <p><%= t("name") %>: <%= @user.name %></p>
+  <p><%= t("email") %>: <%= @user.email %></p>
+
+    <div ><%= link_to t("edit"), edit_user_registration_path %></div>
+    <div ><%= link_to t("destroy"), user_path(@user), method: :delete, data: { confirm: t("are_you_sure") }%></div>
