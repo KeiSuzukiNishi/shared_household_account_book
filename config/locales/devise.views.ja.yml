@@ -99,9 +99,10 @@ ja:
         currently_waiting_confirmation_for_email: "%{email} の確認待ち"
         leave_blank_if_you_don_t_want_to_change_it: 空欄のままなら変更しません
         title: "%{resource}編集"
-        unhappy: 気に入りません
+        unhappy: 気に入りませんか？
         update: 更新
-        we_need_your_current_password_to_confirm_your_changes: 変更を反映するには現在のパスワードを入力してください
+        we_need_your_current_password_to_confirm_your_changes: 変更を反映するには現在のパスワードを入力してください。
+        edit_user_page: アカウント編集画面
       new:
         sign_up: アカウント登録
       signed_up: アカウント登録が完了しました。
@@ -148,6 +149,7 @@ ja:
     notice: 'お知らせ: %{message}'
     alert: 'アラート: %{message}'
     sign_in: ログイン
+    sign_in_page: ログイン画面
     sign_up: アカウント登録
     sign_out: ログアウト
     incomes_expenses_index: 収入支出一覧
@@ -180,3 +182,5 @@ ja:
     categories_destroyed: 項目が削除されました。
     are_you_sure: 本当によろしいですか？
     category: 項目
+    user_show_page: アカウント詳細画面
+    
