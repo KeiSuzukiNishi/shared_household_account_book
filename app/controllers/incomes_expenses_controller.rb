@@ -28,6 +28,7 @@ class IncomesExpensesController < ApplicationController
   # POST /incomes_expenses or /incomes_expenses.json
   def create
     @incomes_expense = IncomesExpense.new(incomes_expense_params)
+    @categories = Category.all
 
     respond_to do |format|
       if @incomes_expense.save
@@ -70,6 +71,6 @@ class IncomesExpensesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def incomes_expense_params
-      params.require(:incomes_expense).permit(:dealt_on, :income_expense_type, :company, :description, :remarks, :amount, :image)
+      params.require(:incomes_expense).permit(:dealt_on, :income_expense_type, :company, :description, :remarks, :amount, :image, :category_id)
     end
 end
