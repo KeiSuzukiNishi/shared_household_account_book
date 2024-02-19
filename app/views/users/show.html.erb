@@ -4,4 +4,3 @@
   <p><%= t("email") %>: <%= @user.email %></p>
 
     <div ><%= link_to t("edit"), edit_user_registration_path %></div>
-    <div ><%= link_to t("destroy"), user_path(@user), method: :delete, data: { confirm: t("are_you_sure") }%></div>
