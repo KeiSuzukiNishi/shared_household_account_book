@@ -71,3 +71,4 @@ gem 'devise'
 gem 'rexml'
 gem 'devise-i18n'
 gem 'pry-rails'
+gem "simple_calendar"
