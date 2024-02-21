@@ -16,10 +16,8 @@
 
   <p>
     <strong><%= t('shared_book.categories') %>:</strong>
-    <% @incomes_expenses.each do |incomes_expense| %>
       <% category = Category.find(incomes_expense.category_id) %>
       <%= category.name %>
-    <% end %>
   </p>
 
   <p>

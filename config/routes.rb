@@ -4,4 +4,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :destroy]
   resources :categories
   root "incomes_expenses#index"
+
+  resources :incomes_expenses do
+    collection do
+      get 'calendar'
+    end
+  end
 end

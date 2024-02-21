@@ -1,8 +1,12 @@
-<%= render @incomes_expense %>
-
-<div>
+<% if @incomes_expense %>
+  <%= render @incomes_expense %>
+  <div>
   <%= link_to t('shared_book.edit'), edit_incomes_expense_path(@incomes_expense) %> |
   <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
 
   <%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete %>
-</div>
+  </div>
+  <% else %>
+    <!-- @incomes_expenseがnilの場合の表示や処理を追加 -->
+    <p>No incomes expense found.</p>
+<% end %>
