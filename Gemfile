@@ -77,3 +77,4 @@ gem "sassc-rails"
 gem 'jquery-rails'
 gem 'bootstrap', '~> 5.0.0'
 gem 'mini_racer'
+gem 'rails-i18n'

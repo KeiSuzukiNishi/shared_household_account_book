@@ -38,7 +38,7 @@ class IncomesExpensesController < ApplicationController
 
   def calendar
     @date = params.fetch(:date, Date.today).to_date
-    @incomes_expenses = IncomesExpense.where(date: @date.beginning_of_month..@date.end_of_month)
+    @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_month..@date.end_of_month)
     @categories = Category.all
     render 'calendar'
   end

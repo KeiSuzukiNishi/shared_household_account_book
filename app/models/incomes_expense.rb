@@ -9,4 +9,11 @@ class IncomesExpense < ApplicationRecord
 
     belongs_to :category
 
+    def start_date
+        starts_at || dealt_on
+    end
+
+    def end_date
+        ends_at || dealt_on
+    end
 end
