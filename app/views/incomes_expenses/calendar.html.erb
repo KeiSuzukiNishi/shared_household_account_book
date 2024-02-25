@@ -9,3 +9,7 @@
     <%= link_to total_amount, incomes_expenses_path(@incomes_expenses) %>
   <% end %>
 <% end %>
+
+<% @incomes_expenses.each do |incomes_expense| %>
+    <%= render incomes_expense %>
+  <% end %>
