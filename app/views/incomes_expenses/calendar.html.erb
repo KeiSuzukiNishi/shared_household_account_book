@@ -1,6 +1,5 @@
 <h1><%= t('shared_book.calendar_page') %></h1>
 
-<% I18n.locale = :de %>
 <%= month_calendar(events: @incomes_expenses) do |date, incomes_expenses| %>
   <%= date.day %>
   <% total_amount = incomes_expenses.sum(&:amount) %>
