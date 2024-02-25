@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :incomes_expenses do
     collection do
       get 'calendar'
+      get 'day', to: 'incomes_expenses#day'
     end
   end
 end

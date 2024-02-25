@@ -1,0 +1,15 @@
+
+[1mFrom:[0m /home/keisuzuki/workspace/dpro/final_task/shared_household_account_book/app/controllers/incomes_expenses_controller.rb:41 IncomesExpensesController#calendar:
+
+    [1;34m39[0m: [32mdef[0m [1;34mcalendar[0m
+    [1;34m40[0m:   @date = params.fetch([33m:date[0m, [1;34;4mDate[0m.today).to_date
+ => [1;34m41[0m:   binding.pry   [1;34m# この行を追加[0m
+    [1;34m42[0m:   [32mif[0m params[[33m:id[0m] == [31m[1;31m"[0m[31mcalendar[1;31m"[0m[31m[0m
+    [1;34m43[0m:     @incomes_expenses = []
+    [1;34m44[0m:   [32melse[0m
+    [1;34m45[0m:     @incomes_expenses = [1;34;4mIncomesExpense[0m.where([35mstarts_at[0m: @date.beginning_of_month..@date.end_of_month)
+    [1;34m46[0m:   [32mend[0m
+    [1;34m47[0m:   @categories = [1;34;4mCategory[0m.all
+    [1;34m48[0m:   render [31m[1;31m'[0m[31mcalendar[1;31m'[0m[31m[0m
+    [1;34m49[0m: [32mend[0m
+
