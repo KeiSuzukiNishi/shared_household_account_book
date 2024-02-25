@@ -38,7 +38,14 @@ class IncomesExpensesController < ApplicationController
 
   def calendar
     @date = params.fetch(:date, Date.today).to_date
-    @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_month..@date.end_of_month)
+    if params[:id] == "calendar"
+      # "calendar" の場合の処理、例えば別の変数を使用するか、デフォルトの値をセットするなど
+      @incomes_expenses = []
+    else
+      @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_month..@date.end_of_month)
+    end
+    Rails.logger.debug("@incomes_expenses: #{@incomes_expenses.inspect}")
+    
     @categories = Category.all
     render 'calendar'
   end

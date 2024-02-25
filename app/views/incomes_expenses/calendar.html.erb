@@ -1,5 +1,17 @@
 <h1><%= t('shared_book.calendar_page') %></h1>
 
+<% if @incomes_expense %>
+  <%= render @incomes_expense %>
+  <div>
+  <%= link_to t('shared_book.edit'), edit_incomes_expense_path(@incomes_expense) %> |
+  <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
+
+  <%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete %>
+  </div>
+  <% else %>
+    <p>No incomes expense found.</p>
+<% end %>
+
 <%= month_calendar(events: @incomes_expenses) do |date, incomes_expenses| %>
   <%= date.day %>
   <% total_amount = incomes_expenses.sum(&:amount) %>
