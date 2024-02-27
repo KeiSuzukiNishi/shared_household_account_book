@@ -12,38 +12,43 @@
   <% end %>
 
   <div>
-    <%= form.label t('shared_book.dealt_on'), style: "display: block" %>
-    <%= form.date_field :dealt_on %>
+    <%= form.label t('shared_book.dealt_on'), for: 'incomes_expense_dealt_on' %>
+    <%= form.date_field :dealt_on, id: 'incomes_expense_dealt_on' %>
   </div>
 
   <div>
-    <%= form.label t('shared_book.income_expense_type'), style: "display: block" %>
-    <%= form.number_field :income_expense_type %>
+    <%= form.label t('shared_book.income_expense_type'), for: 'incomes_expense_income_expense_type' %>
+    <%= form.select :income_expense_type, IncomesExpense.income_expense_types.keys, {include_blank: true}, id: 'incomes_expense_income_expense_type' %>
   </div>
 
   <div>
-    <%= form.label t('shared_book.company'), style: "display: block" %>
-    <%= form.text_field :company %>
+    <%= form.label t('shared_book.company'), for: 'incomes_expense_company' %>
+    <%= form.text_field :company, id: 'incomes_expense_company' %>
   </div>
 
   <div>
-    <%= form.label t('shared_book.description'), style: "display: block" %>
-    <%= form.text_area :description %>
+    <%= form.label t('shared_book.category'), for: 'incomes_expense_category_id' %>
+    <%= form.collection_select :category_id, @categories, :id, :name, { include_blank: true }, id: 'incomes_expense_category_id' %>
   </div>
 
   <div>
-    <%= form.label t('shared_book.remarks'), style: "display: block" %>
-    <%= form.text_area :remarks %>
+    <%= form.label t('shared_book.description'), for: 'incomes_expense_description' %>
+    <%= form.text_area :description, id: 'incomes_expense_description' %>
   </div>
 
   <div>
-    <%= form.label t('shared_book.amount'), style: "display: block" %>
-    <%= form.text_field :amount %>
+    <%= form.label t('shared_book.remarks'), for: 'incomes_expense_remarks' %>
+    <%= form.text_area :remarks, id: 'incomes_expense_remarks' %>
   </div>
 
   <div>
-    <%= form.label t('shared_book.image'), style: "display: block" %>
-    <%= form.text_field :image %>
+    <%= form.label t('shared_book.amount'), for: 'incomes_expense_amount' %>
+    <%= form.text_field :amount, id: 'incomes_expense_amount' %>
+  </div>
+
+  <div>
+    <%= form.label t('shared_book.image'), for: 'incomes_expense_image' %>
+    <%= form.file_field :image, id: 'incomes_expense_image' %>
   </div>
 
   <div>

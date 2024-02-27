@@ -5,24 +5,30 @@ class IncomesExpensesController < ApplicationController
   # GET /incomes_expenses or /incomes_expenses.json
   def index
     @incomes_expenses = IncomesExpense.all
+    @categories = Category.all
   end
 
   # GET /incomes_expenses/1 or /incomes_expenses/1.json
   def show
+    @incomes_expenses = IncomesExpense.all
+    @categories = Category.all
   end
 
   # GET /incomes_expenses/new
   def new
     @incomes_expense = IncomesExpense.new
+    @categories = Category.all
   end
 
   # GET /incomes_expenses/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /incomes_expenses or /incomes_expenses.json
   def create
     @incomes_expense = IncomesExpense.new(incomes_expense_params)
+    @categories = Category.all
 
     respond_to do |format|
       if @incomes_expense.save
@@ -51,7 +57,6 @@ class IncomesExpensesController < ApplicationController
   # DELETE /incomes_expenses/1 or /incomes_expenses/1.json
   def destroy
     @incomes_expense.destroy!
-
     respond_to do |format|
       format.html { redirect_to incomes_expenses_url, notice: t('shared_book.incomes_expenses_destroyed') }
       format.json { head :no_content }
@@ -66,6 +71,6 @@ class IncomesExpensesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def incomes_expense_params
-      params.require(:incomes_expense).permit(:dealt_on, :income_expense_type, :company, :description, :remarks, :amount, :image)
+      params.require(:incomes_expense).permit(:dealt_on, :income_expense_type, :company, :description, :remarks, :amount, :image, :category_id)
     end
 end

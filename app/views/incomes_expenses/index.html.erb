@@ -5,6 +5,8 @@
     <%= render incomes_expense %>
     <p>
       <%= link_to t('shared_book.details'), incomes_expense %>
+      <%= link_to t('shared_book.edit'), edit_incomes_expense_path(incomes_expense) %>
+      <%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete %>
     </p>
   <% end %>
 </div>

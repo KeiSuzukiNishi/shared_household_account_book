@@ -1,0 +1,9 @@
+<div>
+  <ul>
+    <li><%= category.name %></li>
+    <p>
+      <%= link_to t('shared_book.edit'), edit_category_path(category) %> |
+      <%= button_to t('shared_book.destroy'), category_path(category), method: :delete, data: { confirm: t('shared_book.are_you_sure') } %>
+    </p>
+  </ul>
+</div>

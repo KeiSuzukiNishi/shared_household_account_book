@@ -70,6 +70,6 @@ end
 gem 'devise'
 gem 'rexml'
 gem 'devise-i18n'
-gem 'rails_admin', '~> 3.0'
-gem "cssbundling-rails"
-gem "cssbundling-rails"
+gem 'pry-rails'
+gem 'rails_admin'
+gem "sassc-rails"
