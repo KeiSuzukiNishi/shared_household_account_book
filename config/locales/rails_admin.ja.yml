@@ -148,3 +148,13 @@ ja:
         default_col_sep: ","
         col_sep: カラム区切り文字
         col_sep_help: "空白にすると標準の '%{value}' になります。" # value is default_col_sep
+  activestorage:
+    name: "アクティブストレージ"
+    attachment:
+      name: "アタッチメント"
+    blob:
+      name: "ブロブ"
+    variant:
+      name: "バリアントレコード"
+  category:
+    name : "カテゴリ"

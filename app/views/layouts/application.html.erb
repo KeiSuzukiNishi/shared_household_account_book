@@ -14,11 +14,19 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <% if user_signed_in? %>
-      <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
-      <%= link_to t('shared_book.category_index'), categories_path %>
-      <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
-      <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
+    <% if signed_in? %>
+      <% if current_user&.admin? %>
+            <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
+        <%= link_to t('shared_book.category_index'), categories_path %>
+        <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
+        <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
+        <%= link_to t("admin.admin_page"), rails_admin_path %></li>
+      <% else %>
+        <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
+        <%= link_to t('shared_book.category_index'), categories_path %>
+        <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
+        <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
+      <% end %>
     <% else %>
       <%= link_to t('shared_book.sign_up'), new_user_registration_path %>
       <%= link_to t('shared_book.sign_in'), new_user_session_path %>
