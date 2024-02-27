@@ -73,3 +73,4 @@ gem 'devise-i18n'
 gem 'pry-rails'
 gem 'rails_admin'
 gem "sassc-rails"
+gem 'cancancan'
