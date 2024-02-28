@@ -8,6 +8,7 @@ class IncomesExpense < ApplicationRecord
     has_one_attached :image
 
     belongs_to :category
+    belongs_to :user
 
     def start_date
         starts_at || dealt_on
