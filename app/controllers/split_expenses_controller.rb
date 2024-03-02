@@ -1,5 +1,9 @@
 class SplitExpensesController < ApplicationController
     def index
+        @users = User.all
+        @year = params[:year].to_i || Time.now.year
+        @month = params[:month].to_i || Time.now.month
+        
         if params[:user_incomes]
           user_incomes = params[:user_incomes].values.map(&:to_i)
           total_income = user_incomes.sum
@@ -10,7 +14,6 @@ class SplitExpensesController < ApplicationController
         else
           @results = [] 
         end
-    
         render :index
     end
         

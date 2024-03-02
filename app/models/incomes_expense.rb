@@ -17,4 +17,9 @@ class IncomesExpense < ApplicationRecord
     def end_date
         ends_at || dealt_on
     end
+
+    def self.total_amount_by_month(year, month)
+        where("extract(year from dealt_on) = ? AND extract(month from dealt_on) = ?", year, month)
+          .sum(:amount)
+    end
 end

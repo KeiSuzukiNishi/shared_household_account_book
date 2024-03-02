@@ -33,3 +33,29 @@
 <% else %>
   <p>No results available.</p>
 <% end %>
+
+<h1>月ごとの合計金額</h1>
+
+<%= form_tag("/split_expenses/index/", method: "get") do %>
+  <%= select_year(Date.today, { prompt: 'Year', default: @year }, { name: 'year' }) %>
+  <%= select_month(Date.today, { prompt: 'Month', default: @month }, { name: 'month' }) %>
+  <%= submit_tag "表示" %>
+<% end %>
+
+
+<table>
+    <thead>
+      <tr>
+        <th>ユーザー名</th>
+        <th>合計金額</th>
+      </tr>
+    </thead>  
+     <tbody>
+        <% @users.each do |user| %>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= user.total_amount_by_month(@year, params[:month]) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
