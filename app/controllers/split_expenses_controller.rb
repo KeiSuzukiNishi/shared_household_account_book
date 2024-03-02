@@ -3,6 +3,7 @@ class SplitExpensesController < ApplicationController
         @users = User.all
         @year = params[:year].to_i || Time.now.year
         @month = params[:month].to_i || Time.now.month
+        @total_expenses = @users.sum { |user| user.total_amount_by_month(@year, @month) }
         
         if params[:user_incomes]
           user_incomes = params[:user_incomes].values.map(&:to_i)

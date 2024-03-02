@@ -8,9 +8,10 @@
     <%= text_field_tag "user_incomes[#{user.id}]", nil, id: "user_#{user.id}_income" %><br>
   <% end %>
 
+  <%= select_year(Date.today, { prompt: 'Year', default: @year }, { name: 'year' }) %>
+  <%= select_month(Date.today, { prompt: 'Month', default: @month }, { name: 'month' }) %>
   <%= submit_tag "計算" %>
 <% end %>
-
 
 <% if @results.present? %>
   <h2>負担比率</h2>
@@ -30,32 +31,29 @@
       <% end %>
     </tbody>
   </table>
-<% else %>
-  <p>No results available.</p>
-<% end %>
 
-<h1>月ごとの合計金額</h1>
-
-<%= form_tag("/split_expenses/index/", method: "get") do %>
-  <%= select_year(Date.today, { prompt: 'Year', default: @year }, { name: 'year' }) %>
-  <%= select_month(Date.today, { prompt: 'Month', default: @month }, { name: 'month' }) %>
-  <%= submit_tag "表示" %>
-<% end %>
-
-
-<table>
+  <h1>月ごとの合計金額</h1>
+  <table>
     <thead>
       <tr>
         <th>ユーザー名</th>
-        <th>合計金額</th>
+        <th>収支合計金額</th>
+        <th>負担すべき金額</th>
+        <th>差額</th>
       </tr>
     </thead>  
-     <tbody>
-        <% @users.each do |user| %>
-            <tr>
-                <td><%= user.name %></td>
-                <td><%= user.total_amount_by_month(@year, params[:month]) %></td>
-            </tr>
-        <% end %>
+    <tbody>
+      <% @users.each_with_index do |user, index| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.total_amount_by_month(@year, params[:month]) %></td>
+          <td><%= @total_expenses * @results[index] / 100 %></td>
+          <td><%= @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, params[:month]) * @results[index] / 100) %></td>
+        </tr>
+      <% end %>
     </tbody>
-</table>
+  </table>
+
+<% else %>
+  <p>No results available.</p>
+<% end %>
