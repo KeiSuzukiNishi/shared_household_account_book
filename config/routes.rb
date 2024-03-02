@@ -2,9 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :users, only: [:show, :destroy]
   resources :categories
+  resources :expense_records
   root "incomes_expenses#index"
-  get 'split_expenses/index'
-  post 'split_expenses/calculate'
 
   resources :incomes_expenses do
     collection do
