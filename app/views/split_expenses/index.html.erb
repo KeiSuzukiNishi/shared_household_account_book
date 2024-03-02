@@ -1,0 +1,35 @@
+<h1>割勘一覧</h1>
+
+<%= form_tag("/split_expenses/index/", method: "get") do %>
+  <% User.all.each do |user| %>
+    <label for="<%= "user_#{user.id}_income" %>">
+      <%= "#{user.name} の年収：" %>
+    </label>
+    <%= text_field_tag "user_incomes[#{user.id}]", nil, id: "user_#{user.id}_income" %><br>
+  <% end %>
+
+  <%= submit_tag "計算" %>
+<% end %>
+
+
+<% if @results.present? %>
+  <h2>負担比率</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ユーザー名</th>
+        <th>負担比率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% User.all.each_with_index do |user, index| %>
+        <tr>
+          <td><%= user.name %>:  </td>
+          <td><%= @results[index] %>%</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No results available.</p>
+<% end %>
