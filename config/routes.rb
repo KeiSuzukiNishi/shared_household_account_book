@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :users, only: [:show, :destroy]
   resources :categories
-  resources :expense_records
+
   root "incomes_expenses#index"
+
+  resources :expense_records
 
   resources :incomes_expenses do
     collection do

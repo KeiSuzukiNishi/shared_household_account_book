@@ -1,18 +1,3 @@
-<h1>割勘一覧</h1>
-
-<%= form_tag(expense_records_path, method: 'get') do %>
-  <% User.all.each do |user| %>
-    <label for="<%= "user_#{user.id}_income" %>">
-      <%= "#{user.name} の年収：" %>
-    </label>
-    <%= text_field_tag "user_incomes[#{user.id}]", nil, id: "user_#{user.id}_income" %><br>
-  <% end %>
-
-  <%= select_year(Date.today, { prompt: 'Year', default: @year }, { name: 'year' }) %>
-  <%= select_month(Date.today, { prompt: 'Month', default: @month }, { name: 'month' }) %>
-  <%= submit_tag "計算" %>
-<% end %>
-
 <% if @results.present? %>
   <h2>負担比率</h2>
   <table>
@@ -54,12 +39,6 @@
     </tbody>
   </table>
 
-<% else %>
-  <p>No results available.</p>
-<% end %>
-
-<% if @expense_record.present? %>
-  <%= link_to "詳細", expense_record_path(@expense_record) %>
 <% else %>
   <p>No results available.</p>
 <% end %>

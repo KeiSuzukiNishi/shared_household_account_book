@@ -7,4 +7,8 @@ class ExpenseRecord < ApplicationRecord
   validates :difference, presence: true
   
   belongs_to :user
+
+  def to_param
+    "#{id}-#{year}-#{month}"
+  end
 end
