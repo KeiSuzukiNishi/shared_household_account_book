@@ -1,16 +1,16 @@
-<h1>年月ごとの割勘一覧</h1>
+<h1><%= t('shared_book.expense_record_index') %></h1>
 
 <% if @users.any? %>
   <table>
     <tr>
-      <th>年</th>
-      <th>月</th>
-        <th>ユーザー名</th>
-        <th>収入</th>
-        <th>比率 (%)</th>
-        <th>合計金額</th>
-        <th>負担すべき金額</th>
-        <th>差額</th>
+      <th><%= t('shared_book.year') %></th>
+      <th><%= t('shared_book.month') %></th>
+      <th><%= t('shared_book.user_name') %></th>
+      <th><%= t('shared_book.income') %></th>
+      <th><%= t('shared_book.ratio') %>(%)</th>
+      <th><%= t('shared_book.total_amount') %></th>
+      <th><%= t('shared_book.burden_amount') %></th>
+      <th><%= t('shared_book.difference') %></th>
     </tr>
 
     <% @expense_records_by_month.each do |month, records| %>
@@ -41,7 +41,5 @@
     <% end %>
   </table>
 <% else %>
-  <p>No users found.</p>
+  <p><%= t('shared_book.no_user_found') %></p>
 <% end %>
-
-<%= link_to 'Back', expense_records_path %>

@@ -17,6 +17,7 @@
     <% if user_signed_in? %>
       <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
       <%= link_to t('shared_book.category_index'), categories_path %>
+      <%= link_to t('shared_book.expense_record_index'), expense_records_path %>
       <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
       <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
     <% else %>

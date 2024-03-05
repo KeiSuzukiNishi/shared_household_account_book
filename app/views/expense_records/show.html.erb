@@ -1,16 +1,16 @@
-<h1>Expense Record Details</h1>
+<h1><%= t('shared_book.expense_record_details') %></h1>
 
 <% if @users.any? %>
   <table>
     <tr>
-      <th>User</th>
-      <th>Year</th>
-      <th>Month</th>
-      <th>Income</th>
-      <th>Ratio</th>
-      <th>Total Amount</th>
-      <th>Burden Amount</th>
-      <th>Difference</th>
+      <th><%= t('shared_book.user_name') %></th>
+      <th><%= t('shared_book.year') %></th>
+      <th><%= t('shared_book.month') %></th>
+      <th><%= t('shared_book.income') %></th>
+      <th><%= t('shared_book.ratio') %>(%)</th>
+      <th><%= t('shared_book.total_amount') %></th>
+      <th><%= t('shared_book.burden_amount') %></th>
+      <th><%= t('shared_book.difference') %></th>
     </tr>
 
     <% @users.each do |user| %>
@@ -31,11 +31,9 @@
     <% end %>
   </table>
   <div>
-    <%#= link_to t('shared_book.edit'), edit_expense_record_path(expense_record) %> |
-    <%= link_to t('shared_book.expense_records_index'), expense_records_path %>
+    <%#= link_to t('shared_book.edit'), edit_expense_record_path(user_record) %> |
+    <%= link_to t('shared_book.expense_record_index'), expense_records_path %>
   </div>
 <% else %>
-  <p>No expenses records found.</p>
+  <p><%= t('shared_book.no_expense_record_found') %></p>
 <% end %>
-
-<%= link_to 'Back', expense_records_path %>

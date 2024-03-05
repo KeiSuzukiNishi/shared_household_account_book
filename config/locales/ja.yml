@@ -42,6 +42,23 @@ ja:
     user_show_page: アカウント詳細画面
     calendar_page: カレンダー一覧画面
     incomes_expenses_show_page: 収入支出詳細画面
+    expense_record_index: 割勘一覧
+    year: 年
+    month: 月
+    user_name: ユーザー名
+    income: 収入
+    ratio: 比率
+    total_amount: 合計金額
+    burden_amount: 負担すべき金額
+    difference: 差額
+    no_user_found: ユーザーはいません。
+    expense_record_details: 割勘詳細
+    no_expense_record_found: 割勘記録はありません。
+    expense_record_edit: 割勘編集
+    update: 更新
+    submit: 登録
+    s_yearly_income: の年収
+    expense_record_new: 割勘新規作成
   simple_calendar:
     previous: "<<"
     next: ">>"
