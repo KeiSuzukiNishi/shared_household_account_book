@@ -1,65 +1,47 @@
-<h1>割勘一覧</h1>
+<h1>年月ごとの割勘一覧</h1>
 
-<%= form_tag(expense_records_path, method: 'get') do %>
-  <% User.all.each do |user| %>
-    <label for="<%= "user_#{user.id}_income" %>">
-      <%= "#{user.name} の年収：" %>
-    </label>
-    <%= text_field_tag "user_incomes[#{user.id}]", nil, id: "user_#{user.id}_income" %><br>
-  <% end %>
-
-  <%= select_year(Date.today, { prompt: 'Year', default: @year }, { name: 'year' }) %>
-  <%= select_month(Date.today, { prompt: 'Month', default: @month }, { name: 'month' }) %>
-  <%= submit_tag "計算" %>
-<% end %>
-
-<% if @results.present? %>
-  <h2>負担比率</h2>
+<% if @users.any? %>
   <table>
-    <thead>
-      <tr>
+    <tr>
+      <th>年</th>
+      <th>月</th>
         <th>ユーザー名</th>
-        <th>負担比率</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% User.all.each_with_index do |user, index| %>
-        <tr>
-          <td><%= user.name %>:  </td>
-          <td><%= @results[index] %>%</td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <h1>月ごとの合計金額</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>ユーザー名</th>
-        <th>収支合計金額</th>
+        <th>収入</th>
+        <th>比率 (%)</th>
+        <th>合計金額</th>
         <th>負担すべき金額</th>
         <th>差額</th>
-      </tr>
-    </thead>  
-    <tbody>
-      <% @users.each_with_index do |user, index| %>
+    </tr>
+
+    <% @expense_records_by_month.each do |month, records| %>
+      <% @users.each do |user| %>
         <tr>
+          <td><%= month.year %></td>
+          <td><%= month.month %></td>
           <td><%= user.name %></td>
-          <td><%= user.total_amount_by_month(@year, params[:month]) %></td>
-          <td><%= @total_expenses * @results[index] / 100 %></td>
-          <td><%= @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, params[:month]) * @results[index] / 100) %></td>
+          
+          <% user_record = records.find { |record| record.user == user } %>
+          <% if user_record.present? %>
+            <td><%= user_record.income %></td>
+            <td><%= "#{user_record.ratio}%" %></td>
+            <td><%= user_record.total_amount %></td>
+            <td><%= user_record.burden_amount %></td>
+            <td><%= user_record.difference %></td>
+            <td><%= link_to t('shared_book.details'), expense_record_path(user_record) %></td>
+            <td><%= link_to t('shared_book.edit'), edit_expense_record_path(user_record) %></td>
+            <td><%= button_to t('shared_book.destroy'), user_record, method: :delete %></td>
+          <% else %>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          <% end %>
         </tr>
       <% end %>
-    </tbody>
+    <% end %>
   </table>
-
 <% else %>
-  <p>No results available.</p>
+  <p>No users found.</p>
 <% end %>
 
-<% if @expense_record.present? %>
-  <%= link_to "詳細", expense_record_path(@expense_record) %>
-<% else %>
-  <p>No results available.</p>
-<% end %>
+<%= link_to 'Back', expense_records_path %>

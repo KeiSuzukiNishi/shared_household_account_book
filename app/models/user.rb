@@ -7,4 +7,8 @@ class User < ApplicationRecord
   def total_amount_by_month(year, month)
     incomes_expenses.total_amount_by_month(year, month)
   end
+
+  def income
+    self[:income]
+  end
 end

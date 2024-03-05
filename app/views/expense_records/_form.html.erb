@@ -1,57 +1,12 @@
-<%= form_tag(expense_records_path, method: 'post') do %>
+<%= form_for @expense_record || ExpenseRecord.new, url: @expense_record&.persisted? ? expense_record_path(@expense_record) : expense_records_path, method: @expense_record&.persisted? ? :patch : :post do |f| %>
   <% User.all.each do |user| %>
-    <label for="<%= "user_#{user.id}_income" %>">
+    <label for="<%= "user_incomes_#{user.id}" %>">
       <%= "#{user.name} の年収：" %>
     </label>
-    <%= text_field_tag "user_incomes[#{user.id}]", nil, id: "user_#{user.id}_income" %><br>
+    <%= f.text_field "#{user.id}_income", value: @expense_record&.user&.income, id: "user_incomes_#{user.id}" %><br>
   <% end %>
 
-  <%= select_year(Date.today, { prompt: 'Year', default: @year }, { name: 'year' }) %>
-  <%= select_month(Date.today, { prompt: 'Month', default: @month }, { name: 'month' }) %>
-  <%= submit_tag "計算" %>
-<% end %>
-
-<% if @results.present? %>
-  <h2>負担比率</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>ユーザー名</th>
-        <th>負担比率</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% User.all.each_with_index do |user, index| %>
-        <tr>
-          <td><%= user.name %>:  </td>
-          <td><%= @results[index] %>%</td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <h1>月ごとの合計金額</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>ユーザー名</th>
-        <th>収支合計金額</th>
-        <th>負担すべき金額</th>
-        <th>差額</th>
-      </tr>
-    </thead>  
-    <tbody>
-      <% @users.each_with_index do |user, index| %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= user.total_amount_by_month(@year, params[:month]) %></td>
-          <td><%= @total_expenses * @results[index] / 100 %></td>
-          <td><%= @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, params[:month]) * @results[index] / 100) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-<% else %>
-  <p>No results available.</p>
+  <%= f.select :year, (Date.today.year - 10..Date.today.year + 10).to_a, { prompt: 'Year' } %>
+  <%= f.select :month, Date::MONTHNAMES.compact.each_with_index.map { |month, index| [month, index + 1] }, { prompt: 'Month' } %>
+  <%= f.submit @expense_record&.persisted? ? "更新" : "登録" %>
 <% end %>
