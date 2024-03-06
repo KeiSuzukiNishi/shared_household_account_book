@@ -25,23 +25,26 @@ class ExpenseRecordsController < ApplicationController
     @results = []
     if params[:expense_record]
       user_incomes = params[:expense_record].select { |key, _| key.match?(/\d+_income/) }.values.map(&:to_i)
-      total_income = user_incomes.sum
+      
+      unless user_incomes.empty?
+        total_income = user_incomes.sum
   
-      @results = user_incomes.map do |income|
-        (income.to_f / total_income.to_f * 100).round
-      end
-  
-      @users.each_with_index do |user, index|
-        ExpenseRecord.create!(
-          user: user,
-          year: @year,
-          month: @month,
-          ratio: @results[index],
-          total_amount: user.total_amount_by_month(@year, @month),
-          burden_amount: @total_expenses * @results[index] / 100,
-          difference: @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, @month) * @results[index] / 100),
-          income: user_incomes[index]
-        )
+        @results = user_incomes.map do |income|
+          (income.to_f / total_income.to_f * 100).round
+        end
+    
+        @users.each_with_index do |user, index|
+          ExpenseRecord.create!(
+            user: user,
+            year: @year,
+            month: @month,
+            ratio: @results[index],
+            total_amount: user.total_amount_by_month(@year, @month),
+            burden_amount: @total_expenses * @results[index] / 100,
+            difference: @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, @month) * @results[index] / 100),
+            income: user_incomes[index]
+          )
+        end
       end
     end
   
@@ -68,18 +71,17 @@ class ExpenseRecordsController < ApplicationController
 
   def update
     @expense_record = ExpenseRecord.find(params[:id])
-  
+
     if @expense_record.update(expense_record_params)
       redirect_to expense_record_path(@expense_record)
     else
       render :edit
-      binding.pry
     end
   end
   
   private
   
   def expense_record_params
-    params.require(:expense_record).permit(:user_id, :year, :month, :ratio, :total_amount, :burden_amount, :difference)
+    permitted_params = params.require(:expense_record).permit(:year, :month, :ratio, :total_amount, :burden_amount, :difference, :income)
   end
 end

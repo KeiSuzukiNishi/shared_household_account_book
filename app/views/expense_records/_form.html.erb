@@ -3,7 +3,7 @@
     <label for="<%= "user_incomes_#{user.id}" %>">
       <%= "#{user.name}" %><%= t('shared_book.s_yearly_income') %>:
     </label>
-    <%= f.text_field "#{user.id}_income", value: @expense_record&.user&.income, id: "user_incomes_#{user.id}" %><br>
+    <%= f.text_field :income, value: @expense_record&.user&.income, id: "user_incomes_#{user.id}" %><br>
   <% end %>
 
   <%= f.select :year, (Date.today.year - 10..Date.today.year + 10).to_a, { prompt: t('shared_book.year') } %>
