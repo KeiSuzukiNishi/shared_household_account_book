@@ -17,6 +17,7 @@ https://docs.google.com/spreadsheets/d/1JXL5HXBarIpRyQ13NGmLlo2k02nKHsQsR3CaKy0b
 ## ワイヤーフレーム
 https://app.diagrams.net/#G1Vqa4a3cGnBcsw4bcd9CckrZkp7NOQ5Wj
 ## ER図
+![無題](https://github.com/KeiSuzukiNishi/shared_household_account_book/assets/113779940/3dbf5583-e9a4-4b43-b531-e6f30341653e)
 ## 画面遷移図
 ![無題](https://github.com/KeiSuzukiNishi/shared_household_account_book/assets/113779940/5a5ac3ac-bf5e-4800-943b-55cfbad03ffb)
 ![無題2](https://github.com/KeiSuzukiNishi/shared_household_account_book/assets/113779940/6d4a92f6-7fbd-492d-9114-ccf7d7f335cc)
