@@ -16,4 +16,8 @@ class IncomesExpense < ApplicationRecord
     def end_date
         ends_at || dealt_on
     end
+
+    def start_time
+        dealt_on.to_time
+    end
 end
