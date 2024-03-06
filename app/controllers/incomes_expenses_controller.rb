@@ -38,7 +38,6 @@ class IncomesExpensesController < ApplicationController
 
   def calendar
     @date = params.fetch(:date, Date.today).to_date
-    # binding.pry
     if params[:id] == "calendar"
       @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_month..@date.end_of_month)
     else
@@ -82,7 +81,6 @@ class IncomesExpensesController < ApplicationController
   
   def set_incomes_expense
     if params[:id] == "calendar"
-      # params[:id] が "calendar" の場合は何もせずに終了
       return
     end
     @incomes_expense = IncomesExpense.find(params[:id])

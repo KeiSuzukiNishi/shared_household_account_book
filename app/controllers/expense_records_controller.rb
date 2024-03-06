@@ -21,10 +21,11 @@ class ExpenseRecordsController < ApplicationController
     @year = params[:expense_record][:year].to_i || Time.now.year
     @month = params[:expense_record][:month].to_i || Time.now.month
     @total_expenses = @users.sum { |user| user.total_amount_by_month(@year, @month) }
-  
+    
     @results = []
-    if params[:expense_record]
-      user_incomes = params[:expense_record].select { |key, _| key.match?(/\d+_income/) }.values.map(&:to_i)
+    binding.pry
+    if params[:expense_record].present? && params[:expense_record][:user_incomes].present?
+      user_incomes = params[:expense_record][:user_incomes].values.map(&:to_i)
       
       unless user_incomes.empty?
         total_income = user_incomes.sum
@@ -44,6 +45,7 @@ class ExpenseRecordsController < ApplicationController
             difference: @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, @month) * @results[index] / 100),
             income: user_incomes[index]
           )
+
         end
       end
     end
@@ -82,6 +84,6 @@ class ExpenseRecordsController < ApplicationController
   private
   
   def expense_record_params
-    permitted_params = params.require(:expense_record).permit(:year, :month, :ratio, :total_amount, :burden_amount, :difference, :income)
+    params.require(:expense_record).permit(:year, :month, user_incomes: {})
   end
 end
