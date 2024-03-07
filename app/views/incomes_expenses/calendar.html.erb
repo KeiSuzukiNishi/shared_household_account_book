@@ -1,6 +1,6 @@
 <h1><%= t('shared_book.calendar_page') %></h1>
 
-<%= month_calendar(events: IncomesExpense.all) do |date, incomes_expenses| %>
+<%= month_calendar(events: @incomes_expenses) do |date, incomes_expenses| %>
   <%= date.day %>
 
   <% total_amount = incomes_expenses.sum { |ie| ie.amount if ie.dealt_on.to_date == date } %>
