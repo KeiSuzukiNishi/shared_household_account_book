@@ -23,10 +23,11 @@ class ExpenseRecordsController < ApplicationController
     @total_expenses = @users.sum { |user| user.total_amount_by_month(@year, @month) }
     
     @results = []
-    binding.pry
+   
     if params[:expense_record].present? && params[:expense_record][:user_incomes].present?
+      binding.pry
       user_incomes = params[:expense_record][:user_incomes].values.map(&:to_i)
-      
+     
       unless user_incomes.empty?
         total_income = user_incomes.sum
   
@@ -45,7 +46,7 @@ class ExpenseRecordsController < ApplicationController
             difference: @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, @month) * @results[index] / 100),
             income: user_incomes[index]
           )
-
+          
         end
       end
     end
