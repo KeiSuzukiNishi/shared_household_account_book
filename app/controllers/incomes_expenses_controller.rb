@@ -38,22 +38,18 @@ class IncomesExpensesController < ApplicationController
 
   def calendar
     @date = params.fetch(:date, Date.today).to_date
-    #  binding.pry
-    if params[:id] == "calendar"
-      @incomes_expenses = IncomesExpense.where(dealt_on: @date.all_month)
-      else
-      @incomes_expenses = IncomesExpense.where(dealt_on: @date.all_month)
-    end
+    @incomes_expenses = IncomesExpense.where(dealt_on: @date.beginning_of_month..@date.end_of_month)
     @categories = Category.all
+    # binding.pry
     render 'calendar'
   end
   
-  def day
-    @date = params.fetch(:date, Date.today).to_date
-    @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_day..@date.end_of_day)
-    @categories = Category.all
-    render 'day'
-  end
+  # def day
+  #   @date = params.fetch(:date, Date.today).to_date
+  #   @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_day..@date.end_of_day)
+  #   @categories = Category.all
+  #   render 'day'
+  # end
 
   def update
     respond_to do |format|
@@ -82,7 +78,6 @@ class IncomesExpensesController < ApplicationController
   
   def set_incomes_expense
     if params[:id] == "calendar"
-      # params[:id] が "calendar" の場合は何もせずに終了
       return
     end
     @incomes_expense = IncomesExpense.find(params[:id])
