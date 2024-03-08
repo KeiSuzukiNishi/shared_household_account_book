@@ -21,35 +21,31 @@ class ExpenseRecordsController < ApplicationController
     @year = params[:expense_record][:year].to_i || Time.now.year
     @month = params[:expense_record][:month].to_i || Time.now.month
     @total_expenses = @users.sum { |user| user.total_amount_by_month(@year, @month) }
-    
-
     @results = []
-    binding.pry
 
-      user_incomes = params[:expense_record][:user_income_user.id].values.map(&:to_i)
-     
-      
-        total_income = user_incomes.sum
-  
-        @results = user_incomes.map do |income|
-          (income.to_f / total_income.to_f * 100).round
-        end
     
-        @users.each_with_index do |user, index|
-          ExpenseRecord.create!(
-            user: user,
-            year: @year,
-            month: @month,
-            ratio: @results[index],
-            total_amount: user.total_amount_by_month(@year, @month),
-            burden_amount: @total_expenses * @results[index] / 100,
-            difference: @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, @month) * @results[index] / 100),
-            income: user_incomes[index]
-          )
-        end
-  
+    user_incomes = params[:income].values.map(&:to_i) 
+    total_income = user_incomes.sum
+
+    @results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
+    # ここまでできてる。下記のratioがexpenserecordモデルのカラムにないからエラーが出る。もはやdetailsを使用せずに普通にexenserecordにカラムを追加してやればいいのでは？ 
+    # binding.pry
+    @users.each_with_index do |user, index|
+      ExpenseRecord.create!(
+        user: user,
+        year: @year,
+        month: @month,
+        ratio: @results[index],
+        total_amount: user.total_amount_by_month(@year, @month),
+        burden_amount: @total_expenses * @results[index] / 100,
+        difference: @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, @month) * @results[index] / 100),
+        income: user_incomes[index]
+      )
+    end
+
     redirect_to expense_records_path
   end
+
         
   def show
     @expense_record = ExpenseRecord.find(params[:id])
@@ -80,8 +76,8 @@ class ExpenseRecordsController < ApplicationController
   end
   
   private
-  
+
   def expense_record_params
-    params.require(:expense_record).permit(:year, :month, user_incomes: {})
+    params.require(:expense_record).permit(:year, :month, user_incomes_attributes: [:id, :income])
   end
 end

@@ -1,12 +1,23 @@
-<%= form_for @expense_record || ExpenseRecord.new, url: @expense_record&.persisted? ? expense_record_path(@expense_record) : expense_records_path, method: @expense_record&.persisted? ? :patch : :post do |f| %>
+<%= form_for @expense_record || ExpenseRecord.new, url: @expense_record&.persisted? ? expense_record_path(@expense_record) : expense_records_path, method: @expense_record&.persisted? ? :patch : :post do |form| %>
   <% User.all.each do |user| %>
-    <label for="<%= "user_incomes_#{user.id}" %>">
-      <%= "#{user.name}" %><%= t('shared_book.s_yearly_income') %>:
-    </label>
-    <%= f.text_field "user_incomes_#{user.id}", value: @expense_record&.user&.income, id: "user_incomes_#{user.id}" %><br>
+      <label for="<%= "user_incomes_#{user.id}" %>">
+        <%= "#{user.name}" %><%= t('shared_book.s_yearly_income') %>:
+      </label>
+      <%= text_field :income, id: "user_incomes_#{user.id}" %><br>
   <% end %>
 
-  <%= f.select :year, (Date.today.year - 10..Date.today.year + 10).to_a, { prompt: t('shared_book.year') } %>
-  <%= f.select :month, Date::MONTHNAMES.compact.each_with_index.map { |month, index| [month, index + 1] }, { prompt: t('shared_book.month') } %>
-  <%= f.submit @expense_record&.persisted? ? t('shared_book.update') : t('shared_book.submit') %>
+  <ul>
+    <%= form.fields_for :expense_records do |expense_records_form| %>
+      <li>
+        <%= expense_records_form.label :year %>
+        <%= expense_records_form.select :year, (Date.today.year - 10..Date.today.year + 10).to_a, { prompt: t('shared_book.year') } %>
+      </li>
+      <li>
+        <%= expense_records_form.label :month %>
+        <%= expense_records_form.select :month, Date::MONTHNAMES.compact.each_with_index.map { |month, index| [month, index + 1] }, { prompt: t('shared_book.month') } %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= form.submit @expense_record&.persisted? ? t('shared_book.update') : t('shared_book.submit') %>
 <% end %>
