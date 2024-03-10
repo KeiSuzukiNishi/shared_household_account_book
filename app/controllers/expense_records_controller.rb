@@ -4,7 +4,11 @@ class ExpenseRecordsController < ApplicationController
     @expense_records_by_month = {}
 
     ExpenseRecord.all.group_by { |record| [record.year, record.month] }.each do |(year, month), records|
-      @expense_records_by_month[Date.new(year, month)] = records
+      begin
+        date = Date.new(year, month)
+        @expense_records_by_month[date] = records
+      rescue ArgumentError
+      end
     end
   end
 
@@ -28,13 +32,16 @@ class ExpenseRecordsController < ApplicationController
     total_income = user_incomes.sum
 
     @results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
-    # ここまでできてる。下記のratioがexpenserecordモデルのカラムにないからエラーが出る。もはやdetailsを使用せずに普通にexenserecordにカラムを追加してやればいいのでは？ 
-    # binding.pry
+    #ここまでできてる。この下が通らずに一覧画面に行ってるかも
+
     @users.each_with_index do |user, index|
-      ExpenseRecord.create!(
+      expense_record = ExpenseRecord.create!(
         user: user,
         year: @year,
-        month: @month,
+        month: @month
+      )
+    #  binding.pry　ここで止まらない
+      expense_record.create_expense_records_detail!(
         ratio: @results[index],
         total_amount: user.total_amount_by_month(@year, @month),
         burden_amount: @total_expenses * @results[index] / 100,

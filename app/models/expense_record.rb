@@ -3,6 +3,8 @@ class ExpenseRecord < ApplicationRecord
   validates :month, presence: true
 
   belongs_to :user
+  has_one :expense_records_detail, inverse_of: :expense_record
+  accepts_nested_attributes_for :expense_records_detail
 
   def to_param
     "#{id}-#{year}-#{month}"
