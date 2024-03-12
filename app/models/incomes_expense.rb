@@ -5,6 +5,9 @@ class IncomesExpense < ApplicationRecord
     validates :amount, presence: true
 
     enum income_expense_type: { "収入": 0, "支出": 1 }
+    scope :expenses, -> { where(income_expense_type: "支出") }
+    scope :incomes, -> { where(income_expense_type: "収入") }
+
     has_one_attached :image
 
     belongs_to :category

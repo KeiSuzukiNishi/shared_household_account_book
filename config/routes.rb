@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # resources :admins
   root "incomes_expenses#index"
 
+  get 'charts/expenses_by_category', to: 'charts#expenses_by_category', as: 'expenses_by_category'
+
   namespace :admin do
     get 'index', to: 'users#index'
     # resources :incomes_expenses

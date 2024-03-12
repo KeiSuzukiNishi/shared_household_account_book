@@ -74,3 +74,5 @@ gem 'pry-rails'
 gem 'rails_admin'
 gem "sassc-rails"
 gem 'cancancan'
+gem 'chartkick'
+gem 'groupdate'
