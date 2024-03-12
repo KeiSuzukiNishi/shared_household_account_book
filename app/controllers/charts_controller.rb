@@ -62,5 +62,23 @@ class ChartsController < ApplicationController
                                           .select("EXTRACT(YEAR FROM dealt_on) AS year, EXTRACT(MONTH FROM dealt_on) AS month, SUM(amount) AS total_amount")
                                           .where("EXTRACT(YEAR FROM dealt_on) = ? AND EXTRACT(MONTH FROM dealt_on) BETWEEN ? AND ?", selected_year, start_month, end_month)
                                           .group("year, month")
-      end
+    end
+
+    def column_chart_yearly
+        # フォームからのパラメータで開始年と終了年を取得（デフォルトは現在の年）
+        start_year = params[:start_year].presence || Date.today.year
+        end_year = params[:end_year].presence || Date.today.year
+
+        # 対象期間の収入データを取得
+        @yearly_incomes = IncomesExpense.incomes
+                                        .se lect("EXTRACT(YEAR FROM dealt_on) AS year, EXTRACT(MONTH FROM dealt_on) AS month, SUM(amount) AS total_amount")
+                                        .where("EXTRACT(YEAR FROM dealt_on) BETWEEN ? AND ?", start_year, end_year)
+                                        .group("year, month")
+
+        # 対象期間の支出データを取得
+        @yearly_expenses = IncomesExpense.expenses
+                                        .select("EXTRACT(YEAR FROM dealt_on) AS year, EXTRACT(MONTH FROM dealt_on) AS month, SUM(amount) AS total_amount")
+                                        .where("EXTRACT(YEAR FROM dealt_on) BETWEEN ? AND ?", start_year, end_year)
+                                        .group("year, month")
+    end
 end

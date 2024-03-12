@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'charts/pie_chart_monthly', to: 'charts#pie_chart_monthly', as: 'pie_chart_monthly'
   get 'charts/column_chart_monthly', to: 'charts#column_chart_monthly', as: 'column_chart_monthly'
+  get 'charts/column_chart_yearly', to: 'charts#column_chart_yearly', as: 'column_chart_yearly'
 
   namespace :admin do
     get 'index', to: 'users#index'

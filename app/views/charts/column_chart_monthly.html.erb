@@ -15,5 +15,5 @@
 
 <%= column_chart [
    { name: 'Incomes', data: @monthly_incomes.map { |record| ["#{record.year.to_i}-#{record.month.to_i}", record.total_amount] } },
-   { name: 'Expenses', data: @monthly_expenses.map { |record| ["#{record.year.to_i}-#{record.month.to_i}", record.total_amount] } }
-], library: { colors: ['green', 'red'] }, xtitle: "年月", ytitle: "金額" %>
+   { name: 'Expenses', data: @monthly_expenses.map { |record| ["#{record.year.to_i}-#{record.month.to_i}", record.total_amount] } }], 
+    library: { colors: ['green', 'red'] }, xtitle: "年月", ytitle: "金額" %>
