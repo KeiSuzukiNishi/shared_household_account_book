@@ -1,0 +1,51 @@
+<%= form_with url: expenses_by_category_path, method: :get do |form| %>
+  <%= form.label :selected_year, "Year" %>
+  <%= form.text_field :selected_year, type: "number", value: params[:selected_year] || Date.today.year %>
+
+  <%= form.label :selected_month, "Month" %>
+  <%= form.text_field :selected_month, type: "number", value: params[:selected_month] || Date.today.month %>
+
+  <%= form.submit "Submit" %>
+    
+  <div>
+    <%= form.label :income_amount, "収入金額 (円)" %>
+    <%= form.text_field :income_amount, value: @incomes_by_month, readonly: true %>
+  </div>
+    <div>
+    <%= form.label :expense_amount, "支出金額 (円)" %>
+    <%= form.text_field :expense_amount, value: @expenses_by_month, readonly: true %>
+  </div>
+    <div>
+    <%= form.label :differences_amount, "差額 (円)" %>
+    <%= form.text_field :ddifferences_amount, value: @differences_by_month, readonly: true %>
+  </div>
+<% end %>
+
+<% if @data.present? && @data.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>項目名</th>
+        <th>合計金額 (円)</th>
+        <th>割合 (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @total_amount_by_category.each do |category_id, amount| %>
+        <% category = Category.find_by(id: category_id) %>
+        <tr>
+          <td><%= category&.name || "Unknown Category" %></td>
+          <td><%= amount %></td>
+          <td><%= @percentages_by_category[category_id] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>データが存在しません。</p>
+<% end %>
+
+
+  <%= pie_chart @data, legend: 'bottom', donut: true, suffix: "%" %>
+
+  
