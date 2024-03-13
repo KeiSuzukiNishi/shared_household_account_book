@@ -1,4 +1,4 @@
-<h1>月別棒グラフ</h1>
+<h1>月間棒グラフ</h1>
 
 <%= form_with url: column_chart_monthly_path, method: :get do |form| %>
   <%= form.label :selected_year, "Year" %>
@@ -17,3 +17,7 @@
    { name: 'Incomes', data: @monthly_incomes.map { |record| ["#{record.year.to_i}-#{record.month.to_i}", record.total_amount] } },
    { name: 'Expenses', data: @monthly_expenses.map { |record| ["#{record.year.to_i}-#{record.month.to_i}", record.total_amount] } }], 
     library: { colors: ['green', 'red'] }, xtitle: "年月", ytitle: "金額" %>
+
+<%= link_to "月間円グラフ", pie_chart_monthly_path %>
+<%= link_to "年間円グラフ", pie_chart_yearly_path %>
+<%= link_to "年間棒グラフ", column_chart_yearly_path %>
