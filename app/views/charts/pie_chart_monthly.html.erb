@@ -1,4 +1,4 @@
-<h1>月別円グラフ</h1>
+<h1>月間円グラフ</h1>
 <%= form_with url: pie_chart_monthly_path, method: :get do |form| %>
   <%= form.label :selected_year, "Year" %>
   <%= form.text_field :selected_year, type: "number", value: params[:selected_year] || Date.today.year %>
@@ -49,4 +49,6 @@
 
   <%= pie_chart @data, legend: 'bottom', donut: true, suffix: "%" %>
 
-  
+<%= link_to "年間円グラフ", pie_chart_yearly_path %>
+<%= link_to "月間棒グラフ", column_chart_monthly_path %>
+<%= link_to "年間棒グラフ", column_chart_yearly_path %>
