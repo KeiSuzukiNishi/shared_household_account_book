@@ -1,24 +1,21 @@
 <h1>月別円グラフ</h1>
-<%= form_with url: pie_chart_monthly_path, method: :get do |form| %>
+<%= form_with url: pie_chart_yearly_path, method: :get do |form| %>
   <%= form.label :selected_year, "Year" %>
   <%= form.text_field :selected_year, type: "number", value: params[:selected_year] || Date.today.year %>
-
-  <%= form.label :selected_month, "Month" %>
-  <%= form.text_field :selected_month, type: "number", value: params[:selected_month] || Date.today.month %>
 
   <%= form.submit "Submit" %>
     
   <div>
     <%= form.label :income_amount, "収入金額 (円)" %>
-    <%= form.text_field :income_amount, value: @incomes_by_month, readonly: true %>
+    <%= form.text_field :income_amount, value: @incomes_by_year, readonly: true %>
   </div>
     <div>
     <%= form.label :expense_amount, "支出金額 (円)" %>
-    <%= form.text_field :expense_amount, value: @expenses_by_month, readonly: true %>
+    <%= form.text_field :expense_amount, value: @expenses_by_year, readonly: true %>
   </div>
     <div>
     <%= form.label :differences_amount, "差額 (円)" %>
-    <%= form.text_field :ddifferences_amount, value: @differences_by_month, readonly: true %>
+    <%= form.text_field :ddifferences_amount, value: @differences_by_year, readonly: true %>
   </div>
 <% end %>
 
