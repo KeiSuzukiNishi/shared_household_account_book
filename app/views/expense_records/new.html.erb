@@ -1,5 +1,11 @@
 <h1><%= t('shared_book.expense_record_new') %></h1>
 
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <%= render "form", expense_record: @expense_record %>
 
 <div>

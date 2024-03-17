@@ -6,10 +6,11 @@ class ExpenseRecordsController < ApplicationController
     ExpenseRecord.all.group_by { |record| [record.year, record.month] }.each do |(year, month), records|
       begin
         date = Date.new(year, month)
-        @expense_records_by_month[date] = records
+        @expense_records_by_month[date] = records.map(&:expense_records_details).flatten 
       rescue ArgumentError
       end
     end
+    # binding.pry
   end
 
   def new
@@ -26,31 +27,33 @@ class ExpenseRecordsController < ApplicationController
     @month = params[:expense_record][:month].to_i || Time.now.month
     @total_expenses = @users.sum { |user| user.total_amount_by_month(@year, @month) }
     @results = []
-
     
     user_incomes = params[:income].values.map(&:to_i) 
     total_income = user_incomes.sum
-
+  
     @results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
-    #ここまでできてる。この下が通らずに一覧画面に行ってるかも
-
-    @users.each_with_index do |user, index|
-      expense_record = ExpenseRecord.create!(
-        user: user,
-        year: @year,
-        month: @month
-      )
-    #  binding.pry　ここで止まらない
-      expense_record.create_expense_records_detail!(
-        ratio: @results[index],
-        total_amount: user.total_amount_by_month(@year, @month),
-        burden_amount: @total_expenses * @results[index] / 100,
-        difference: @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, @month) * @results[index] / 100),
-        income: user_incomes[index]
-      )
+    
+    if ExpenseRecord.exists?(year: @year, month: @month)
+      flash.now[:alert] = "すでにレコードが存在しています。"
+      render :new
+    else
+      @users.each_with_index do |user, index|
+        expense_record = ExpenseRecord.create!(
+          user: user,
+          year: @year,
+          month: @month
+        )
+       
+        expense_record.expense_records_details.create!(
+          ratio: @results[index],
+          total_amount: user.total_amount_by_month(@year, @month),
+          burden_amount: @total_expenses * @results[index] / 100,
+          difference: @total_expenses * @results[index] / 100 - (user.total_amount_by_month(@year, @month) * @results[index] / 100),
+          income: user_incomes[index]
+        )
+      end
+      redirect_to expense_records_path
     end
-
-    redirect_to expense_records_path
   end
 
         

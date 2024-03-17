@@ -6,17 +6,15 @@
       <%= text_field :income, id: "user_incomes_#{user.id}" %><br>
   <% end %>
 
-  <ul>
-    <%= form.fields_for :expense_records do |expense_records_form| %>
-      <li>
-        <%= expense_records_form.label :year %>
-        <%= expense_records_form.select :year, (Date.today.year - 10..Date.today.year + 10).to_a, { prompt: t('shared_book.year') } %>
-      </li>
-      <li>
-        <%= expense_records_form.label :month %>
-        <%= expense_records_form.select :month, Date::MONTHNAMES.compact.each_with_index.map { |month, index| [month, index + 1] }, { prompt: t('shared_book.month') } %>
-      </li>
-    <% end %>
+     <ul>
+    <li>
+      <%= form.label :year, 'Year' %>
+      <%= form.select :year, (Date.today.year - 10..Date.today.year + 10).to_a, { prompt: 'Year' } %>
+    </li>
+    <li>
+      <%= form.label :month, 'Month' %>
+      <%= form.select :month, Date::MONTHNAMES.compact.each_with_index.map { |month, index| [month, index + 1] }, { prompt: 'Month' } %>
+    </li>
   </ul>
 
   <%= form.submit @expense_record&.persisted? ? t('shared_book.update') : t('shared_book.submit') %>
