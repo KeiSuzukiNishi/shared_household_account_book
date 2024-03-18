@@ -17,21 +17,22 @@
       <% expense_record = ExpenseRecord.find_by(user: user, year: @year, month: @month) %>
 
       <% if expense_record.present? %>
+        <% expense_record_detail = expense_record.expense_records_details.first %>
         <tr>
           <td><%= user.name %></td>
           <td><%= expense_record.year %></td>
           <td><%= expense_record.month %></td>
-          <td><%= expense_record.income %></td>
-          <td><%= expense_record.ratio %>%</td>
-          <td><%= expense_record.total_amount %></td>
-          <td><%= expense_record.burden_amount %></td>
-          <td><%= expense_record.difference %></td>
+          <td><%= expense_record_detail.income %></td>
+          <td><%= expense_record_detail.ratio %>%</td>
+          <td><%= expense_record_detail.total_amount %></td>
+          <td><%= expense_record_detail.burden_amount %></td>
+          <td><%= expense_record_detail.difference %></td>
         </tr>
       <% end %>
     <% end %>
   </table>
   <div>
-    <%#= link_to t('shared_book.edit'), edit_expense_record_path(user_record) %> |
+    <%= link_to t('shared_book.edit'), edit_expense_record_path(@expense_record) %> |
     <%= link_to t('shared_book.expense_record_index'), expense_records_path %>
   </div>
 <% else %>

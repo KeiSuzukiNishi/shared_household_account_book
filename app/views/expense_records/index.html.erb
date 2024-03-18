@@ -39,15 +39,15 @@
           <td><%= month.month %></td>
           <td><%= user.name %></td>
           
-          <% user_record = records.find { |record| record.user == user } %>
+          <% user_record = @expense_records_by_month[month]&.find { |record| record.user == user } %>
           <% if user_record.present? %>
             <td><%= user_record.income %></td>
             <td><%= "#{user_record.ratio}%" %></td>
             <td><%= user_record.total_amount %></td>
             <td><%= user_record.burden_amount %></td>
             <td><%= user_record.difference %></td>
-            <td><%= link_to t('shared_book.details'), expense_record_path(user_record) %></td>
-            <td><%= link_to t('shared_book.edit'), edit_expense_record_path(user_record) %></td>
+            <td><%= link_to t('shared_book.details'), expense_record_path(user_record.expense_record) %></td>
+            <td><%= link_to t('shared_book.edit'), edit_expense_record_path(user_record.expense_record) %></td>
             <td><%= button_to t('shared_book.destroy'), expense_records_path, method: :delete %></td>
           <% else %>
             <td></td>

@@ -71,12 +71,11 @@ class ExpenseRecordsController < ApplicationController
   end
 
   def edit
-    # @expense_record_details = ExpenseRecordsDetail.all
+    @expense_record = ExpenseRecord.find(params[:id])
   end
 
   def update
     @expense_record = ExpenseRecord.find(params[:id])
-    binding.pry
 
     if @expense_record.update(expense_record_params)
       redirect_to expense_record_path(@expense_record)
