@@ -10,10 +10,10 @@ class ExpenseRecordsController < ApplicationController
       rescue ArgumentError
       end
     end
-    # binding.pry
   end
 
   def new
+    @expense_record = ExpenseRecord.new
     @users = User.all
     @year = params[:year].to_i || Time.now.year
     @month = params[:month].to_i || Time.now.month
@@ -34,8 +34,7 @@ class ExpenseRecordsController < ApplicationController
     @results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
     
     if ExpenseRecord.exists?(year: @year, month: @month)
-      flash.now[:alert] = "すでにレコードが存在しています。"
-      render :new
+      redirect_to new_expense_record_path, alert: "すでにレコードが存在しています。"
     else
       @users.each_with_index do |user, index|
         expense_record = ExpenseRecord.create!(
@@ -45,6 +44,7 @@ class ExpenseRecordsController < ApplicationController
         )
        
         expense_record.expense_records_details.create!(
+          user: user,
           ratio: @results[index],
           total_amount: user.total_amount_by_month(@year, @month),
           burden_amount: @total_expenses * @results[index] / 100,
@@ -66,17 +66,17 @@ class ExpenseRecordsController < ApplicationController
     @total_expenses = @users.sum { |user| user.total_amount_by_month(@year, @month) }
   
     @results = [] 
-  
-    
+
     render :show
   end
 
   def edit
-    @expense_record = ExpenseRecord.find(params[:id])
+    # @expense_record_details = ExpenseRecordsDetail.all
   end
 
   def update
     @expense_record = ExpenseRecord.find(params[:id])
+    binding.pry
 
     if @expense_record.update(expense_record_params)
       redirect_to expense_record_path(@expense_record)

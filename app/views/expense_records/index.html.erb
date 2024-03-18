@@ -32,8 +32,6 @@
       <th><%= t('shared_book.difference') %></th>
     </tr>
 
-
-
     <% @expense_records_by_month.each do |month, records| %>
       <% @users.each do |user| %>
         <tr>
@@ -50,7 +48,7 @@
             <td><%= user_record.difference %></td>
             <td><%= link_to t('shared_book.details'), expense_record_path(user_record) %></td>
             <td><%= link_to t('shared_book.edit'), edit_expense_record_path(user_record) %></td>
-            <td><%= button_to t('shared_book.destroy'), user_record, method: :delete %></td>
+            <td><%= button_to t('shared_book.destroy'), expense_records_path, method: :delete %></td>
           <% else %>
             <td></td>
             <td></td>
