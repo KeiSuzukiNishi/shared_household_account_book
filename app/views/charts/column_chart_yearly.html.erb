@@ -1,0 +1,20 @@
+<h1>年間棒グラフ</h1>
+
+<%= form_with url: column_chart_yearly_path, method: :get do |form| %>
+  <%= form.label :start_year, "Start Year" %>
+  <%= form.text_field :start_year, type: "number", value: params[:start_year] || Date.today.year %>
+
+  <%= form.label :end_year, "End Year" %>
+  <%= form.text_field :end_year, type: "number", value: params[:end_year] || Date.today.year %>
+
+  <%= form.submit "Submit" %>
+<% end %>
+
+<%= column_chart [
+   { name: 'Incomes', data: @yearly_incomes.map { |record| [record.year.to_i, record.total_amount] } },
+   { name: 'Expenses', data: @yearly_expenses.map { |record| [record.year.to_i, record.total_amount] } }], 
+    library: { colors: ['green', 'red'] }, xtitle: "年", ytitle: "金額" %>
+
+<%= link_to "月間円グラフ", pie_chart_monthly_path %>
+<%= link_to "年間円グラフ", pie_chart_yearly_path %>
+<%= link_to "年間棒グラフ", column_chart_monthly_path %>
