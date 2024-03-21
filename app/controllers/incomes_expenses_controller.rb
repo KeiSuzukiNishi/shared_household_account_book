@@ -37,15 +37,10 @@ class IncomesExpensesController < ApplicationController
   end
 
   def calendar
-    @date = params.fetch(:date, Date.today).to_date
-    if params[:id] == "calendar"
-      @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_month..@date.end_of_month)
-    else
-      @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_month..@date.end_of_month)
-    end
+    @start_date = params[:start_date].present? ? Date.parse(params[:start_date]) : Date.today
+    @incomes_expenses = IncomesExpense.where(starts_at: @start_date.beginning_of_month..@start_date.end_of_month)
     @categories = Category.all
-
-    # binding.pry
+    
     render 'calendar'
   end
   
@@ -55,7 +50,7 @@ class IncomesExpensesController < ApplicationController
     @categories = Category.all
     render 'day'
   end
-  
+
   def update
     respond_to do |format|
       if @incomes_expense.update(incomes_expense_params)
