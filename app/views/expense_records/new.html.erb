@@ -1,0 +1,7 @@
+<h1><%= t('shared_book.expense_record_new') %></h1>
+
+<%= render "form", expense_record: @expense_record %>
+
+<div>
+  <%= link_to t('shared_book.expense_record_index'), expense_records_path %>
+</div>

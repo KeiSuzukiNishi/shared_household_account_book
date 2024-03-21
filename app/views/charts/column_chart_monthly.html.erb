@@ -1,0 +1,23 @@
+<h1>月間棒グラフ</h1>
+
+<%= form_with url: column_chart_monthly_path, method: :get do |form| %>
+  <%= form.label :selected_year, "Year" %>
+  <%= form.text_field :selected_year, type: "number", value: params[:selected_year] || Date.today.year %>
+
+  <%= form.label :start_month, "Start Month" %>
+  <%= form.select :start_month, options_for_select((1..12).map { |m| [Date::MONTHNAMES[m], m] }, params[:start_month]), { include_blank: true } %>
+
+  <%= form.label :end_month, "End Month" %>
+  <%= form.select :end_month, options_for_select((1..12).map { |m| [Date::MONTHNAMES[m], m] }, params[:end_month]), { include_blank: true } %>
+
+  <%= form.submit "Submit" %>
+<% end %>
+
+<%= column_chart [
+   { name: 'Incomes', data: @monthly_incomes.map { |record| ["#{record.year.to_i}-#{record.month.to_i}", record.total_amount] } },
+   { name: 'Expenses', data: @monthly_expenses.map { |record| ["#{record.year.to_i}-#{record.month.to_i}", record.total_amount] } }], 
+    library: { colors: ['green', 'red'] }, xtitle: "年月", ytitle: "金額" %>
+
+<%= link_to "月間円グラフ", pie_chart_monthly_path %>
+<%= link_to "年間円グラフ", pie_chart_yearly_path %>
+<%= link_to "年間棒グラフ", column_chart_yearly_path %>

@@ -1,12 +1,47 @@
-<h1><%= t('shared_book.incomes_expenses_show_page') %></h1>
-<% if @incomes_expense %>
-  <%= render @incomes_expense %>
-  <div>
-  <%= link_to t('shared_book.edit'), edit_incomes_expense_path(@incomes_expense) %> |
-  <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
+<h1><%= "詳細画面" %></h1>
 
-  <%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete %>
-  </div>
+  <% if @incomes_expense.present? %>
+    <table>
+      <thead>
+        <tr>
+          <th><%= t('shared_book.dealt_on') %></th>
+          <th><%= t('shared_book.income_expense_type') %></th>
+          <th><%= t('shared_book.company') %></th>
+          <th><%= t('shared_book.categories') %></th>
+          <th><%= t('shared_book.description') %></th>
+          <th><%= t('shared_book.remarks') %></th>
+          <th><%= t('shared_book.amount') %></th>
+          <th><%= t('shared_book.image') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @incomes_expense.dealt_on %></td>
+          <td><%= @incomes_expense.income_expense_type %></td>
+          <td><%= @incomes_expense.company %></td>
+          <td>
+            <% category = Category.find(@incomes_expense.category_id) %>
+            <%= category.name %>
+          </td>
+          <td><%= @incomes_expense.description %></td>
+          <td><%= @incomes_expense.remarks %></td>
+          <td><%= @incomes_expense.amount %></td>
+          <td>
+            <% if @incomes_expense.image.attached? %>
+              <div>
+                <strong><%= t('shared_book.image') %>:</strong> 
+                <%= link_to t('shared_book.view_image'), @incomes_expense.image %>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <%= link_to t('shared_book.edit'), edit_incomes_expense_path(@incomes_expense) %>
+      <%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete %>
+    </p>
   <% else %>
-    <p>No incomes expense found.</p>
-<% end %>
+    <p>データが存在しません。</p>
+  <% end %>
+</div>
