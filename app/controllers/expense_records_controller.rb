@@ -75,18 +75,34 @@ class ExpenseRecordsController < ApplicationController
   end
 
   def update
-    @expense_record = ExpenseRecord.find(params[:id])
-
-    if @expense_record.update(expense_record_params)
-      redirect_to expense_record_path(@expense_record)
-    else
-      render :edit
+    expense_record = ExpenseRecord.find(params[:id])
+  
+    @year = params[:expense_record][:year].to_i || Time.now.year
+    @month = params[:expense_record][:month].to_i || Time.now.month
+    @total_expenses = User.all.sum { |user| user.total_amount_by_month(@year, @month) }
+  
+    user_incomes = params[:income].values.map(&:to_i) 
+    total_income = user_incomes.sum
+    results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
+  
+    expense_record.expense_records_details.each_with_index do |detail, index|
+      user = detail.user
+  
+      detail.update(
+        ratio: results[index],
+        total_amount: user.total_amount_by_month(@year, @month),
+        burden_amount: @total_expenses * results[index] / 100,
+        difference: @total_expenses * results[index] / 100 - (user.total_amount_by_month(@year, @month) * results[index] / 100),
+        income: user_incomes[index]
+      )
     end
+  
+    redirect_to expense_record_path(expense_record)
   end
   
   private
 
   def expense_record_params
-    params.require(:expense_record).permit(:year, :month, user_incomes_attributes: [:id, :income])
+    params.require(:expense_record).permit(:year, :month, :ratio, :total_amount, :burden_amount, :difference, :income)
   end
 end
