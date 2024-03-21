@@ -2,30 +2,25 @@ class IncomesExpensesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_incomes_expense, only: %i[ show edit update destroy ]
 
-  # GET /incomes_expenses or /incomes_expenses.json
   def index
     @incomes_expenses = IncomesExpense.all
     @categories = Category.all
   end
 
-  # GET /incomes_expenses/1 or /incomes_expenses/1.json
   def show
-    @incomes_expenses = IncomesExpense.all
     @categories = Category.all
   end
 
-  # GET /incomes_expenses/new
+
   def new
     @incomes_expense = IncomesExpense.new
     @categories = Category.all
   end
 
-  # GET /incomes_expenses/1/edit
   def edit
     @categories = Category.all
   end
 
-  # POST /incomes_expenses or /incomes_expenses.json
   def create
     @incomes_expense = IncomesExpense.new(incomes_expense_params)
     @categories = Category.all
@@ -41,7 +36,24 @@ class IncomesExpensesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /incomes_expenses/1 or /incomes_expenses/1.json
+  def calendar
+    @date = params.fetch(:date, Date.today).to_date
+    if params[:id] == "calendar"
+      @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_month..@date.end_of_month)
+    else
+      @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_month..@date.end_of_month)
+    end
+    @categories = Category.all
+    render 'calendar'
+  end
+  
+  def day
+    @date = params.fetch(:date, Date.today).to_date
+    @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_day..@date.end_of_day)
+    @categories = Category.all
+    render 'day'
+  end
+
   def update
     respond_to do |format|
       if @incomes_expense.update(incomes_expense_params)
@@ -54,7 +66,6 @@ class IncomesExpensesController < ApplicationController
     end
   end
 
-  # DELETE /incomes_expenses/1 or /incomes_expenses/1.json
   def destroy
     @incomes_expense.destroy!
     respond_to do |format|
@@ -63,13 +74,18 @@ class IncomesExpensesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_incomes_expense
-      @incomes_expense = IncomesExpense.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
+
+
+  private
+  
+  def set_incomes_expense
+    if params[:id] == "calendar"
+      return
+    end
+    @incomes_expense = IncomesExpense.find(params[:id])
+  end
+  
     def incomes_expense_params
       params.require(:incomes_expense).permit(:dealt_on, :income_expense_type, :company, :description, :remarks, :amount, :image, :category_id)
     end

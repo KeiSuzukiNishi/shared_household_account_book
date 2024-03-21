@@ -1,0 +1,66 @@
+<h1><%= t('shared_book.expense_record_index') %></h1>
+
+<% ExpenseRecord.all.each do |record| %>
+  <tr>
+    <td><%= record.year %>年<%= record.month %>月</td>
+    <% @users.each do |user| %>
+      <td><%= user.name %></td>
+      <% detail = record.expense_records_details.find_by(user_id: user.id) %>
+      <% if detail %>
+        <td><%= detail.income %></td>
+        <td><%= "#{detail.ratio}%" %></td>
+        <td><%= detail.total_amount %></td>
+        <td><%= detail.burden_amount %></td>
+        <td><%= detail.difference %></td>
+      <% else %>
+        レコードがありません
+      <% end %>
+    <% end %>
+  </tr>
+<% end %>
+
+<% if @users.any? %>
+  <table>
+    <tr>
+      <th><%= t('shared_book.year') %></th>
+      <th><%= t('shared_book.month') %></th>
+      <th><%= t('shared_book.user_name') %></th>
+      <th><%= t('shared_book.income') %></th>
+      <th><%= t('shared_book.ratio') %>(%)</th>
+      <th><%= t('shared_book.total_amount') %></th>
+      <th><%= t('shared_book.burden_amount') %></th>
+      <th><%= t('shared_book.difference') %></th>
+    </tr>
+
+    <% @expense_records_by_month.each do |month, records| %>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= month.year %></td>
+          <td><%= month.month %></td>
+          <td><%= user.name %></td>
+          
+          <% user_record = @expense_records_by_month[month]&.find { |record| record.user == user } %>
+          <% if user_record.present? %>
+            <td><%= user_record.income %></td>
+            <td><%= "#{user_record.ratio}%" %></td>
+            <td><%= user_record.total_amount %></td>
+            <td><%= user_record.burden_amount %></td>
+            <td><%= user_record.difference %></td>
+            <td><%= link_to t('shared_book.details'), expense_record_path(user_record.expense_record) %></td>
+            <td><%= link_to t('shared_book.edit'), edit_expense_record_path(user_record.expense_record) %></td>
+            <td><%= button_to t('shared_book.destroy'), expense_records_path, method: :delete %></td>
+          <% else %>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+<% else %>
+  <p><%= t('shared_book.no_user_found') %></p>
+<% end %>
+
+<%= link_to t('shared_book.expense_record_new'), new_expense_record_path %>

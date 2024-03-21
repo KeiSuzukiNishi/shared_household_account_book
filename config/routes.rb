@@ -2,10 +2,17 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get '/admin/index', to: 'admin#index'
   devise_for :users, controllers: { registrations: 'users/registrations' }
-  resources :incomes_expenses
   resources :users, only: [:show, :destroy]
   resources :categories
-  # resources :admins
+  resources :expense_records
+
+  resources :incomes_expenses do
+    collection do
+      get 'calendar'
+      get 'day', to: 'incomes_expenses#day'
+    end
+  end
+
   root "incomes_expenses#index"
 
   get 'charts/pie_chart_monthly', to: 'charts#pie_chart_monthly', as: 'pie_chart_monthly'

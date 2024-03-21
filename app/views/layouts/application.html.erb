@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= t('shared_book.title') %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    <%= javascript_include_tag 'chartkick', 'Chart.bundle' %>
-  </head>
-
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <% if signed_in? %>
-      <% if current_user&.admin? %>
-            <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
-        <%= link_to t('shared_book.category_index'), categories_path %>
-        <%= link_to "月間円グラフ", pie_chart_monthly_path %>
-        <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
-        <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
-        <%= link_to t("admin.admin_page"), rails_admin_path %></li>
-      <% else %>
-        <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
-        <%= link_to t('shared_book.category_index'), categories_path %>
-        <%= link_to "月間円グラフ", pie_chart_monthly_path %>
-        <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
-        <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
-      <% end %>
-    <% else %>
-      <%= link_to t('shared_book.sign_up'), new_user_registration_path %>
-      <%= link_to t('shared_book.sign_in'), new_user_session_path %>
-    <% end %>
-
-    <%= yield %>
-  </body>
+<head>
+<title><%= t('shared_book.title') %></title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+<%= javascript_importmap_tags %>
+<%= javascript_include_tag 'chartkick', 'Chart.bundle' %>
+</head>
+<body>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+<% if signed_in? %>
+  <% if current_user&.admin? %>
+    <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
+    <%= link_to t('shared_book.category_index'), categories_path %>
+    <%= link_to t('shared_book.calendar_page'), calendar_incomes_expenses_path %>
+    <%= link_to "月間円グラフ", pie_chart_monthly_path %>
+    <%= link_to t('shared_book.expense_record_index'), expense_records_path %>
+    <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
+    <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
+    <%= link_to t("admin.admin_page"), rails_admin_path %></li>
+  <% else %>
+    <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path %>
+    <%= link_to t('shared_book.category_index'), categories_path %>
+    <%= link_to t('shared_book.calendar_page'), calendar_incomes_expenses_path %>
+    <%= link_to "月間円グラフ", pie_chart_monthly_path %>
+    <%= link_to t('shared_book.expense_record_index'), expense_records_path %>
+    <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
+    <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
+  <% end %>
+<% end %>
+<%= yield %>
+</body>
 </html>

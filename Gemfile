@@ -71,6 +71,13 @@ gem 'devise'
 gem 'rexml'
 gem 'devise-i18n'
 gem 'pry-rails'
+gem "simple_calendar"
+
+gem "sassc-rails"
+gem 'jquery-rails'
+gem 'bootstrap', '~> 5.0.0'
+gem 'mini_racer'
+gem 'rails-i18n'
 gem 'rails_admin'
 gem "sassc-rails"
 gem 'cancancan'

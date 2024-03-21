@@ -144,43 +144,4 @@ ja:
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
-  shared_book:
-    title: SharedBook
-    notice: 'お知らせ: %{message}'
-    alert: 'アラート: %{message}'
-    sign_in: ログイン
-    sign_in_page: ログイン画面
-    sign_up: アカウント登録
-    sign_out: ログアウト
-    incomes_expenses_index: 収入支出一覧
-    new_incomes_expenses: 収支新規登録
-    dealt_on: 日付
-    income_expense_type: 収入 or 支出
-    company: 会社名・店名
-    description: 詳細
-    remarks: 備考
-    amount: 金額
-    image: レシート画像
-    create_incomes_expense: 収支登録
-    details: 詳細
-    edit: 編集
-    destroy: 削除
-    create: 登録
-    user_show: アカウント
-    incomes_expenses_edit: 収入支出編集
-    incomes_expenses_updated: 収入支出内容が更新されました。
-    incomes_expenses_destroyed: 収入支出内容が削除されました。
-    incomes_expenses_created: 収入支出内容が作成されました。
-    forgot_password?: パスワードをお忘れの方はこちら
-    characters_minimum: 文字以上
-    name: 名前
-    passsowd_reset: パスワードリセット
-    send: 送信
-    view_image: 画像
-    category_index: 項目一覧
-    categorys_created: 項目が作成されました。
-    categories_destroyed: 項目が削除されました。
-    are_you_sure: 本当によろしいですか？
-    category: 項目
-    user_show_page: アカウント詳細画面
-    
+ 
