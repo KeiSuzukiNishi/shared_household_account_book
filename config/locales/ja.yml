@@ -60,8 +60,33 @@ ja:
     submit: 登録
     s_yearly_income: の年収
     expense_record_new: 割勘新規作成
+    categories: 項目
+    year: 年
+    month: 月
+    display: 表示
+    start_year: 開始年
+    end_year: 終了年
+    start_month: 開始月
+    end_month: 終了月 
+    expense: 支出
+    edit_category: 項目編集
+    category_name: 項目名
+    back: 戻る
+    new_category: 新規項目作成
+    charts: グラフ
+    monthly_column_chart: 月間棒グラフ
+    year_month: 年月
+    yearly_column_chart: 年間棒グラフ
+    monthly_pie_chart: 月間円グラフ
+    yearly_pie_chart: 年間円グラフ
+    income_amount_jpy: 収入金額 (円)
+    expense_amount_jpy: 収入金額 (円)
+    difference_amount_jpy: 差額 (円) 
+    total_amount_jpy: 合計金額 (円)
+    ratio_%: 割合 (%)
+    no_data: データが存在しません。
   simple_calendar:
     previous: "<<"
     next: ">>"
     week: 週
-   
+    today: 今日

@@ -1,20 +1,20 @@
-<h1>年間円グラフ</h1>
+<h1><%= t('shared_book.yearly_pie_chart') %></h1>
 <%= form_with url: pie_chart_yearly_path, method: :get do |form| %>
-  <%= form.label :selected_year, "Year" %>
+  <%= form.label :selected_year, t('shared_book.year') %>
   <%= form.text_field :selected_year, type: "number", value: params[:selected_year] || Date.today.year %>
 
-  <%= form.submit "Submit" %>
+  <%= form.submit t('shared_book.display') %>
     
   <div>
-    <%= form.label :income_amount, "収入金額 (円)" %>
+    <%= form.label :income_amount, t('shared_book.income_amount_jpy') %>
     <%= form.text_field :income_amount, value: @incomes_by_year, readonly: true %>
   </div>
     <div>
-    <%= form.label :expense_amount, "支出金額 (円)" %>
+    <%= form.label :expense_amount, t('shared_book.expense_amount_jpy') %>
     <%= form.text_field :expense_amount, value: @expenses_by_year, readonly: true %>
   </div>
     <div>
-    <%= form.label :differences_amount, "差額 (円)" %>
+    <%= form.label :differences_amount, t('shared_book.difference_amount_jpy') %>
     <%= form.text_field :ddifferences_amount, value: @differences_by_year, readonly: true %>
   </div>
 <% end %>
@@ -23,9 +23,9 @@
   <table>
     <thead>
       <tr>
-        <th>項目名</th>
-        <th>合計金額 (円)</th>
-        <th>割合 (%)</th>
+        <th><%= t('shared_book.category') %></th>
+        <th><%= t('shared_book.total_amount_jpy') %></th>
+        <th><%= t('shared_book.ratio_%') %></th>
       </tr>
     </thead>
     <tbody>
@@ -40,12 +40,12 @@
     </tbody>
   </table>
 <% else %>
-  <p>データが存在しません。</p>
+  <p><%= t('shared_book.no_data') %></p>
 <% end %>
 
 
   <%= pie_chart @data, legend: 'bottom', donut: true, suffix: "%" %>
 
-<%= link_to "月間円グラフ", pie_chart_monthly_path %>
-<%= link_to "月間棒グラフ", column_chart_monthly_path %>
-<%= link_to "年間棒グラフ", column_chart_yearly_path %>
+<%= link_to t('shared_book.monthly_pie_chart'), pie_chart_monthly_path %>
+<%= link_to t('shared_book.monthly_column_chart'), column_chart_monthly_path %>
+<%= link_to t('shared_book.yearly_column_chart'), column_chart_yearly_path %>

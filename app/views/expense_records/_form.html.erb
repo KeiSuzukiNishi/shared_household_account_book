@@ -8,12 +8,12 @@
 
      <ul>
     <li>
-      <%= form.label :year, 'Year' %>
-      <%= form.select :year, (Date.today.year - 10..Date.today.year + 10).to_a, { prompt: 'Year' } %>
+      <%= form.label :year, t('shared_book.year') %>
+      <%= form.select :year, (Date.today.year - 10..Date.today.year + 10).to_a, { prompt: t('shared_book.year') } %>
     </li>
     <li>
-      <%= form.label :month, 'Month' %>
-      <%= form.select :month, Date::MONTHNAMES.compact.each_with_index.map { |month, index| [month, index + 1] }, { prompt: 'Month' } %>
+      <%= form.label :month, t('shared_book.month') %>
+      <%= form.select :month, Date::MONTHNAMES.compact.each_with_index.map { |month, index| [month, index + 1] }, { prompt: t('shared_book.month') } %>
     </li>
   </ul>
 
