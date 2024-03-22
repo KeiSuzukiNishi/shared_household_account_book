@@ -1,15 +1,36 @@
 <h1><%= t('shared_book.calendar_page') %></h1>
 
-<%= month_calendar(events: @incomes_expenses) do |date, incomes_expenses| %>
+<%= month_calendar(events: @incomes_expenses, date: @start_date) do |date, incomes_expenses| %>
   <%= date.day %>
-
-  <% total_amount = incomes_expenses.sum(&:amount) %>
   
-  <% if incomes_expenses.any? %>
-    <%= link_to total_amount, incomes_expenses_path(@incomes_expenses) %>
+  <% total_amount = incomes_expenses.sum { |ie| ie.amount if ie.dealt_on.to_date == date } %>
+  <% if total_amount.present? %>
+    <% first_income_expense = incomes_expenses.find { |ie| ie.dealt_on.to_date == date } %>
+    <% if first_income_expense.present? %>
+      <%= link_to total_amount, incomes_expense_path(first_income_expense) %>
+    <% end %>
   <% end %>
 <% end %>
 
-<% @incomes_expenses.each do |incomes_expense| %>
-    <%= render incomes_expense %>
-  <% end %>
+<table>
+  <thead>
+    <tr>
+      <th><%= t('shared_book.dealt_on') %></th>
+      <th><%= t('shared_book.income_expense_type') %>:</th>
+      <th><%= t('shared_book.categories') %></th>
+      <th><%= t('shared_book.company') %></th>
+      <th><%= t('shared_book.amount') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @incomes_expenses.each do |incomes_expense| %>
+      <tr>
+        <td><%= incomes_expense.dealt_on %></td>
+        <td><%= incomes_expense.income_expense_type %></td>
+        <td><%= Category.find(incomes_expense.category_id).name %></td>
+        <td><%= incomes_expense.company %></td>
+        <td><%= incomes_expense.amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

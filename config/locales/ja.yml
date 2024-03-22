@@ -42,6 +42,7 @@ ja:
     user_show_page: アカウント詳細画面
     calendar_page: カレンダー一覧画面
     incomes_expenses_show_page: 収入支出詳細画面
+    calendar_index: カレンダー一覧
     expense_record_index: 割勘一覧
     year: 年
     month: 月
@@ -63,3 +64,4 @@ ja:
     previous: "<<"
     next: ">>"
     week: 週
+   

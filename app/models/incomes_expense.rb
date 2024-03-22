@@ -25,4 +25,8 @@ class IncomesExpense < ApplicationRecord
         where("extract(year from dealt_on) = ? AND extract(month from dealt_on) = ?", year, month)
           .sum(:amount)
     end
+
+    def start_time
+        dealt_on.to_time
+    end
 end
