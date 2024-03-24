@@ -1,9 +1,20 @@
 <h1><%= t('shared_book.category') %></h1>
 
-<div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
-  <% end %>
-</div>
+<% if @categories.present? && @categories.any? %>
+    <table>
+      <tr>
+        <th><%= t('shared_book.category_name') %></th>
+      </tr>
+          <% @categories.each do |category| %>
+            <tr>
+              <td><%= category.name %></td>
+              <td><%= link_to t('shared_book.edit'), edit_category_path(category) %></td>
+              <td><%= button_to t('shared_book.destroy'), category_path(category), method: :delete, data: { confirm: t('shared_book.are_you_sure') } %></td>
+            </tr>
+          <% end %>
+    </table>
+  <% else %>
+  <p>データが存在しません。</p>
+<% end %>
 
 <%= link_to t('shared_book.new_category'), new_category_path %>
