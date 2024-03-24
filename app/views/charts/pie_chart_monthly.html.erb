@@ -10,15 +10,15 @@
     
   <div>
     <%= form.label :income_amount, t('shared_book.income_amount_jpy') %>
-    <%= form.text_field :income_amount, value: @incomes_by_month, readonly: true %>
+    <%= form.text_field :income_amount, value: number_with_delimiter(@incomes_by_month), readonly: true %>
   </div>
     <div>
     <%= form.label :expense_amount, t('shared_book.expense_amount_jpy') %>
-    <%= form.text_field :expense_amount, value: @expenses_by_month, readonly: true %>
+    <%= form.text_field :expense_amount, value: number_with_delimiter(@expenses_by_month), readonly: true %>
   </div>
     <div>
     <%= form.label :differences_amount, t('shared_book.difference_amount_jpy') %>
-    <%= form.text_field :ddifferences_amount, value: @differences_by_month, readonly: true %>
+    <%= form.text_field :ddifferences_amount, value: number_with_delimiter(@differences_by_month), readonly: true %>
   </div>
 <% end %>
 
@@ -36,7 +36,7 @@
         <% category = Category.find_by(id: category_id) %>
         <tr>
           <td><%= category&.name || "Unknown Category" %></td>
-          <td><%= amount %></td>
+          <td><%= number_with_delimiter(amount) %></td>
           <td><%= @percentages_by_category[category_id] %></td>
         </tr>
       <% end %>

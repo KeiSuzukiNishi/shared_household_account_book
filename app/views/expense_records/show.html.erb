@@ -22,11 +22,11 @@
           <td><%= user.name %></td>
           <td><%= expense_record.year %></td>
           <td><%= expense_record.month %></td>
-          <td><%= expense_record_detail.income %></td>
+          <td><%= number_with_delimiter(expense_record_detail.income) %></td>
           <td><%= expense_record_detail.ratio %>%</td>
-          <td><%= expense_record_detail.total_amount %></td>
-          <td><%= expense_record_detail.burden_amount %></td>
-          <td><%= expense_record_detail.difference %></td>
+          <td><%= number_with_delimiter(expense_record_detail.total_amount) %></td>
+          <td><%= number_with_delimiter(expense_record_detail.burden_amount) %></td>
+          <td><%= number_with_delimiter(expense_record_detail.difference) %></td>
         </tr>
       <% end %>
     <% end %>

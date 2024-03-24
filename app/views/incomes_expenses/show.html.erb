@@ -25,7 +25,7 @@
           </td>
           <td><%= @incomes_expense.description %></td>
           <td><%= @incomes_expense.remarks %></td>
-          <td><%= @incomes_expense.amount %></td>
+          <td><%= number_with_delimiter(@incomes_expense.amount) %></td>
           <td>
             <% if @incomes_expense.image.attached? %>
               <div>
