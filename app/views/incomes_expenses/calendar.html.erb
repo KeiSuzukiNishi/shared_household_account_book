@@ -7,7 +7,7 @@
   <% if total_amount.present? %>
     <% first_income_expense = incomes_expenses.find { |ie| ie.dealt_on.to_date == date } %>
     <% if first_income_expense.present? %>
-      <%= link_to total_amount, incomes_expense_path(first_income_expense) %>
+      <%= link_to number_with_delimiter(total_amount), incomes_expense_path(first_income_expense) %>
     <% end %>
   <% end %>
 <% end %>
@@ -23,13 +23,13 @@
     </tr>
   </thead>
   <tbody>
-    <% @incomes_expenses.each do |incomes_expense| %>
+    <% @incomes_expenses.order(dealt_on: :asc).each do |incomes_expense| %>
       <tr>
         <td><%= incomes_expense.dealt_on %></td>
         <td><%= incomes_expense.income_expense_type %></td>
         <td><%= Category.find(incomes_expense.category_id).name %></td>
         <td><%= incomes_expense.company %></td>
-        <td><%= incomes_expense.amount %></td>
+        <td><%= number_with_delimiter(incomes_expense.amount) %></td>
       </tr>
     <% end %>
   </tbody>
