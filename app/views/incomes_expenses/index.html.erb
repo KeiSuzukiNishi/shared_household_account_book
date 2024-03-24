@@ -21,10 +21,8 @@
           <td><%= incomes_expense.income_expense_type %></td>
           <td><%= incomes_expense.company %></td>
           <td>
-              <% @incomes_expenses.each do |incomes_expense| %>
-                <% category = Category.find(incomes_expense.category_id) %>
-                <%= category.name %>
-              <% end %>
+              <% category = Category.find(incomes_expense.category_id) %>
+              <%= category.name %>
           </td>
           <td><%= incomes_expense.description %></td>
           <td><%= incomes_expense.remarks %></td>
