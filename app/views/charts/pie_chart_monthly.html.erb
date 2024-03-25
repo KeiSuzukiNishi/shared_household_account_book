@@ -6,7 +6,7 @@
   <%= form.label :selected_month, t('shared_book.month') %>
   <%= form.text_field :selected_month, type: "number", value: params[:selected_month] || Date.today.month %>
 
-  <%= form.submit t('shared_book.display') %>
+  <%= form.submit t('shared_book.display'), class: "btn btn-primary" %>
     
   <div>
     <%= form.label :income_amount, t('shared_book.income_amount_jpy') %>

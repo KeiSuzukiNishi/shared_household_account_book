@@ -10,7 +10,7 @@
   <%= form.label :end_month, t('shared_book.end_month') %>
   <%= form.select :end_month, options_for_select((1..12).map { |m| [Date::MONTHNAMES[m], m] }, params[:end_month]), { include_blank: true } %>
 
-  <%= form.submit t('shared_book.display') %>
+  <%= form.submit t('shared_book.display'), class: "btn btn-primary" %>
 <% end %>
 
 <%= column_chart [

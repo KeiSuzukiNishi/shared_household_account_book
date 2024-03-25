@@ -7,7 +7,7 @@
   <%= form.label :end_year, t('shared_book.end_year') %>
   <%= form.text_field :end_year, type: "number", value: params[:end_year] || Date.today.year %>
 
-  <%= form.submit t('shared_book.display') %>
+  <%= form.submit t('shared_book.display'), class: "btn btn-primary" %>
 <% end %>
 
 <%= column_chart [

@@ -3,7 +3,7 @@
   <%= form.label :selected_year, t('shared_book.year') %>
   <%= form.text_field :selected_year, type: "number", value: params[:selected_year] || Date.today.year %>
 
-  <%= form.submit t('shared_book.display') %>
+  <%= form.submit t('shared_book.display'), class: "btn btn-primary" %>
     
   <div>
     <%= form.label :income_amount, t('shared_book.income_amount_jpy') %>

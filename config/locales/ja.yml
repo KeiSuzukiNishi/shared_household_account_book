@@ -85,6 +85,8 @@ ja:
     total_amount_jpy: 合計金額 (円)
     ratio_%: 割合 (%)
     no_data: データが存在しません。
+    current_password: 現在のパスワード
+    password_confirmation: パスワ確認
   simple_calendar:
     previous: "<<"
     next: ">>"

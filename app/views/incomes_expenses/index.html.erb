@@ -36,7 +36,7 @@
           </td>
           <td><%= link_to t('shared_book.details'), incomes_expense %></td>
           <td><%= link_to t('shared_book.edit'), edit_incomes_expense_path(incomes_expense) %></td>
-          <td><%= button_to t('shared_book.destroy'), incomes_expense, method: :delete %></td>
+          <td><%= button_to t('shared_book.destroy'), incomes_expense, method: :delete, class: "btn btn-secondary" %></td>
         </tr>
         <% end %>
     </tbody>
