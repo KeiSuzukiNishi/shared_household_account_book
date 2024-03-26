@@ -22,6 +22,5 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'index', to: 'users#index'
-    # resources :incomes_expenses
   end
 end

@@ -1,6 +1,6 @@
 <h1><%= t('shared_book.expense_record_details') %></h1>
 
-<% if @users.any? %>
+<% if @expense_record %>
   <table>
     <tr>
       <th><%= t('shared_book.user_name') %></th>
@@ -13,22 +13,17 @@
       <th><%= t('shared_book.difference') %></th>
     </tr>
 
-    <% @users.each do |user| %>
-      <% expense_record = ExpenseRecord.find_by(user: user, year: @year, month: @month) %>
-
-      <% if expense_record.present? %>
-        <% expense_record_detail = expense_record.expense_records_details.first %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= expense_record.year %></td>
-          <td><%= expense_record.month %></td>
-          <td><%= number_with_delimiter(expense_record_detail.income) %></td>
-          <td><%= expense_record_detail.ratio %>%</td>
-          <td><%= number_with_delimiter(expense_record_detail.total_amount) %></td>
-          <td><%= number_with_delimiter(expense_record_detail.burden_amount) %></td>
-          <td><%= number_with_delimiter(expense_record_detail.difference) %></td>
-        </tr>
-      <% end %>
+    <% @expense_record.expense_records_details.each do |detail| %>
+      <tr>
+        <td><%= detail.user.name %></td>
+        <td><%= detail.expense_record.year %></td>
+        <td><%= detail.expense_record.month %></td>
+        <td><%= number_with_delimiter(detail.income) %></td>
+        <td><%= detail.ratio %>%</td>
+        <td><%= number_with_delimiter(detail.total_amount) %></td>
+        <td><%= number_with_delimiter(detail.burden_amount) %></td>
+        <td><%= number_with_delimiter(detail.difference) %></td>
+      </tr>
     <% end %>
   </table>
   <div>
