@@ -18,4 +18,4 @@ import "sb-admin/morris-data"
 import "sb-admin/sb-admin"
 
 import 'app/assets/stylesheets/sb-admin-2';
-import './sb-admin-2';
+import 'app/javascript/sb-admin-2';
