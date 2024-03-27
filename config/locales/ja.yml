@@ -40,6 +40,7 @@ ja:
     are_you_sure: 本当によろしいですか？
     category: 項目
     user_show_page: アカウント詳細画面
+    calendar: カレンダー
     calendar_page: カレンダー一覧画面
     incomes_expenses_show_page: 収入支出詳細画面
     calendar_index: カレンダー一覧
@@ -47,6 +48,7 @@ ja:
     year: 年
     month: 月
     user_name: ユーザー名
+    user_setting: ユーザー設定
     income: 収入
     ratio: 比率
     total_amount: 合計金額
