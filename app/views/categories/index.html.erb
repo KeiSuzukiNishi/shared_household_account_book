@@ -1,20 +1,57 @@
-<h1><%= t('shared_book.category') %></h1>
+<!-- app/assets/stylesheets/custom.cssが反映されないので下記追記-->
+<style>
+    .table-sm td, .table-sm th {
+        font-size: 14px;
+    }
+</style>
 
-<% if @categories.present? && @categories.any? %>
-    <table>
-      <tr>
-        <th><%= t('shared_book.category_name') %></th>
-      </tr>
-          <% @categories.each do |category| %>
-            <tr>
-              <td><%= category.name %></td>
-              <td><%= link_to t('shared_book.edit'), edit_category_path(category) %></td>
-              <td><%= button_to t('shared_book.destroy'), category_path(category), method: :delete, data: { confirm: t('shared_book.are_you_sure') }, class: "btn btn-secondary" %></td>
-            </tr>
-          <% end %>
-    </table>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="row mb-3">
+    <div class="col">
+      <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.category_index') %></h1>
+    </div>
+    <div class="col text-right">
+      <%= link_to t('shared_book.new_category'), new_category_path, class: "btn btn-info" %>
+    </div>
+  </div>
+  
+  <!-- DataTales -->
+  <% if @categories.present? && @categories.any? %>
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th><%= t('shared_book.category_name') %></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @categories.each do |category| %>
+                <tr>
+                  <td><%= category.name %></td>
+                  <td><%= link_to t('shared_book.edit'), edit_category_path(category), class: "btn btn-outline-info btn-sm" %></td>
+                  <td><%= button_to t('shared_book.destroy'), category_path(category), method: :delete, data: { confirm: t('shared_book.are_you_sure') }, class: "btn btn-outline-dark btn-sm" %></td>
+                </tr>
+              <% end %>                   
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   <% else %>
-  <p>データが存在しません。</p>
-<% end %>
+      <p>データが存在しません。</p>
+  <% end %>
+</div>
+<!-- /.container-fluid -->
 
-<%= link_to t('shared_book.new_category'), new_category_path %>
+<script>
+  $(document).ready(function() {
+    $('#dataTable').DataTable();
+  });
+</script>
