@@ -1,18 +1,29 @@
+<!-- app/assets/stylesheets/custom.cssが反映されないので下記追記-->
+<style>
+    .table-sm td, .table-sm th {
+        font-size: 14px;
+    }
+</style>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.incomes_expenses_index') %></h1>
-
-<%= link_to t('shared_book.new_incomes_expenses'), new_incomes_expense_path %>
-
-    <!-- DataTales Example -->
+    <div class="row mb-3">
+        <div class="col">
+            <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.incomes_expenses_index') %></h1>
+        </div>
+        <div class="col text-right">
+            <%= link_to t('shared_book.new_incomes_expenses'), new_incomes_expense_path, class: "btn btn-info" %>
+        </div>
+    </div>
+    
+    <!-- DataTales -->
     <% if @incomes_expenses.present? && @incomes_expenses.any? %>
         <div class="card shadow mb-4">
             <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                     <th><%= t('shared_book.dealt_on') %></th>
@@ -49,9 +60,9 @@
                                 </div>
                             <% end %>
                             </td>
-                            <td><%= link_to t('shared_book.details'), incomes_expense %></td>
-                            <td><%= link_to t('shared_book.edit'), edit_incomes_expense_path(incomes_expense) %></td>
-                            <td><%= button_to t('shared_book.destroy'), incomes_expense, method: :delete, class: "btn btn-dark" %></td>
+                            <td><%= link_to t('shared_book.details'), incomes_expense, class: "btn btn-outline-primary btn-sm" %></td>
+                            <td><%= link_to t('shared_book.edit'), edit_incomes_expense_path(incomes_expense), class: "btn btn-outline-info btn-sm" %></td>
+                            <td><%= button_to t('shared_book.destroy'), incomes_expense, method: :delete, class: "btn btn-outline-dark btn-sm" %></td>
                         </tr>
                     <% end %>                    
                 </tbody>

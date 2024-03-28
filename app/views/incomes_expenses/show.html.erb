@@ -1,15 +1,22 @@
+<!-- app/assets/stylesheets/custom.cssが反映されないので下記追記-->
+<style>
+    .table-sm td, .table-sm th {
+        font-size: 14px;
+    }
+</style>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
   <!-- Page Heading -->
   <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.incomes_expenses_show') %></h1>
 
-  <!-- DataTales Example -->
+  <!-- Data Details -->
   <% if @incomes_expense.present? %>
     <div class="card shadow mb-4">
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
                 <th><%= t('shared_book.dealt_on') %></th>
@@ -44,8 +51,8 @@
                     </div>
                   <% end %>
                 </td>
-                <td><%= link_to t('shared_book.edit'), edit_incomes_expense_path(@incomes_expense) %></td>
-                <td><%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete, class: "btn btn-secondary" %></td>
+                <td><%= link_to t('shared_book.edit'), edit_incomes_expense_path(@incomes_expense), class: "btn btn-outline-info btn-sm" %></td>
+                <td><%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete, class: "btn btn-outline-dark btn-sm" %></td>
               </tr>                  
             </tbody>
           </table>
