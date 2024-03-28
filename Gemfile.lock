@@ -342,6 +342,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails
+  kaminari
   letter_opener_web
   mini_racer
   pg (~> 1.1)

@@ -3,7 +3,7 @@ class IncomesExpensesController < ApplicationController
   before_action :set_incomes_expense, only: %i[ show edit update destroy ]
 
   def index
-    @incomes_expenses = IncomesExpense.all
+    @incomes_expenses = IncomesExpense.all.page(params[:page])
     @categories = Category.all
   end
 
