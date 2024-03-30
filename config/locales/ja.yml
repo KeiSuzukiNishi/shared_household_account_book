@@ -83,13 +83,16 @@ ja:
     monthly_pie_chart: 月間円グラフ
     yearly_pie_chart: 年間円グラフ
     income_amount_jpy: 収入金額 (円)
-    expense_amount_jpy: 収入金額 (円)
+    expense_amount_jpy: 支出金額 (円)
     difference_amount_jpy: 差額 (円) 
     total_amount_jpy: 合計金額 (円)
     ratio_%: 割合 (%)
     no_data: データが存在しません。
     current_password: 現在のパスワード
     password_confirmation: パスワ確認
+    monthly_summary: 月間まとめ
+    category_details: 項目別詳細
+    yearly_summary: 年間まとめ
   simple_calendar:
     previous: "<<"
     next: ">>"

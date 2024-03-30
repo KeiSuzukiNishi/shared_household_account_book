@@ -1,51 +1,91 @@
-<h1><%= t('shared_book.yearly_pie_chart') %></h1>
-<%= form_with url: pie_chart_yearly_path, method: :get do |form| %>
-  <%= form.label :selected_year, t('shared_book.year') %>
-  <%= form.text_field :selected_year, type: "number", value: params[:selected_year] || Date.today.year %>
+<!-- app/assets/stylesheets/custom.cssが反映されないので下記追記-->
+<style>
+    .table-sm td, .table-sm th {
+        font-size: 14px;
+    }
+</style>
 
-  <%= form.submit t('shared_book.display'), class: "btn btn-primary" %>
-    
-  <div>
-    <%= form.label :income_amount, t('shared_book.income_amount_jpy') %>
-    <%= form.text_field :income_amount, value: number_with_delimiter(@incomes_by_year), readonly: true %>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="row mb-3">
+      <div class="col">
+          <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.yearly_pie_chart') %></h1>
+      </div>
+      <div class="col text-right">
+          <%= link_to t('shared_book.monthly_pie_chart'), pie_chart_monthly_path, class: "btn btn-info btn-outline-light" %>
+          <%= link_to t('shared_book.monthly_column_chart'), column_chart_monthly_path, class: "btn btn-info btn-outline-light" %>
+          <%= link_to t('shared_book.yearly_column_chart'), column_chart_yearly_path, class: "btn btn-info btn-outline-light" %>
+      </div>
   </div>
-    <div>
-    <%= form.label :expense_amount, t('shared_book.expense_amount_jpy') %>
-    <%= form.text_field :expense_amount, value: number_with_delimiter(@expenses_by_year), readonly: true %>
+
+  <!-- form Data -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <%= form_with url: pie_chart_yearly_path, method: :get do |form| %>
+        <%= form.label :selected_year, t('shared_book.year') %>
+        <%= form.text_field :selected_year, type: "number", value: params[:selected_year] || Date.today.year %>
+
+        <%= form.submit t('shared_book.display'), class: "btn btn-primary" %>
+    </div>
+      <!-- chart -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div>
+        <%= pie_chart @data, legend: 'bottom', donut: true, suffix: "%" %>
+        </div>
+      </div>
+
+      <!-- details -->
+      <div class="col-md-6">
+        <div class="m-3">
+          <h2 class="border-bottom-warning fs-3"><%= t('shared_book.yearly_summary') %></h2>
+           <div>
+            <%= form.label :income_amount, t('shared_book.income_amount_jpy') %>
+            <%= form.text_field :income_amount, value: number_with_delimiter(@incomes_by_year), readonly: true %>
+          </div>
+            <div>
+            <%= form.label :expense_amount, t('shared_book.expense_amount_jpy') %>
+            <%= form.text_field :expense_amount, value: number_with_delimiter(@expenses_by_year), readonly: true %>
+          </div>
+            <div>
+            <%= form.label :differences_amount, t('shared_book.difference_amount_jpy') %>
+            <%= form.text_field :ddifferences_amount, value: number_with_delimiter(@differences_by_year), readonly: true %>
+          </div>
+        </div>
+    <% end %>
+
+        <div class="m-3">
+          <h2 class="border-bottom-warning fs-3"><%= t('shared_book.category_details') %></h2>
+          <% if @data.present? && @data.any? %>
+            <div class="table-responsive">
+              <table class="table-bordered table-sm" id="dataTable" >
+                <thead>
+                  <tr>
+                    <th><%= t('shared_book.category') %></th>
+                    <th><%= t('shared_book.total_amount_jpy') %></th>
+                    <th><%= t('shared_book.ratio_%') %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @total_amount_by_category.sort_by { |_, amount| -amount }.each do |category_id, amount| %>
+                    <% category = Category.find_by(id: category_id) %>
+                    <tr>
+                      <td><%= category&.name || "Unknown Category" %></td>
+                      <td><%= number_with_delimiter(amount) %></td>
+                      <td><%= @percentages_by_category[category_id] %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <p><%= t('shared_book.no_data') %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-    <div>
-    <%= form.label :differences_amount, t('shared_book.difference_amount_jpy') %>
-    <%= form.text_field :ddifferences_amount, value: number_with_delimiter(@differences_by_year), readonly: true %>
-  </div>
-<% end %>
-
-<% if @data.present? && @data.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th><%= t('shared_book.category') %></th>
-        <th><%= t('shared_book.total_amount_jpy') %></th>
-        <th><%= t('shared_book.ratio_%') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @total_amount_by_category.sort_by { |_, amount| -amount }.each do |category_id, amount| %>
-        <% category = Category.find_by(id: category_id) %>
-        <tr>
-          <td><%= category&.name || "Unknown Category" %></td>
-          <td><%= number_with_delimiter(amount) %></td>
-          <td><%= @percentages_by_category[category_id] %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p><%= t('shared_book.no_data') %></p>
-<% end %>
-
-
-  <%= pie_chart @data, legend: 'bottom', donut: true, suffix: "%" %>
-
-<%= link_to t('shared_book.monthly_pie_chart'), pie_chart_monthly_path %>
-<%= link_to t('shared_book.monthly_column_chart'), column_chart_monthly_path %>
-<%= link_to t('shared_book.yearly_column_chart'), column_chart_yearly_path %>
+</div>

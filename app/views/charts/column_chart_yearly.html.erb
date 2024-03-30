@@ -1,20 +1,37 @@
-<h1><%= t('shared_book.yearly_column_chart') %></h1>
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-<%= form_with url: column_chart_yearly_path, method: :get do |form| %>
-  <%= form.label :start_year, t('shared_book.start_year') %>
-  <%= form.text_field :start_year, type: "number", value: params[:start_year] || Date.today.year %>
+    <!-- Page Heading -->
+    <div class="row mb-3">
+        <div class="col">
+            <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.yearly_column_chart') %></h1>
+        </div>
+        <div class="col text-right">
+            <%= link_to t('shared_book.monthly_pie_chart'), pie_chart_monthly_path, class: "btn btn-info btn-outline-light" %>
+            <%= link_to t('shared_book.yearly_pie_chart'), pie_chart_yearly_path, class: "btn btn-info btn-outline-light" %>
+            <%= link_to t('shared_book.monthly_column_chart'), column_chart_monthly_path, class: "btn btn-info btn-outline-light" %>
+        </div>
+    </div>
 
-  <%= form.label :end_year, t('shared_book.end_year') %>
-  <%= form.text_field :end_year, type: "number", value: params[:end_year] || Date.today.year %>
+  <!-- form Data -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <%= form_with url: column_chart_yearly_path, method: :get do |form| %>
+        <%= form.label :start_year, t('shared_book.start_year') %>
+        <%= form.text_field :start_year, type: "number", value: params[:start_year] || Date.today.year %>
 
-  <%= form.submit t('shared_book.display'), class: "btn btn-primary" %>
-<% end %>
+        <%= form.label :end_year, t('shared_book.end_year') %>
+        <%= form.text_field :end_year, type: "number", value: params[:end_year] || Date.today.year %>
 
-<%= column_chart [
-   { name: t('shared_book.income'), data: @yearly_incomes.map { |record| [record.year.to_i, record.total_amount] } },
-   { name: t('shared_book.expense'), data: @yearly_expenses.map { |record| [record.year.to_i, record.total_amount] } }], 
-    library: { colors: ['green', 'red'] }, xtitle: t('shared_book.year_month'), ytitle: t('shared_book.amount') %>
+        <%= form.submit t('shared_book.display'), class: "btn btn-success" %>
+      <% end %>
+    </div> 
 
-<%= link_to t('shared_book.monthly_pie_chart'), pie_chart_monthly_path %>
-<%= link_to t('shared_book.yearly_pie_chart'), pie_chart_yearly_path %>
-<%= link_to t('shared_book.monthly_column_chart'), column_chart_monthly_path %>
+    <%= column_chart [
+    { name: t('shared_book.income'), data: @yearly_incomes.map { |record| [record.year.to_i, record.total_amount] } },
+    { name: t('shared_book.expense'), data: @yearly_expenses.map { |record| [record.year.to_i, record.total_amount] } }], 
+      library: { colors: ['green', 'red'] }, xtitle: t('shared_book.year_month'), ytitle: t('shared_book.amount') %>
+
+      
+  </div>
+</div>
