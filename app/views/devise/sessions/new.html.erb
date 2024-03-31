@@ -50,12 +50,12 @@
                 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                   <div class="form-group">
                     <%= f.label :email, class: "sr-only" %>
-                    <%= f.email_field :email, autofocus: true, class: "form-control form-control-user", placeholder: t('shared_book.Enter_Email_Address') %>
+                    <%= f.email_field :email, autofocus: true, class: "form-control form-control-user", placeholder: t('shared_book.email') %>
                   </div>
 
                   <div class="form-group">
                     <%= f.label :password, class: "sr-only" %>
-                    <%= f.password_field :password, class: "form-control form-control-user", placeholder: t('shared_book.Password') %>
+                    <%= f.password_field :password, class: "form-control form-control-user", placeholder: t('shared_book.password') %>
                   </div>
 
                   <% if devise_mapping.rememberable? %>

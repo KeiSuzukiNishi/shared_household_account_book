@@ -1,33 +1,50 @@
-<h2><%= t('shared_book.sign_up') %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label t('shared_book.name') %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+<div class="container">
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+      <!-- Nested Row within Card Body -->
+      <div class="row align-items-center">
+        <div class="col-lg-5 d-none d-lg-block position-relative">
+          <%= image_tag("colorful-speech-bubbles-isometric-hiring-illustration_23-2148099747.jpg", class: "img-fluid", alt: "Register Image") %>
+          <div class="position-absolute top-0 start-50 translate-middle text-center w-100" style="margin-top: 40px;">
+            <h1 class="text-black">Shared Book</h1>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="p-5">
+            <div class="text-center">
+              <h1 class="h4 text-gray-900 mb-4"><%= t('shared_book.sign_up') %></h1>
+            </div>
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "user" }) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+              <div class="form-group">
+                <%= f.label t('shared_book.name'), class: "sr-only" %>
+                <%= f.text_field :name, class: "form-control form-control-user", id: "exampleFirstName", placeholder: t('shared_book.name') %>
+              </div>
+              <div class="form-group">
+                <%= f.label :email, class: "sr-only" %>
+                <%= f.email_field :email, class: "form-control form-control-user", id: "exampleInputEmail", placeholder: t('shared_book.email') %>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <%= f.label :password, class: "sr-only" %>
+                  <%= f.password_field :password, class: "form-control form-control-user", id: "exampleInputPassword", placeholder: t('shared_book.password') %>
+                </div>
+                <div class="col-sm-6">
+                  <%= f.label :password_confirmation, class: "sr-only" %>
+                  <%= f.password_field :password_confirmation, class: "form-control form-control-user", id: "exampleRepeatPassword", placeholder: t('shared_book.password_confirmation') %>
+                </div>
+              </div>
+              <div class="form-group">
+                <%= f.submit t('shared_book.sign_up'), class: "btn btn-primary btn-user btn-block" %>
+              </div>
+            <% end %>
+            <hr>
+            <div class="text-center">
+              <a class="small" href="login.html"><%= t('shared_book.sign_in') %></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %><%= t('shared_book.characters_minimum') %>)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit t('shared_book.sign_up'), class: "btn btn-success" %>
-  </div>
-<% end %>
-
+</div>

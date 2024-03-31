@@ -89,12 +89,12 @@ ja:
     ratio_%: 割合 (%)
     no_data: データが存在しません。
     current_password: 現在のパスワード
-    password_confirmation: パスワ確認
+    password_confirmation: パスワード確認
     monthly_summary: 月間まとめ
     category_details: 項目別詳細
     yearly_summary: 年間まとめ
-    Enter_Email_Address: "メールアドレスを入力してください..."
-    Password: パスワード
+    email: メールアドレス
+    password: パスワード
   simple_calendar:
     previous: "<<"
     next: ">>"
