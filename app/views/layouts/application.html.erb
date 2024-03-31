@@ -46,6 +46,8 @@
         <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
         <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
       <% end %>
+    <% else %>
+    <%= link_to t('shared_book.sign_in'), new_user_session_path %>
     <% end %>
 
 

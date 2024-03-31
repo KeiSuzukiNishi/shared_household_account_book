@@ -93,6 +93,8 @@ ja:
     monthly_summary: 月間まとめ
     category_details: 項目別詳細
     yearly_summary: 年間まとめ
+    Enter_Email_Address: "メールアドレスを入力してください..."
+    Password: パスワード
   simple_calendar:
     previous: "<<"
     next: ">>"
