@@ -8,6 +8,7 @@ class IncomesExpensesController < ApplicationController
   end
 
   def show
+    head :internal_server_error
     @categories = Category.all
   end
 
