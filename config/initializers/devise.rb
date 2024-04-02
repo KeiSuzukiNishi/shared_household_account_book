@@ -314,7 +314,7 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   # ログイン画面で使用するレイアウトを指定
-  config.sign_in_page = :sessions
-  config.sign_up_page = :sessions
+  # config.sign_in_page = :sessions
+  # config.sign_up_page = :sessions
 
 end

@@ -3,7 +3,9 @@ class ExpenseRecordsController < ApplicationController
     @users = User.all
     @expense_records_by_month = {}
 
-    ExpenseRecord.all.group_by { |record| [record.year, record.month] }.each do |(year, month), records|
+    grouped_records = ExpenseRecord.all.group_by { |record| [record.year, record.month] }.sort_by { |(year, month), _| [year, month] }.reverse
+
+    grouped_records.each do |(year, month), records|
       begin
         date = Date.new(year, month)
         @expense_records_by_month[date] = records.map(&:expense_records_details).flatten 

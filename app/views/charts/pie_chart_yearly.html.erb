@@ -33,6 +33,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
+          <h2 class="border-bottom-warning fs-3"><%= t('shared_book.yearly_expense_pie_chart') %></h2>
           <div>
         <%= pie_chart @data, legend: 'bottom', donut: true, suffix: "%" %>
         </div>

@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @incomes_expenses.order(dealt_on: :desc).each do |incomes_expense| %>
+                    <% @incomes_expenses.order(dealt_on: :asc).each do |incomes_expense| %>
                         <tr>
                             <td><%= incomes_expense.dealt_on %></td>
                             <td><%= incomes_expense.income_expense_type %></td>
