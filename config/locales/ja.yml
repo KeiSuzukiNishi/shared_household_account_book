@@ -16,6 +16,10 @@ ja:
     errors:
       messages:
         blank: "を入力してください"
+  flash:
+    expense_record_blank_year_month: 年と月を入力してください。
+    expense_record_blank_income: 年収を入力してください。
+    expense_record_existed: すでにレコードが存在しています。
   shared_book:
     title: SharedBook
     notice: 'お知らせ: %{message}'

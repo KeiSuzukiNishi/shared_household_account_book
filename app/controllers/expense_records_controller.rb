@@ -28,7 +28,7 @@ class ExpenseRecordsController < ApplicationController
     @year = params[:expense_record][:year].to_i || Time.now.year
     @month = params[:expense_record][:month].to_i || Time.now.month
     if @year.zero? || @month.zero?
-      redirect_to new_expense_record_path, alert: "年と月を入力してください。"
+      redirect_to new_expense_record_path, alert: t('flash.expense_record_blank_year_month')
       return
     end
 
@@ -37,7 +37,7 @@ class ExpenseRecordsController < ApplicationController
     
     user_incomes = params[:income].values.reject(&:blank?).map(&:to_i)
     if user_incomes.empty?
-      redirect_to new_expense_record_path, alert: "年収を入力してください。"
+      redirect_to new_expense_record_path, alert: t('flash.expense_record_blank_income')
       return
     end
     
@@ -46,7 +46,7 @@ class ExpenseRecordsController < ApplicationController
     @results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
     
     if ExpenseRecord.exists?(year: @year, month: @month)
-      redirect_to new_expense_record_path, alert: "すでにレコードが存在しています。"
+      redirect_to new_expense_record_path, alert: t('flash.expense_record_existed')
     else
 
       expense_record = ExpenseRecord.create!(
