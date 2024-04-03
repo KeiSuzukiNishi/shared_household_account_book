@@ -40,7 +40,6 @@ class ExpenseRecordsController < ApplicationController
     else
       @users.each_with_index do |user, index|
         expense_record = ExpenseRecord.create!(
-          user: user,
           year: @year,
           month: @month
         )
@@ -81,9 +80,12 @@ class ExpenseRecordsController < ApplicationController
   
     @year = params[:expense_record][:year].to_i || Time.now.year
     @month = params[:expense_record][:month].to_i || Time.now.month
-    @total_expenses = User.all.sum { |user| user.total_amount_by_month(@year, @month) }
   
-    user_incomes = params[:income].values.map(&:to_i) 
+    expense_record.update(year: @year, month: @month)
+  
+    total_expenses = User.all.sum { |user| user.total_amount_by_month(@year, @month) }
+  
+    user_incomes = params[:income].values.map(&:to_i)
     total_income = user_incomes.sum
     results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
   
@@ -93,8 +95,8 @@ class ExpenseRecordsController < ApplicationController
       detail.update(
         ratio: results[index],
         total_amount: user.total_amount_by_month(@year, @month),
-        burden_amount: @total_expenses * results[index] / 100,
-        difference: @total_expenses * results[index] / 100 - (user.total_amount_by_month(@year, @month) * results[index] / 100),
+        burden_amount: total_expenses * results[index] / 100,
+        difference: total_expenses * results[index] / 100 - (user.total_amount_by_month(@year, @month) * results[index] / 100),
         income: user_incomes[index]
       )
     end
@@ -102,6 +104,16 @@ class ExpenseRecordsController < ApplicationController
     redirect_to expense_record_path(expense_record)
   end
   
+  def destroy
+    @expense_record = ExpenseRecord.find_by(id: params[:id])
+    if @expense_record
+      @expense_record.destroy
+      redirect_to expense_records_path, notice: "Expense Record was successfully destroyed."
+    else
+      redirect_to expense_records_path, alert: "Expense Record not found."
+    end
+  end
+
   private
 
   def expense_record_params
