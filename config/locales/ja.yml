@@ -11,6 +11,8 @@ ja:
         company: "会社名・店名"
         amount: "金額"
         category: "項目"
+      category:
+        name: "項目名"
     errors:
       messages:
         blank: "を入力してください"
