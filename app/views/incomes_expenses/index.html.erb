@@ -1,50 +1,83 @@
-<h1><%= t('shared_book.incomes_expenses_index') %></h1>
+<!-- app/assets/stylesheets/custom.cssが反映されないので下記追記-->
+<style>
+    .table-sm td, .table-sm th {
+        font-size: 14px;
+    }
+</style>
 
-<% if @incomes_expenses.present? && @incomes_expenses.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th><%= t('shared_book.dealt_on') %></th>
-        <th><%= t('shared_book.income_expense_type') %></th>
-        <th><%= t('shared_book.company') %></th>
-        <th><%= t('shared_book.categories') %></th>
-        <th><%= t('shared_book.description') %></th>
-        <th><%= t('shared_book.remarks') %></th>
-        <th><%= t('shared_book.amount') %></th>
-        <th><%= t('shared_book.image') %></th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @incomes_expenses.each do |incomes_expense| %>
-        <tr>
-          <td><%= incomes_expense.dealt_on %></td>
-          <td><%= incomes_expense.income_expense_type %></td>
-          <td><%= incomes_expense.company %></td>
-          <td>
-              <% @incomes_expenses.each do |incomes_expense| %>
-                <% category = Category.find(incomes_expense.category_id) %>
-                <%= category.name %>
-              <% end %>
-          </td>
-          <td><%= incomes_expense.description %></td>
-          <td><%= incomes_expense.remarks %></td>
-          <td><%= incomes_expense.amount %></td>
-          <td><% if incomes_expense.image.attached? %>
-                <div>
-                  <strong><%= t('shared_book.image') %>:</strong> 
-                  <%= link_to t('shared_book.view_image'), incomes_expense.image %>
-                </div>
-              <% end %>
-          </td>
-          <td><%= link_to t('shared_book.details'), incomes_expense %></td>
-          <td><%= link_to t('shared_book.edit'), edit_incomes_expense_path(incomes_expense) %></td>
-          <td><%= button_to t('shared_book.destroy'), incomes_expense, method: :delete %></td>
-        </tr>
-        <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>データが存在しません。</p>
-<% end %>
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-<%= link_to t('shared_book.new_incomes_expenses'), new_incomes_expense_path %>
+    <!-- Page Heading -->
+    <div class="row mb-3">
+        <div class="col">
+            <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.incomes_expenses_index') %></h1>
+        </div>
+        <div class="col text-right">
+            <%= link_to t('shared_book.new_incomes_expenses'), new_incomes_expense_path, class: "btn btn-info" %>
+        </div>
+    </div>
+    
+    <!-- DataTales -->
+    <% if @incomes_expenses.present? && @incomes_expenses.any? %>
+        <div class="card shadow mb-4">
+            <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                    <th><%= t('shared_book.dealt_on') %></th>
+                    <th><%= t('shared_book.income_expense_type') %></th>
+                    <th><%= t('shared_book.company') %></th>
+                    <th><%= t('shared_book.categories') %></th>
+                    <th><%= t('shared_book.description') %></th>
+                    <th><%= t('shared_book.remarks') %></th>
+                    <th><%= t('shared_book.amount') %></th>
+                    <th><%= t('shared_book.image') %></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @incomes_expenses.order(dealt_on: :asc).each do |incomes_expense| %>
+                        <tr>
+                            <td><%= incomes_expense.dealt_on %></td>
+                            <td><%= incomes_expense.income_expense_type %></td>
+                            <td><%= incomes_expense.company %></td>
+                            <td>
+                            <% category = Category.find(incomes_expense.category_id) %>
+                            <%= category.name %>
+                            </td>
+                            <td><%= incomes_expense.description %></td>
+                            <td><%= incomes_expense.remarks %></td>
+                            <td><%= number_with_delimiter(incomes_expense.amount) %></td>
+                            <td>
+                            <% if incomes_expense.image.attached? %>
+                                <div>
+                                <strong><%= t('shared_book.image') %>:</strong> 
+                                <%= link_to t('shared_book.view_image'), incomes_expense.image %>
+                                </div>
+                            <% end %>
+                            </td>
+                            <td><%= link_to t('shared_book.details'), incomes_expense, class: "btn btn-outline-primary btn-sm" %></td>
+                            <td><%= link_to t('shared_book.edit'), edit_incomes_expense_path(incomes_expense), class: "btn btn-outline-info btn-sm" %></td>
+                            <td><%= button_to t('shared_book.destroy'), incomes_expense, method: :delete, class: "btn btn-outline-dark btn-sm" %></td>
+                        </tr>
+                    <% end %>                    
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    <% else %>
+        <p>データが存在しません。</p>
+    <% end %>
+</div>
+<!-- /.container-fluid -->
+
+<script>
+  $(document).ready(function() {
+    $('#dataTable').DataTable();
+  });
+</script>

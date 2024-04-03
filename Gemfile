@@ -83,3 +83,6 @@ gem "sassc-rails"
 gem 'cancancan'
 gem 'chartkick'
 gem 'groupdate'
+gem 'bootstrap_sb_admin_base_v2', '~> 0.3.6'
+gem 'font-awesome-rails'
+gem 'kaminari'

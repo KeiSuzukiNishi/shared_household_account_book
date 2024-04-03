@@ -17,5 +17,5 @@
     </li>
   </ul>
 
-  <%= form.submit @expense_record&.persisted? ? t('shared_book.update') : t('shared_book.submit') %>
+  <%= form.submit @expense_record&.persisted? ? t('shared_book.update') : t('shared_book.submit'), class: "btn btn-success" %>
 <% end %>

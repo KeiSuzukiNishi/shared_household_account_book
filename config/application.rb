@@ -10,5 +10,6 @@ module SharedHouseholdAccountBook
     config.autoload_lib(ignore: %w(assets tasks))
     config.i18n.default_locale = :ja
     config.i18n.available_locales = [:ja, :en]
+    config.exceptions_app = self.routes
   end
 end

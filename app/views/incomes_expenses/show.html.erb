@@ -1,47 +1,66 @@
-<h1><%= "詳細画面" %></h1>
+<!-- app/assets/stylesheets/custom.cssが反映されないので下記追記-->
+<style>
+    .table-sm td, .table-sm th {
+        font-size: 14px;
+    }
+</style>
 
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.incomes_expenses_show') %></h1>
+
+  <!-- Data Details -->
   <% if @incomes_expense.present? %>
-    <table>
-      <thead>
-        <tr>
-          <th><%= t('shared_book.dealt_on') %></th>
-          <th><%= t('shared_book.income_expense_type') %></th>
-          <th><%= t('shared_book.company') %></th>
-          <th><%= t('shared_book.categories') %></th>
-          <th><%= t('shared_book.description') %></th>
-          <th><%= t('shared_book.remarks') %></th>
-          <th><%= t('shared_book.amount') %></th>
-          <th><%= t('shared_book.image') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= @incomes_expense.dealt_on %></td>
-          <td><%= @incomes_expense.income_expense_type %></td>
-          <td><%= @incomes_expense.company %></td>
-          <td>
-            <% category = Category.find(@incomes_expense.category_id) %>
-            <%= category.name %>
-          </td>
-          <td><%= @incomes_expense.description %></td>
-          <td><%= @incomes_expense.remarks %></td>
-          <td><%= @incomes_expense.amount %></td>
-          <td>
-            <% if @incomes_expense.image.attached? %>
-              <div>
-                <strong><%= t('shared_book.image') %>:</strong> 
-                <%= link_to t('shared_book.view_image'), @incomes_expense.image %>
-              </div>
-            <% end %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <p>
-      <%= link_to t('shared_book.edit'), edit_incomes_expense_path(@incomes_expense) %>
-      <%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete %>
-    </p>
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                <th><%= t('shared_book.dealt_on') %></th>
+                <th><%= t('shared_book.income_expense_type') %></th>
+                <th><%= t('shared_book.company') %></th>
+                <th><%= t('shared_book.categories') %></th>
+                <th><%= t('shared_book.description') %></th>
+                <th><%= t('shared_book.remarks') %></th>
+                <th><%= t('shared_book.amount') %></th>
+                <th><%= t('shared_book.image') %></th>
+                <th></th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @incomes_expense.dealt_on %></td>
+                <td><%= @incomes_expense.income_expense_type %></td>
+                <td><%= @incomes_expense.company %></td>
+                <td>
+                  <% category = Category.find(@incomes_expense.category_id) %>
+                  <%= category.name %>
+                </td>
+                <td><%= @incomes_expense.description %></td>
+                <td><%= @incomes_expense.remarks %></td>
+                <td><%= number_with_delimiter(@incomes_expense.amount) %></td>
+                <td>
+                  <% if @incomes_expense.image.attached? %>
+                    <div>
+                      <strong><%= t('shared_book.image') %>:</strong> 
+                      <%= link_to t('shared_book.view_image'), @incomes_expense.image %>
+                    </div>
+                  <% end %>
+                </td>
+                <td><%= link_to t('shared_book.edit'), edit_incomes_expense_path(@incomes_expense), class: "btn btn-outline-info btn-sm" %></td>
+                <td><%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete, class: "btn btn-outline-dark btn-sm" %></td>
+              </tr>                  
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   <% else %>
     <p>データが存在しません。</p>
   <% end %>
 </div>
+<!-- /.container-fluid -->

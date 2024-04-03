@@ -29,6 +29,7 @@ ja:
     models:
       user: ユーザー
       incomes_expense: 収入支出
+      category: 項目
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。

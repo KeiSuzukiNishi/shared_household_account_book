@@ -1,7 +1,20 @@
-<h1><%= t('shared_book.expense_record_new') %></h1>
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-<%= render "form", expense_record: @expense_record %>
+    <!-- Page Heading -->
+    <div class="row mb-3">
+        <div class="col">
+            <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.expense_record_new') %></h1>
+        </div>
+        <div class="col text-right">
+            <%= link_to t('shared_book.expense_record_index'), expense_records_path, class: "btn btn-primary" %>
+        </div>
+    </div>
 
-<div>
-  <%= link_to t('shared_book.expense_record_index'), expense_records_path %>
+  <!-- New Data -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <%= render "form", expense_record: @expense_record %>
+    </div> 
+  </div>
 </div>

@@ -40,13 +40,16 @@ ja:
     are_you_sure: 本当によろしいですか？
     category: 項目
     user_show_page: アカウント詳細画面
+    calendar: カレンダー
     calendar_page: カレンダー一覧画面
     incomes_expenses_show_page: 収入支出詳細画面
+    incomes_expenses_show: 収入支出詳細
     calendar_index: カレンダー一覧
     expense_record_index: 割勘一覧
     year: 年
     month: 月
     user_name: ユーザー名
+    user_setting: ユーザー設定
     income: 収入
     ratio: 比率
     total_amount: 合計金額
@@ -74,17 +77,26 @@ ja:
     back: 戻る
     new_category: 新規項目作成
     charts: グラフ
-    monthly_column_chart: 月間棒グラフ
+    monthly_column_chart: 月別棒グラフ
     year_month: 年月
-    yearly_column_chart: 年間棒グラフ
+    yearly_column_chart: 年別棒グラフ
     monthly_pie_chart: 月間円グラフ
     yearly_pie_chart: 年間円グラフ
     income_amount_jpy: 収入金額 (円)
-    expense_amount_jpy: 収入金額 (円)
+    expense_amount_jpy: 支出金額 (円)
     difference_amount_jpy: 差額 (円) 
     total_amount_jpy: 合計金額 (円)
     ratio_%: 割合 (%)
     no_data: データが存在しません。
+    current_password: 現在のパスワード
+    password_confirmation: パスワード確認
+    monthly_summary: 月間まとめ
+    category_details: 項目別支出詳細
+    yearly_summary: 年間まとめ
+    email: メールアドレス
+    password: パスワード
+    monthly_expense_pie_chart: 月間支出円グラフ
+    yearly_expense_pie_chart: 年間支出円グラフ
   simple_calendar:
     previous: "<<"
     next: ">>"

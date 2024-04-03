@@ -1,13 +1,14 @@
 class IncomesExpensesController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
   before_action :set_incomes_expense, only: %i[ show edit update destroy ]
 
   def index
-    @incomes_expenses = IncomesExpense.all
+    @incomes_expenses = IncomesExpense.all.page(params[:page]).order(dealt_on: :desc)
     @categories = Category.all
   end
 
   def show
+    head :internal_server_error
     @categories = Category.all
   end
 

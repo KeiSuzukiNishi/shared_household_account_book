@@ -1,6 +1,19 @@
-  <h1><%= t('shared_book.user_show_page') %></h1>
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-  <p><%= t("shared_book.name") %>: <%= @user.name %></p>
-  <p><%= t("activerecord.attributes.user.email") %>: <%= @user.email %></p>
+    <!-- Page Heading -->
+    <div class="row mb-3">
+        <div class="col">
+            <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.user_show_page') %></h1>
+        </div>
+    </div>
 
-    <div ><%= link_to t("shared_book.edit"), edit_user_registration_path %></div>
+  <!-- New Data -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <p><%= t("shared_book.name") %>: <%= @user.name %></p>
+      <p><%= t("activerecord.attributes.user.email") %>: <%= @user.email %></p>
+      <%= link_to t("shared_book.edit"), edit_user_registration_path, class: "btn btn-outline-info btn-sm" %>
+    </div> 
+  </div>
+</div>

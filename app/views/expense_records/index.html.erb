@@ -1,66 +1,87 @@
-<h1><%= t('shared_book.expense_record_index') %></h1>
+<!-- app/assets/stylesheets/custom.cssが反映されないので下記追記-->
+<style>
+    .table-sm td, .table-sm th {
+        font-size: 14px;
+    }
+</style>
 
-<% ExpenseRecord.all.each do |record| %>
-  <tr>
-    <td><%= record.year %>年<%= record.month %>月</td>
-    <% @users.each do |user| %>
-      <td><%= user.name %></td>
-      <% detail = record.expense_records_details.find_by(user_id: user.id) %>
-      <% if detail %>
-        <td><%= detail.income %></td>
-        <td><%= "#{detail.ratio}%" %></td>
-        <td><%= detail.total_amount %></td>
-        <td><%= detail.burden_amount %></td>
-        <td><%= detail.difference %></td>
-      <% else %>
-        レコードがありません
-      <% end %>
-    <% end %>
-  </tr>
-<% end %>
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-<% if @users.any? %>
-  <table>
-    <tr>
-      <th><%= t('shared_book.year') %></th>
-      <th><%= t('shared_book.month') %></th>
-      <th><%= t('shared_book.user_name') %></th>
-      <th><%= t('shared_book.income') %></th>
-      <th><%= t('shared_book.ratio') %>(%)</th>
-      <th><%= t('shared_book.total_amount') %></th>
-      <th><%= t('shared_book.burden_amount') %></th>
-      <th><%= t('shared_book.difference') %></th>
-    </tr>
+  <!-- Page Heading -->
+  <div class="row mb-3">
+    <div class="col">
+        <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.expense_record_index') %></h1>
+    </div>
+    <div class="col text-right">
+      <%= link_to t('shared_book.expense_record_new'), new_expense_record_path, class: "btn btn-info" %>
+    </div>
+  </div>
+    
+  <!-- DataTales -->
+  <% if @users.any? %>
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th><%= t('shared_book.year') %></th>
+              <th><%= t('shared_book.month') %></th>
+              <th><%= t('shared_book.user_name') %></th>
+              <th><%= t('shared_book.income') %></th>
+              <th><%= t('shared_book.ratio') %>(%)</th>
+              <th><%= t('shared_book.total_amount') %></th>
+              <th><%= t('shared_book.burden_amount') %></th>
+              <th><%= t('shared_book.difference') %></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
 
-    <% @expense_records_by_month.each do |month, records| %>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= month.year %></td>
-          <td><%= month.month %></td>
-          <td><%= user.name %></td>
-          
-          <% user_record = @expense_records_by_month[month]&.find { |record| record.user == user } %>
-          <% if user_record.present? %>
-            <td><%= user_record.income %></td>
-            <td><%= "#{user_record.ratio}%" %></td>
-            <td><%= user_record.total_amount %></td>
-            <td><%= user_record.burden_amount %></td>
-            <td><%= user_record.difference %></td>
-            <td><%= link_to t('shared_book.details'), expense_record_path(user_record.expense_record) %></td>
-            <td><%= link_to t('shared_book.edit'), edit_expense_record_path(user_record.expense_record) %></td>
-            <td><%= button_to t('shared_book.destroy'), expense_records_path, method: :delete %></td>
-          <% else %>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          <% end %>
-        </tr>
-      <% end %>
-    <% end %>
-  </table>
+          <tbody>
+            <% ExpenseRecord.all.each do |record| %>
+              <% record.expense_records_details.each_with_index do |detail, index| %>
+                <tr>
+                  <% if index == 0 %>
+                    <td rowspan="<%= record.expense_records_details.size %>"><%= record.year %></td>
+                    <td rowspan="<%= record.expense_records_details.size %>"><%= record.month %></td>
+                  <% end %>
+                  <td><%= detail.user.name %></td>
+                  <td><%= number_with_delimiter(detail.income) %></td>
+                  <td><%= "#{detail.ratio}%" %></td>
+                  <td><%= number_with_delimiter(detail.total_amount) %></td>
+                  <td><%= number_with_delimiter(detail.burden_amount) %></td>
+                  <td><%= number_with_delimiter(detail.difference) %></td>
+                  
+                  <% if index == 0 %>
+                    <td rowspan="<%= record.expense_records_details.size %>">
+                      <%= link_to t('shared_book.details'), expense_record_path(record), class: "btn btn-outline-primary btn-sm" %>
+                    </td>
+                    <td rowspan="<%= record.expense_records_details.size %>">
+                      <%= link_to t('shared_book.edit'), edit_expense_record_path(record), class: "btn btn-outline-info btn-sm" %>
+                    </td>
+                    <td rowspan="<%= record.expense_records_details.size %>">
+                      <%= button_to t('shared_book.destroy'), expense_record_path(record), method: :delete, class: "btn btn-outline-dark btn-sm" %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 <% else %>
   <p><%= t('shared_book.no_user_found') %></p>
 <% end %>
+</div>
+<!-- /.container-fluid -->
 
-<%= link_to t('shared_book.expense_record_new'), new_expense_record_path %>
+<script>
+  $(document).ready(function() {
+    $('#dataTable').DataTable();
+  });
+</script>

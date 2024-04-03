@@ -1,36 +1,80 @@
-<h1><%= t('shared_book.calendar_page') %></h1>
+<!-- app/assets/stylesheets/custom.cssが反映されないので下記追記-->
+<style>
+    .table-sm td, .table-sm th {
+        font-size: 14px;
+    }
+</style>
 
-<%= month_calendar(events: @incomes_expenses, date: @start_date) do |date, incomes_expenses| %>
-  <%= date.day %>
-  
-  <% total_amount = incomes_expenses.sum { |ie| ie.amount if ie.dealt_on.to_date == date } %>
-  <% if total_amount.present? %>
-    <% first_income_expense = incomes_expenses.find { |ie| ie.dealt_on.to_date == date } %>
-    <% if first_income_expense.present? %>
-      <%= link_to number_with_delimiter(total_amount), incomes_expense_path(first_income_expense) %>
-    <% end %>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="row mb-3">
+      <div class="col">
+          <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.calendar_page') %></h1>
+      </div>
+      <div class="col text-right">
+          <%= link_to t('shared_book.new_incomes_expenses'), new_incomes_expense_path, class: "btn btn-info" %>
+      </div>
+  </div>
+
+  <!-- Calendar -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <div class="table-responsive">
+        <%= month_calendar(events: @incomes_expenses, date: @start_date, title: '%Y年%-m月') do |date, incomes_expenses| %>
+          <%= date.day %>
+          
+          <% total_amount = incomes_expenses.sum { |ie| ie.amount if ie.dealt_on.to_date == date } %>
+          <% if total_amount.present? %>
+            <% first_income_expense = incomes_expenses.find { |ie| ie.dealt_on.to_date == date } %>
+            <% if first_income_expense.present? %>
+              <%= link_to number_with_delimiter(total_amount), incomes_expense_path(first_income_expense) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+    
+    <!-- DataTales -->
+  <% if @incomes_expenses.present? && @incomes_expenses.any? %>
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                  <tr>
+                    <th><%= t('shared_book.dealt_on') %></th>
+                    <th><%= t('shared_book.income_expense_type') %></th>
+                    <th><%= t('shared_book.categories') %></th>
+                    <th><%= t('shared_book.company') %></th>
+                    <th><%= t('shared_book.amount') %></th>
+                  </tr>
+              </thead>
+              <tbody>
+                <% @incomes_expenses.order(dealt_on: :asc).each do |incomes_expense| %>
+                  <tr>
+                    <td><%= incomes_expense.dealt_on %></td>
+                    <td><%= incomes_expense.income_expense_type %></td>
+                    <td><%= Category.find(incomes_expense.category_id).name %></td>
+                    <td><%= incomes_expense.company %></td>
+                    <td><%= number_with_delimiter(incomes_expense.amount) %></td>
+                  </tr>
+                <% end %>                  
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  <% else %>
+      <p>データが存在しません。</p>
   <% end %>
-<% end %>
+</div>
+<!-- /.container-fluid -->
 
-<table>
-  <thead>
-    <tr>
-      <th><%= t('shared_book.dealt_on') %></th>
-      <th><%= t('shared_book.income_expense_type') %>:</th>
-      <th><%= t('shared_book.categories') %></th>
-      <th><%= t('shared_book.company') %></th>
-      <th><%= t('shared_book.amount') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @incomes_expenses.order(dealt_on: :asc).each do |incomes_expense| %>
-      <tr>
-        <td><%= incomes_expense.dealt_on %></td>
-        <td><%= incomes_expense.income_expense_type %></td>
-        <td><%= Category.find(incomes_expense.category_id).name %></td>
-        <td><%= incomes_expense.company %></td>
-        <td><%= number_with_delimiter(incomes_expense.amount) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<script>
+  $(document).ready(function() {
+    $('#dataTable').DataTable();
+  });
+</script>
