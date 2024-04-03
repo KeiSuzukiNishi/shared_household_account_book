@@ -2,6 +2,7 @@
 <html>
   <head>
     <title><%= t('shared_book.title') %></title>
+    <meta name="description" content="SharedBookは複数人で共有できる家計簿です。収支一覧、カレンダー、グラフ表示も可能で、さらに割勘詳細を表示することにより各ユーザーの実際の負担金額等も確認できます。">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -102,7 +103,7 @@
                 <!-- Nav Item - 割勘一覧 -->
                 <li class="nav-item">
                     <%= link_to expense_records_path, class: "nav-link" do %>
-                        <i class="fa-solid fa-calculator"></i>
+                        <i class="fas fa-calculator"></i>
                         <span><%= t('shared_book.expense_record_index') %></span>
                     <% end %>
                 </li>
