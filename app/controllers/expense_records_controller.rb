@@ -27,23 +27,34 @@ class ExpenseRecordsController < ApplicationController
     @users = User.all
     @year = params[:expense_record][:year].to_i || Time.now.year
     @month = params[:expense_record][:month].to_i || Time.now.month
+    if @year.zero? || @month.zero?
+      redirect_to new_expense_record_path, alert: t('flash.expense_record_blank_year_month')
+      return
+    end
+
     @total_expenses = @users.sum { |user| user.total_amount_by_month(@year, @month) }
     @results = []
     
-    user_incomes = params[:income].values.map(&:to_i) 
+    user_incomes = params[:income].values.reject(&:blank?).map(&:to_i)
+    if user_incomes.empty?
+      redirect_to new_expense_record_path, alert: t('flash.expense_record_blank_income')
+      return
+    end
+    
     total_income = user_incomes.sum
   
     @results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
     
     if ExpenseRecord.exists?(year: @year, month: @month)
-      redirect_to new_expense_record_path, alert: "すでにレコードが存在しています。"
+      redirect_to new_expense_record_path, alert: t('flash.expense_record_existed')
     else
+
+      expense_record = ExpenseRecord.create!(
+        year: @year,
+        month: @month
+      )
+
       @users.each_with_index do |user, index|
-        expense_record = ExpenseRecord.create!(
-          year: @year,
-          month: @month
-        )
-       
         expense_record.expense_records_details.create!(
           user: user,
           ratio: @results[index],

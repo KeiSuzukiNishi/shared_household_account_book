@@ -2,6 +2,7 @@
 <html>
   <head>
     <title><%= t('shared_book.title') %></title>
+    <meta name="description" content="SharedBookは複数人で共有できる家計簿です。収支一覧、カレンダー、グラフ表示も可能で、さらに割勘詳細を表示することにより各ユーザーの実際の負担金額等も確認できます。">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,6 +10,8 @@
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag 'chartkick', 'Chart.bundle' %>
 
+    <%= favicon_link_tag('favicon.ico') %>
+    
     <!-- Custom fonts for this template-->
       <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
       <link
@@ -102,7 +105,7 @@
                 <!-- Nav Item - 割勘一覧 -->
                 <li class="nav-item">
                     <%= link_to expense_records_path, class: "nav-link" do %>
-                        <i class="fa-solid fa-calculator"></i>
+                        <i class="fas fa-calculator"></i>
                         <span><%= t('shared_book.expense_record_index') %></span>
                     <% end %>
                 </li>
@@ -110,7 +113,7 @@
                 <!-- Nav Item - カレンダー -->
                 <li class="nav-item">
                     <%= link_to calendar_incomes_expenses_path, class: "nav-link" do %>
-                        <i class="fa-solid fa-calendar-day"></i>
+                        <i class="fas fa-calendar"></i>
                         <span><%= t('shared_book.calendar') %></span>
                     <% end %>
                 </li>
@@ -305,27 +308,27 @@
     </div>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/app/vendor/jquery/jquery.min.js"></script>
+    <script src="/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/app/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- SB Admin 2 JavaScript -->
-      <script src="app/javascript/sb-admin-2.js"></script>
+      <script src="/app/javascript/sb-admin-2.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="app/javascript/sb-admin-2.min.js"></script>
+    <script src="/app/javascript/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/app/vendor/chart.js/Chart.min.js"></script>
+    <script src="/app/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="app/javascript/demo/chart-area-demo.js"></script>
-    <script src="app/javascript/demo/chart-pie-demo.js"></script>
-    <script src="app/javascript/demo/datatables-demo.js"></script>
+    <script src="/app/javascript/demo/chart-area-demo.js"></script>
+    <script src="/app/javascript/demo/chart-pie-demo.js"></script>
+    <script src="/app/javascript/demo/datatables-demo.js"></script>
 
   </body>
 </html>
