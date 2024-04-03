@@ -20,63 +20,63 @@
     
   <!-- DataTales -->
   <% if @users.any? %>
-  <div class="card shadow mb-4">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-bordered table-sm" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th><%= t('shared_book.year') %></th>
-              <th><%= t('shared_book.month') %></th>
-              <th><%= t('shared_book.user_name') %></th>
-              <th><%= t('shared_book.income') %></th>
-              <th><%= t('shared_book.ratio') %>(%)</th>
-              <th><%= t('shared_book.total_amount') %></th>
-              <th><%= t('shared_book.burden_amount') %></th>
-              <th><%= t('shared_book.difference') %></th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th><%= t('shared_book.year') %></th>
+                <th><%= t('shared_book.month') %></th>
+                <th><%= t('shared_book.user_name') %></th>
+                <th><%= t('shared_book.income') %></th>
+                <th><%= t('shared_book.ratio') %>(%)</th>
+                <th><%= t('shared_book.total_amount') %></th>
+                <th><%= t('shared_book.burden_amount') %></th>
+                <th><%= t('shared_book.difference') %></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <% ExpenseRecord.all.each do |record| %>
-              <% record.expense_records_details.each_with_index do |detail, index| %>
-                <tr>
-                  <% if index == 0 %>
-                    <td rowspan="<%= record.expense_records_details.size %>"><%= record.year %></td>
-                    <td rowspan="<%= record.expense_records_details.size %>"><%= record.month %></td>
-                  <% end %>
-                  <td><%= detail.user.name %></td>
-                  <td><%= number_with_delimiter(detail.income) %></td>
-                  <td><%= "#{detail.ratio}%" %></td>
-                  <td><%= number_with_delimiter(detail.total_amount) %></td>
-                  <td><%= number_with_delimiter(detail.burden_amount) %></td>
-                  <td><%= number_with_delimiter(detail.difference) %></td>
-                  
-                  <% if index == 0 %>
-                    <td rowspan="<%= record.expense_records_details.size %>">
-                      <%= link_to t('shared_book.details'), expense_record_path(record), class: "btn btn-outline-primary btn-sm" %>
-                    </td>
-                    <td rowspan="<%= record.expense_records_details.size %>">
-                      <%= link_to t('shared_book.edit'), edit_expense_record_path(record), class: "btn btn-outline-info btn-sm" %>
-                    </td>
-                    <td rowspan="<%= record.expense_records_details.size %>">
-                      <%= button_to t('shared_book.destroy'), expense_record_path(record), method: :delete, class: "btn btn-outline-dark btn-sm" %>
-                    </td>
-                  <% end %>
-                </tr>
+            <tbody>
+              <% ExpenseRecord.all.each do |record| %>
+                <% record.expense_records_details.each_with_index do |detail, index| %>
+                  <tr>
+                    <% if index == 0 %>
+                      <td rowspan="<%= record.expense_records_details.size %>"><%= record.year %></td>
+                      <td rowspan="<%= record.expense_records_details.size %>"><%= record.month %></td>
+                    <% end %>
+                    <td><%= detail.user.name %></td>
+                    <td><%= number_with_delimiter(detail.income) %></td>
+                    <td><%= "#{detail.ratio}%" %></td>
+                    <td><%= number_with_delimiter(detail.total_amount) %></td>
+                    <td><%= number_with_delimiter(detail.burden_amount) %></td>
+                    <td><%= number_with_delimiter(detail.difference) %></td>
+                    
+                    <% if index == 0 %>
+                      <td rowspan="<%= record.expense_records_details.size %>">
+                        <%= link_to t('shared_book.details'), expense_record_path(record), class: "btn btn-outline-primary btn-sm" %>
+                      </td>
+                      <td rowspan="<%= record.expense_records_details.size %>">
+                        <%= link_to t('shared_book.edit'), edit_expense_record_path(record), class: "btn btn-outline-info btn-sm" %>
+                      </td>
+                      <td rowspan="<%= record.expense_records_details.size %>">
+                        <%= button_to t('shared_book.destroy'), expense_record_path(record), method: :delete, class: "btn btn-outline-dark btn-sm" %>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
               <% end %>
-            <% end %>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-<% else %>
-  <p><%= t('shared_book.no_user_found') %></p>
-<% end %>
+  <% else %>
+    <p><%= t('shared_book.no_user_found') %></p>
+  <% end %>
 </div>
 <!-- /.container-fluid -->
 
