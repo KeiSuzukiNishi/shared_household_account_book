@@ -1,6 +1,19 @@
 ja:
+  errors:
+    format: "%{count}つのエラーがあり、%{model}の保存に失敗しました"
   activerecord:
+    models:
+      incomes_expense: "収支"
     attributes:
+      incomes_expense:
+        dealt_on: "日付"
+        income_expense_type: "収支種類"
+        company: "会社名・店名"
+        amount: "金額"
+        category: "項目"
+    errors:
+      messages:
+        blank: "を入力してください"
   shared_book:
     title: SharedBook
     notice: 'お知らせ: %{message}'
