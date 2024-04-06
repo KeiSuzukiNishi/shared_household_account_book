@@ -21,10 +21,10 @@
         <%= form.text_field :selected_year, type: "number", value: params[:selected_year] || Date.today.year %>
 
         <%= form.label :start_month, t('shared_book.start_month') %>
-        <%= form.select :start_month, options_for_select((1..12).map { |m| [Date::MONTHNAMES[m], m] }, params[:start_month]), { include_blank: true } %>
+        <%= form.select :start_month, options_for_select((1..12).map { |m| [l(Date.new(2024, m, 1), format: '%B'), m] }, params[:start_month]), { include_blank: true } %>
 
         <%= form.label :end_month, t('shared_book.end_month') %>
-        <%= form.select :end_month, options_for_select((1..12).map { |m| [Date::MONTHNAMES[m], m] }, params[:end_month]), { include_blank: true } %>
+        <%= form.select :end_month, options_for_select((1..12).map { |m| [l(Date.new(2024, m, 1), format: '%B'), m] }, params[:end_month]), { include_blank: true } %>
 
         <%= form.submit t('shared_book.display'), class: "btn btn-success" %>
       <% end %>
