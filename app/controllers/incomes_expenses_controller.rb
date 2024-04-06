@@ -38,18 +38,17 @@ class IncomesExpensesController < ApplicationController
 
   def calendar
     @start_date = params[:start_date].present? ? Date.parse(params[:start_date]) : Date.today
-    @incomes_expenses = IncomesExpense.where(starts_at: @start_date.beginning_of_month..@start_date.end_of_month)
+    @incomes_expenses = IncomesExpense.where(dealt_on: @start_date.beginning_of_month..@start_date.end_of_month)
     @categories = Category.all
-    
     render 'calendar'
   end
   
-  def day
-    @date = params.fetch(:date, Date.today).to_date
-    @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_day..@date.end_of_day)
-    @categories = Category.all
-    render 'day'
-  end
+  # def day
+  #   @date = params.fetch(:date, Date.today).to_date
+  #   @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_day..@date.end_of_day)
+  #   @categories = Category.all
+  #   render 'day'
+  # end
 
   def update
     respond_to do |format|
