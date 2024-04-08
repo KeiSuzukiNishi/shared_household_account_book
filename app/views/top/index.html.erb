@@ -53,83 +53,8 @@
     <%= link_to t('shared_book.sign_in'), new_user_session_path %>
     <% end %>
 
-
     <!-- Page Wrapper -->
     <div id="wrapper">
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <%= link_to root_path, class: "sidebar-brand d-flex align-items-center justify-content-center" do %>
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-share-alt"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3"><%= t('shared_book.title').downcase %></div>
-            <% end %>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <% if signed_in? %>
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    <%= t('shared_book.menu') %>
-                </div>
-
-                <!-- Nav Item - 各種一覧 -->
-                <li class="nav-item">
-                    <%= link_to incomes_expenses_path, class: "nav-link" do %>
-                        <i class="fas fa-fw fa-table"></i>
-                        <span><%= t('shared_book.incomes_expenses_index') %></span>
-                    <% end %>
-                </li>
-
-                <!-- Nav Item - 項目一覧 -->
-                <li class="nav-item">
-                    <%= link_to categories_path, class: "nav-link" do %>
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span><%= t('shared_book.category_index') %></span>
-                    <% end %>
-                </li>
-
-                <!-- Nav Item - 割勘一覧 -->
-                <li class="nav-item">
-                    <%= link_to expense_records_path, class: "nav-link" do %>
-                        <i class="fas fa-calculator"></i>
-                        <span><%= t('shared_book.expense_record_index') %></span>
-                    <% end %>
-                </li>
-
-                <!-- Nav Item - カレンダー -->
-                <li class="nav-item">
-                    <%= link_to calendar_incomes_expenses_path, class: "nav-link" do %>
-                        <i class="fas fa-calendar"></i>
-                        <span><%= t('shared_book.calendar') %></span>
-                    <% end %>
-                </li>
-
-                <!-- Nav Item - グラフ -->
-                <li class="nav-item">
-                    <%= link_to pie_chart_monthly_path, class: "nav-link" do %>
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span><%= t('shared_book.charts') %></span>
-                    <% end %>
-                </li>
-            <% end %>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
-        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -256,8 +181,201 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                <%= yield %>
 
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4 px-3 py-5 bg-gradient-primary text-white">
+                        <div class="d-flex align-items-center">
+                            <i class="h3 mr-3 fas fa-share-alt"></i>
+                            <h1 class="h3 font-weight-bold mr-3"><%= t('shared_book.title') %></h1>
+                        </div>
+                        <div class="ml-auto">
+                            <h3><%= t('shared_book.application_everybody_can_share_and_split_out') %></h3>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Card (table) -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold h5 text-primary">
+                                                <%= t('shared_book.you_can_see_the_table_of_incomes_and_expenses') %></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-fw fa-table fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card (charts) -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold h5 text-success">
+                                                <%= t('shared_book.you_can_see_the_tendency_on_charts') %></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-fw fa-chart-area fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card (calendar) -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold h5 text-info">
+                                                <%= t('shared_book.you_can_see_the_incomes_expenses_on_calendar') %>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card (expense records) -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold h5 text-warning">
+                                                <%= t('shared_book.you_can_see_the_monthly_burden_amount_with_split_function') %></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calculator fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+
+                        <!-- Explanation (table) -->
+                        <div class="col-xl-7 col-lg-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex flex-row">
+                                    <i class="fas fa-fw fa-table text-gray-500"></i>
+                                    <h6 class="font-weight-bold text-primary"><%= t('shared_book.incomes_expenses_index') %></h6>
+                                    <h6 class="font-weight-bold text-dark">: <%= t('shared_book.easy_to_see_tendency_with_sort_function') %></h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div>
+                                        <%= image_tag("table.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Explanation (calendar) -->
+                        <div class="col-xl-5 col-lg-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex flex-row">
+                                    <i class="fas fa-calendar text-gray-500"></i>
+                                    <h6 class="font-weight-bold text-primary"><%= t('shared_book.calendar') %></h6>
+                                    <h6 class="font-weight-bold text-dark">: <%= t('shared_book.you_can_see_the_record_on_it_and_details_at_the_bottom') %></h6>                    
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div>
+                                        <%= image_tag("calendar1.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                    <div>
+                                        <%= image_tag("calendar2.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Explanation (chart) -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex flex-row">
+                                    <i class="fas fa-chart-area text-gray-500"></i>
+                                    <h6 class="m-0 font-weight-bold text-primary"><%= t('shared_book.charts') %></h6>
+                                    <h6 class="font-weight-bold text-dark">: <%= t('shared_book.you_can_see_comparision_and_ratio_on_monthly_and_yearly_pie_chart_and_column_chart') %></h6>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <%= image_tag("pie_chart.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <%= image_tag("column_chart.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Explanation (expense_record) -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex flex-row">
+                                    <i class="fas fa-calculator text-gray-500"></i>
+                                    <h6 class="m-0 font-weight-bold text-primary"><%= t('shared_book.expense_record_index') %></h6>
+                                    <h6 class="font-weight-bold text-dark">: <%= t('shared_book.you_can_see_monthly_burden_amount_for_each_by_entering_yearly_salary') %></h6>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <%= image_tag("expense_records.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 text-center">
+                            <h3 class="text-danger font-weight-bold fs-4"><%= t('shared_book.lets_create_accounting_book_with_sharedbook_righ_now') %></h3>
+                        </div>
+                        <div class="text-center">
+                            <%= link_to new_user_registration_path, class: "btn btn-success btn-icon-split" do %>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-user-plus"></i>
+                            </span>
+                            <span class="text"><%= t('shared_book.sign_up') %></span>
+                            <% end %>
+                            
+                            <%= link_to new_user_session_path, class: "btn btn-info btn-icon-split" do %>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </span>
+                            <span class="text"><%= t('shared_book.sign_in') %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
             

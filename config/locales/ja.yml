@@ -1,21 +1,66 @@
 ja:
   errors:
     format: "%{count}つのエラーがあり、%{model}の保存に失敗しました"
+  date:
+    month_names:
+      - "1月"
+      - "2月"
+      - "3月"
+      - "4月"
+      - "5月"
+      - "6月"
+      - "7月"
+      - "8月"
+      - "9月"
+      - "10月"
+      - "11月"
+      - "12月"
   activerecord:
     models:
-      incomes_expense: "収支"
+      incomes_expense: 収支
+      expense_records_detail: 割勘詳細
+      expense_record: 割勘記録
+      attachment: 添付
     attributes:
       incomes_expense:
-        dealt_on: "日付"
-        income_expense_type: "収支種類"
-        company: "会社名・店名"
-        amount: "金額"
-        category: "項目"
+        dealt_on: 日付
+        income_expense_type: 収支種類
+        company: 会社名・店名
+        amount: 金額
+        category: 項目
+        id: ID
+        description: 詳細
+        remarks: 注意事項
+        created_at: 作成日時
       category:
-        name: "項目名"
+        name: 項目名
+        id: ID
+        created_at: 作成日時
+        updated_at: 更新日時
+        incomes_expenses: 収支
+      expense_records_detail:
+        id: ID
+        expense_record: 割勘記録
+        ratio: 比率
+        total_amount: 合計金額
+        burden_amount: 負担金額
+        difference: 差額
+        income: 収入金額
+        created_at: 作成日時
+        updated_at: 更新日時
+      expense_record:
+        id: ID
+        year: 年
+        month: 月
+        expense_records_details: 割勘記録
+        created_at: 作成日時
+        updated_at: 更新日時
+      attachment:
+        name: 添付ファイル
+        id: ID
     errors:
       messages:
-        blank: "を入力してください"
+        blank: を入力してください
   flash:
     expense_record_blank_year_month: 年と月を入力してください。
     expense_record_blank_income: 年収を入力してください。
@@ -116,6 +161,17 @@ ja:
     password: パスワード
     monthly_expense_pie_chart: 月間支出円グラフ
     yearly_expense_pie_chart: 年間支出円グラフ
+    application_everybody_can_share_and_split_out: みんなでシェアしてすぐに割勘できる家計簿アプリ
+    you_can_see_the_table_of_incomes_and_expenses: 収入支出の一覧表を確認できる。
+    you_can_see_the_tendency_on_charts: グラフで一目で傾向が分かる。
+    you_can_see_the_incomes_expenses_on_calendar: カレンダー表示でその月の収支を確認。
+    you_can_see_the_monthly_burden_amount_with_split_function: 割勘機能で複数人の月間負担額がすぐに分かる。
+    easy_to_see_tendency_with_sort_function: ソート機能があり、傾向が確認しやすい。
+    you_can_see_the_record_on_it_and_details_at_the_bottom: いつレコードがあるかすぐに分かり、下部分で詳細が確認できる。
+    you_can_see_comparision_and_ratio_on_monthly_and_yearly_pie_chart_and_column_chart: 年別、月別の円グラフ、棒グラフで比較や比率を確認できる。
+    you_can_see_monthly_burden_amount_for_each_by_entering_yearly_salary: 各ユーザーの年収を入力するだけでそれぞれの比率で算出した月間負担金額がすぐに分かる。
+    lets_create_accounting_book_with_sharedbook_righ_now: さあ今すぐSharedBookで家計簿をシェアして作ろう！
+    menu: メニュー
   simple_calendar:
     previous: "<<"
     next: ">>"

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root "incomes_expenses#index"
+  root 'top#index'
 
   get 'charts/pie_chart_monthly', to: 'charts#pie_chart_monthly', as: 'pie_chart_monthly'
   get 'charts/pie_chart_yearly', to: 'charts#pie_chart_yearly', as: 'pie_chart_yearly'

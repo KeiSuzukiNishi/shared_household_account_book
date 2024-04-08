@@ -1,5 +1,8 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 
+import 'jquery/dist/jquery';
+import 'bootstrap/dist/js/bootstrap';
+
 import "@hotwired/turbo-rails"
 import "controllers"
 import "chartkick"
