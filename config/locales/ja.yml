@@ -130,6 +130,7 @@ ja:
     password: パスワード
     monthly_expense_pie_chart: 月間支出円グラフ
     yearly_expense_pie_chart: 年間支出円グラフ
+    application_everybody_can_share_and_split_out: みんなでシェアしてすぐに割勘できる家計簿アプリ
   simple_calendar:
     previous: "<<"
     next: ">>"

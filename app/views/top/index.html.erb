@@ -1,1 +1,444 @@
-Welcom program Beginners!!
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= t('shared_book.title') %></title>
+    <meta name="description" content="SharedBookは複数人で共有できる家計簿です。収支一覧、カレンダー、グラフ表示も可能で、さらに割勘詳細を表示することにより各ユーザーの実際の負担金額等も確認できます。">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'chartkick', 'Chart.bundle' %>
+
+    <%= favicon_link_tag('favicon.ico') %>
+    
+    <!-- Custom fonts for this template-->
+      <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+      <link
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- SB Admin 2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.4/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+
+
+  </head>
+
+  <body>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <% if signed_in? %>
+      <% if current_user&.admin? %>
+        <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
+        <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
+        <%= link_to t("admin.admin_page"), rails_admin_path %></li>
+      <% else %>
+        <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
+        <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
+      <% end %>
+    <% else %>
+    <%= link_to t('shared_book.sign_in'), new_user_session_path %>
+    <% end %>
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Alerts -->
+                        <% if signed_in? %>
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell fa-fw"></i>
+                                    <!-- Counter - Alerts -->
+                                    <span class="badge badge-danger badge-counter">3+</span>
+                                </a>
+                                <!-- Dropdown - Alerts -->
+                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="alertsDropdown">
+                                    <h6 class="dropdown-header">
+                                        Alerts Center
+                                    </h6>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="mr-3">
+                                            <div class="icon-circle bg-primary">
+                                                <i class="fas fa-file-alt text-white"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="small text-gray-500">December 12, 2019</div>
+                                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="mr-3">
+                                            <div class="icon-circle bg-success">
+                                                <i class="fas fa-donate text-white"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="small text-gray-500">December 7, 2019</div>
+                                            $290.29 has been deposited into your account!
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="mr-3">
+                                            <div class="icon-circle bg-warning">
+                                                <i class="fas fa-exclamation-triangle text-white"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="small text-gray-500">December 2, 2019</div>
+                                            Spending Alert: We've noticed unusually high spending for your account.
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                </div>
+                            </li>
+
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-lg-inline text-gray-600 small"><%= current_user.name %></span>
+                                </a>
+
+                                <!-- Dropdown - User Information -->
+                                <% if current_user&.admin? %>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                        aria-labelledby="userDropdown">
+                                        <a class="dropdown-item" href="<%= user_path(current_user.id) %>">
+                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            <%= t('shared_book.user_show') %>
+                                        </a>
+                                        <a class="dropdown-item" href="<%= edit_user_registration_path %>">
+                                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            <%= t('shared_book.user_setting') %>
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete">
+                                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            <%= t('shared_book.sign_out') %>
+                                        </a>
+                                        <a class="dropdown-item" href="<%= rails_admin_path %>" data-method="delete">
+                                            <i class="fa-solid fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            <%= t("admin.admin_page") %>
+                                        </a>
+                                    </div>
+                                <% else %>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                            aria-labelledby="userDropdown">
+                                            <a class="dropdown-item" href="<%= user_path(current_user.id) %>">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                <%= t('shared_book.user_show') %>
+                                            </a>
+                                            <a class="dropdown-item" href="<%= edit_user_registration_path %>">
+                                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                <%= t('shared_book.user_setting') %>
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete">
+                                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                <%= t('shared_book.sign_out') %>
+                                            </a>
+                                        </div>
+                                <% end %>
+                            </li>
+                            
+                        <% end %>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4 px-3 py-5 bg-gradient-primary text-white">
+    <div class="d-flex align-items-center">
+        <i class="h3 mr-3 fas fa-share-alt"></i>
+        <h1 class="h3 font-weight-bold mr-3"><%= t('shared_book.title') %></h1>
+    </div>
+    <div class="ml-auto">
+        <h3><%= t('shared_book.application_everybody_can_share_and_split_out') %></h3>
+    </div>
+</div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Card (table) -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold h5 text-primary">
+                                                収入支出の一覧表を確認できる。</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-fw fa-table fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card (charts) -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold h5 text-success">
+                                                グラフで一目で傾向が分かる。</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-fw fa-chart-area fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card (calendar) -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold h5 text-info">カレンダー表示でその月の収支を確認。
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card (expense records) -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold h5 text-warning">
+                                                割勘機能で複数人の月間負担額がすぐに分かる。</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calculator fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+
+                        <!-- Explanation (table) -->
+                        <div class="col-xl-7 col-lg-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex flex-row">
+                                    <i class="fas fa-fw fa-table text-gray-500"></i>
+                                    <h6 class="font-weight-bold text-primary">収入支出一覧</h6>
+                                    <h6 class="font-weight-bold text-dark">: ソート機能があり、傾向が確認しやすい。</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div>
+                                        <%= image_tag("table.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Explanation (calendar) -->
+                        <div class="col-xl-5 col-lg-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex flex-row">
+                                    <i class="fas fa-calendar text-gray-500"></i>
+                                    <h6 class="font-weight-bold text-primary">カレンダー</h6>
+                                    <h6 class="font-weight-bold text-dark">: いつレコードがあるかすぐに分かり、下部分で詳細が確認できる。</h6>                    
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div>
+                                        <%= image_tag("calendar1.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                    <div>
+                                        <%= image_tag("calendar2.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Explanation (chart) -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex flex-row">
+                                    <i class="fas fa-chart-area text-gray-500"></i>
+                                    <h6 class="m-0 font-weight-bold text-primary">グラフ</h6>
+                                    <h6 class="font-weight-bold text-dark">: 年別、月別の円グラフ、棒グラフで比較や比率を確認できる。</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <%= image_tag("pie_chart.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <%= image_tag("column_chart.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Explanation (chart) -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex flex-row">
+                                    <i class="fas fa-calculator text-gray-500"></i>
+                                    <h6 class="m-0 font-weight-bold text-primary">割勘一覧</h6>
+                                    <h6 class="font-weight-bold text-dark">: 各ユーザーの年収を入力するだけでそれぞれの比率で算出した月間負担金額がすぐに分かる。</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <%= image_tag("expense_records.png", style: "max-width: 100%; height: auto;") %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 text-center">
+                            <h3 class="text-danger font-weight-bold fs-4">さあ今すぐSharedBookで家計簿をシェアして作ろう！</h3>
+                        </div>
+                        <div class="text-center">
+                            <%= link_to new_user_registration_path, class: "btn btn-success btn-icon-split" do %>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-user-plus"></i>
+                            </span>
+                            <span class="text"><%= t('shared_book.sign_up') %></span>
+                            <% end %>
+                            
+                            <%= link_to new_user_session_path, class: "btn btn-info btn-icon-split" do %>
+                            <span class="icon text-white-50">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </span>
+                            <span class="text"><%= t('shared_book.sign_in') %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Shared Book 2024</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/app/vendor/jquery/jquery.min.js"></script>
+    <script src="/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Core plugin JavaScript-->
+    <script src="/app/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- SB Admin 2 JavaScript -->
+      <script src="/app/javascript/sb-admin-2.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/app/javascript/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/app/vendor/chart.js/Chart.min.js"></script>
+    <script src="/app/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/app/javascript/demo/chart-area-demo.js"></script>
+    <script src="/app/javascript/demo/chart-pie-demo.js"></script>
+    <script src="/app/javascript/demo/datatables-demo.js"></script>
+
+  </body>
+</html>
