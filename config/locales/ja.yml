@@ -17,19 +17,50 @@ ja:
       - "12月"
   activerecord:
     models:
-      incomes_expense: "収支"
+      incomes_expense: 収支
+      expense_records_detail: 割勘詳細
+      expense_record: 割勘記録
+      attachment: 添付
     attributes:
       incomes_expense:
-        dealt_on: "日付"
-        income_expense_type: "収支種類"
-        company: "会社名・店名"
-        amount: "金額"
-        category: "項目"
+        dealt_on: 日付
+        income_expense_type: 収支種類
+        company: 会社名・店名
+        amount: 金額
+        category: 項目
+        id: ID
+        description: 詳細
+        remarks: 注意事項
+        created_at: 作成日時
       category:
-        name: "項目名"
+        name: 項目名
+        id: ID
+        created_at: 作成日時
+        updated_at: 更新日時
+        incomes_expenses: 収支
+      expense_records_detail:
+        id: ID
+        expense_record: 割勘記録
+        ratio: 比率
+        total_amount: 合計金額
+        burden_amount: 負担金額
+        difference: 差額
+        income: 収入金額
+        created_at: 作成日時
+        updated_at: 更新日時
+      expense_record:
+        id: ID
+        year: 年
+        month: 月
+        expense_records_details: 割勘記録
+        created_at: 作成日時
+        updated_at: 更新日時
+      attachment:
+        name: 添付ファイル
+        id: ID
     errors:
       messages:
-        blank: "を入力してください"
+        blank: を入力してください
   flash:
     expense_record_blank_year_month: 年と月を入力してください。
     expense_record_blank_income: 年収を入力してください。
