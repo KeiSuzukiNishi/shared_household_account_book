@@ -186,15 +186,15 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4 px-3 py-5 bg-gradient-primary text-white">
-    <div class="d-flex align-items-center">
-        <i class="h3 mr-3 fas fa-share-alt"></i>
-        <h1 class="h3 font-weight-bold mr-3"><%= t('shared_book.title') %></h1>
-    </div>
-    <div class="ml-auto">
-        <h3><%= t('shared_book.application_everybody_can_share_and_split_out') %></h3>
-    </div>
-</div>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4 px-3 py-5 bg-gradient-primary text-white">
+                        <div class="d-flex align-items-center">
+                            <i class="h3 mr-3 fas fa-share-alt"></i>
+                            <h1 class="h3 font-weight-bold mr-3"><%= t('shared_book.title') %></h1>
+                        </div>
+                        <div class="ml-auto">
+                            <h3><%= t('shared_book.application_everybody_can_share_and_split_out') %></h3>
+                        </div>
+                    </div>
 
                     <!-- Content Row -->
                     <div class="row">
@@ -206,7 +206,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold h5 text-primary">
-                                                収入支出の一覧表を確認できる。</div>
+                                                <%= t('shared_book.you_can_see_the_table_of_incomes_and_expenses') %></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-fw fa-table fa-2x text-gray-300"></i>
@@ -223,7 +223,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold h5 text-success">
-                                                グラフで一目で傾向が分かる。</div>
+                                                <%= t('shared_book.you_can_see_the_tendency_on_charts') %></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-fw fa-chart-area fa-2x text-gray-300"></i>
@@ -239,7 +239,8 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold h5 text-info">カレンダー表示でその月の収支を確認。
+                                            <div class="font-weight-bold h5 text-info">
+                                                <%= t('shared_book.you_can_see_the_incomes_expenses_on_calendar') %>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -257,7 +258,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold h5 text-warning">
-                                                割勘機能で複数人の月間負担額がすぐに分かる。</div>
+                                                <%= t('shared_book.you_can_see_the_monthly_burden_amount_with_split_function') %></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calculator fa-2x text-gray-300"></i>
@@ -278,8 +279,8 @@
                                 <!-- Card Header -->
                                 <div class="card-header py-3 d-flex flex-row">
                                     <i class="fas fa-fw fa-table text-gray-500"></i>
-                                    <h6 class="font-weight-bold text-primary">収入支出一覧</h6>
-                                    <h6 class="font-weight-bold text-dark">: ソート機能があり、傾向が確認しやすい。</h6>
+                                    <h6 class="font-weight-bold text-primary"><%= t('shared_book.incomes_expenses_index') %></h6>
+                                    <h6 class="font-weight-bold text-dark">: <%= t('shared_book.easy_to_see_tendency_with_sort_function') %></h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -296,8 +297,8 @@
                                 <!-- Card Header -->
                                 <div class="card-header py-3 d-flex flex-row">
                                     <i class="fas fa-calendar text-gray-500"></i>
-                                    <h6 class="font-weight-bold text-primary">カレンダー</h6>
-                                    <h6 class="font-weight-bold text-dark">: いつレコードがあるかすぐに分かり、下部分で詳細が確認できる。</h6>                    
+                                    <h6 class="font-weight-bold text-primary"><%= t('shared_book.calendar') %></h6>
+                                    <h6 class="font-weight-bold text-dark">: <%= t('shared_book.you_can_see_the_record_on_it_and_details_at_the_bottom') %></h6>                    
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -321,8 +322,8 @@
                                 <!-- Card Header -->
                                 <div class="card-header py-3 d-flex flex-row">
                                     <i class="fas fa-chart-area text-gray-500"></i>
-                                    <h6 class="m-0 font-weight-bold text-primary">グラフ</h6>
-                                    <h6 class="font-weight-bold text-dark">: 年別、月別の円グラフ、棒グラフで比較や比率を確認できる。</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary"><%= t('shared_book.charts') %></h6>
+                                    <h6 class="font-weight-bold text-dark">: <%= t('shared_book.you_can_see_comparision_and_ratio_on_monthly_and_yearly_pie_chart_and_column_chart') %></h6>
                                 </div>
                                 <div class="card-body">
                                     <div>
@@ -336,14 +337,14 @@
                             </div>
                         </div>
 
-                        <!-- Explanation (chart) -->
+                        <!-- Explanation (expense_record) -->
                         <div class="col-lg-6 mb-4">
                             <div class="card shadow mb-4">
                                 <!-- Card Header -->
                                 <div class="card-header py-3 d-flex flex-row">
                                     <i class="fas fa-calculator text-gray-500"></i>
-                                    <h6 class="m-0 font-weight-bold text-primary">割勘一覧</h6>
-                                    <h6 class="font-weight-bold text-dark">: 各ユーザーの年収を入力するだけでそれぞれの比率で算出した月間負担金額がすぐに分かる。</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary"><%= t('shared_book.expense_record_index') %></h6>
+                                    <h6 class="font-weight-bold text-dark">: <%= t('shared_book.you_can_see_monthly_burden_amount_for_each_by_entering_yearly_salary') %></h6>
                                 </div>
                                 <div class="card-body">
                                     <div>
@@ -355,7 +356,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-md-6 text-center">
-                            <h3 class="text-danger font-weight-bold fs-4">さあ今すぐSharedBookで家計簿をシェアして作ろう！</h3>
+                            <h3 class="text-danger font-weight-bold fs-4"><%= t('shared_book.lets_create_accounting_book_with_sharedbook_righ_now') %></h3>
                         </div>
                         <div class="text-center">
                             <%= link_to new_user_registration_path, class: "btn btn-success btn-icon-split" do %>

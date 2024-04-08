@@ -131,6 +131,15 @@ ja:
     monthly_expense_pie_chart: 月間支出円グラフ
     yearly_expense_pie_chart: 年間支出円グラフ
     application_everybody_can_share_and_split_out: みんなでシェアしてすぐに割勘できる家計簿アプリ
+    you_can_see_the_table_of_incomes_and_expenses: 収入支出の一覧表を確認できる。
+    you_can_see_the_tendency_on_charts: グラフで一目で傾向が分かる。
+    you_can_see_the_incomes_expenses_on_calendar: カレンダー表示でその月の収支を確認。
+    you_can_see_the_monthly_burden_amount_with_split_function: 割勘機能で複数人の月間負担額がすぐに分かる。
+    easy_to_see_tendency_with_sort_function: ソート機能があり、傾向が確認しやすい。
+    you_can_see_the_record_on_it_and_details_at_the_bottom: いつレコードがあるかすぐに分かり、下部分で詳細が確認できる。
+    you_can_see_comparision_and_ratio_on_monthly_and_yearly_pie_chart_and_column_chart: 年別、月別の円グラフ、棒グラフで比較や比率を確認できる。
+    you_can_see_monthly_burden_amount_for_each_by_entering_yearly_salary: 各ユーザーの年収を入力するだけでそれぞれの比率で算出した月間負担金額がすぐに分かる。
+    lets_create_accounting_book_with_sharedbook_righ_now: さあ今すぐSharedBookで家計簿をシェアして作ろう！
   simple_calendar:
     previous: "<<"
     next: ">>"
