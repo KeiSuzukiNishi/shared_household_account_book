@@ -50,7 +50,7 @@
                     <% end %>
                     <td><%= detail.user.name %></td>
                     <td><%= number_with_delimiter(detail.income) %></td>
-                    <td><%= "#{detail.ratio}%" %></td>
+                    <td><%= "#{detail.ratio.to_i}%" %></td>
                     <td><%= number_with_delimiter(detail.total_amount) %></td>
                     <td><%= number_with_delimiter(detail.burden_amount) %></td>
                     <td><%= number_with_delimiter(detail.difference) %></td>
