@@ -22,3 +22,4 @@ import "sb-admin/sb-admin"
 
 import 'app/assets/stylesheets/sb-admin-2';
 import 'app/javascript/sb-admin-2';
+import 'app/javascript/vendor/sb-admin-2.min';

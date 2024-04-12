@@ -15,6 +15,7 @@ ja:
       - "10月"
       - "11月"
       - "12月"
+  admin:
   activerecord:
     models:
       incomes_expense: 収支
@@ -32,6 +33,8 @@ ja:
         description: 詳細
         remarks: 注意事項
         created_at: 作成日時
+  
+        image: 添付
       category:
         name: 項目名
         id: ID
@@ -43,6 +46,7 @@ ja:
         expense_record: 割勘記録
         ratio: 比率
         total_amount: 合計金額
+        total_expense_amount: 支出金額
         burden_amount: 負担金額
         difference: 差額
         income: 収入金額
@@ -114,9 +118,10 @@ ja:
     month: 月
     user_name: ユーザー名
     user_setting: ユーザー設定
-    income: 収入
+    income: 収入金額
     ratio: 比率
     total_amount: 合計金額
+    total_expense_amount: 支出金額
     burden_amount: 負担すべき金額
     difference: 差額
     no_user_found: ユーザーはいません。
