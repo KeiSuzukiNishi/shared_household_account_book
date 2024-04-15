@@ -8,6 +8,7 @@
 * jquery-rails
 * bootstrap
 * rails-i18n
+* rails_admin
 * cancancan
 * chartkick
 * font-awesome-rails
