@@ -86,23 +86,23 @@ class ChartsController < ApplicationController
 
     def column_chart_monthly
         # フォームからのパラメータで対象年月を取得（デフォルトは現在の年月）
-        selected_year = params[:selected_year].presence || Date.today.year
-    
+        start_year = params[:start_year].presence || Date.today.year
+        
         # フォームからのパラメータで開始月と終了月を取得
         start_month = params[:start_month].presence || 1
+        end_year = params[:end_year].presence || Date.today.year
         end_month = params[:end_month].presence || 12
-    
+        
         # 対象期間の収入データを取得
         @monthly_incomes = IncomesExpense.incomes
-                                         .select("EXTRACT(YEAR FROM dealt_on) AS year, EXTRACT(MONTH FROM dealt_on) AS month, SUM(amount) AS total_amount")
-                                         .where("EXTRACT(YEAR FROM dealt_on) = ? AND EXTRACT(MONTH FROM dealt_on) BETWEEN ? AND ?", selected_year, start_month, end_month)
-                                         .group("year, month")
-        
-        # 対象期間の支出データを取得
+        .select("EXTRACT(YEAR FROM dealt_on) AS year, EXTRACT(MONTH FROM dealt_on) AS month, SUM(amount) AS total_amount")
+        .where("(EXTRACT(YEAR FROM dealt_on) = ? AND EXTRACT(MONTH FROM dealt_on) >= ?) OR (EXTRACT(YEAR FROM dealt_on) = ? AND EXTRACT(MONTH FROM dealt_on) <= ?)", start_year, start_month, end_year, end_month)
+        .group("year, month")
+
         @monthly_expenses = IncomesExpense.expenses
-                                          .select("EXTRACT(YEAR FROM dealt_on) AS year, EXTRACT(MONTH FROM dealt_on) AS month, SUM(amount) AS total_amount")
-                                          .where("EXTRACT(YEAR FROM dealt_on) = ? AND EXTRACT(MONTH FROM dealt_on) BETWEEN ? AND ?", selected_year, start_month, end_month)
-                                          .group("year, month")
+                .select("EXTRACT(YEAR FROM dealt_on) AS year, EXTRACT(MONTH FROM dealt_on) AS month, SUM(amount) AS total_amount")
+                .where("(EXTRACT(YEAR FROM dealt_on) = ? AND EXTRACT(MONTH FROM dealt_on) >= ?) OR (EXTRACT(YEAR FROM dealt_on) = ? AND EXTRACT(MONTH FROM dealt_on) <= ?)", start_year, start_month, end_year, end_month)
+                .group("year, month")
     end
 
     def column_chart_yearly

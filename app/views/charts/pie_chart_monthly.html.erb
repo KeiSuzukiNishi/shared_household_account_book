@@ -28,7 +28,7 @@
         <%= form.text_field :selected_year, type: "number", value: params[:selected_year] || Date.today.year %>
 
         <%= form.label :selected_month, t('shared_book.month') %>
-        <%= form.text_field :selected_month, type: "number", value: params[:selected_month] || Date.today.month %>
+        <%= form.select :selected_month, options_for_select((1..12).map { |m| [Date::MONTHNAMES[m], m] }, params[:selected_month] || Date.today.month) %>
 
         <%= form.submit t('shared_book.display'), class: "btn btn-primary" %>
     </div>
