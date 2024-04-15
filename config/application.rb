@@ -12,5 +12,8 @@ module SharedHouseholdAccountBook
     config.i18n.available_locales = [:ja, :en]
     config.exceptions_app = self.routes
     config.time_zone = 'Tokyo'
+    config.generators do |g|
+      g.test_framework :rspec
+    end
   end
 end
