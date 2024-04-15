@@ -2,7 +2,7 @@
 ## 開発言語
 * Ruby: 3.0.1p64
 * Rails: 7.1.2
-## gem
+## 導入Gem
 * devise
 * simple_calendar
 * jquery-rails
