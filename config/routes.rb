@@ -23,8 +23,5 @@ Rails.application.routes.draw do
   get '/404', to: 'errors#not_found'
   get '*path', to: 'errors#not_found'
   get '/test_500', to: 'test#test_500'
-  namespace :admin do
-    get 'index', to: 'users#index'
-  end
 
 end

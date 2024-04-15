@@ -1,63 +1,63 @@
-# # ユーザーを4人作成
-# 4.times do |n|
-#     user = User.create!(
-#         name: "user#{n+1}",
-#         email: "user#{n+1}@example.com",
-#         password: "password123", 
-#         password_confirmation: "password123" 
-#     )
-#     puts "User #{user.email} created!"
-# end
+# ユーザーを4人作成
+4.times do |n|
+    user = User.create!(
+        name: "user#{n+1}",
+        email: "user#{n+1}@example.com",
+        password: "password123", 
+        password_confirmation: "password123" 
+    )
+    puts "User #{user.email} created!"
+end
 
-# # 管理者を2人作成
-# 2.times do |n|
-# admin = User.create!(
-#     name: "admin#{n+1}",
-#     email: "admin#{n+1}@example.com",
-#     password: "password123", 
-#     password_confirmation: "password123", 
-#     admin: true # 管理者権限を付与
-#     )
-#     puts "Admin #{admin.email} created!"
-# end
+# 管理者を2人作成
+2.times do |n|
+admin = User.create!(
+    name: "admin#{n+1}",
+    email: "admin#{n+1}@example.com",
+    password: "password123", 
+    password_confirmation: "password123", 
+    admin: true # 管理者権限を付与
+    )
+    puts "Admin #{admin.email} created!"
+end
 
-# # 項目を10個作成
-# 10.times do |n|
-#     category = Category.create!(
-#     name: "category#{n+1}"
-#     )
-#     puts "Category #{category.name} created!"
-# end
+# 項目を10個作成
+10.times do |n|
+    category = Category.create!(
+    name: "category#{n+1}"
+    )
+    puts "Category #{category.name} created!"
+end
 
-# # 収支を50個作成
-# 100.times do |n|
-#     dealt_on = Faker::Date.between(from: 1.year.ago, to: Date.today)
-#     income_expense_type = ["収入", "支出"].sample
-#     company = Faker::Company.name
-#     amount = rand(100..50000)
-#     category_id = Category.pluck(:id).sample
-#     user_id = User.pluck(:id).sample
+# 収支を50個作成
+100.times do |n|
+    dealt_on = Faker::Date.between(from: 1.year.ago, to: Date.today)
+    income_expense_type = ["収入", "支出"].sample
+    company = Faker::Company.name
+    amount = rand(100..50000)
+    category_id = Category.pluck(:id).sample
+    user_id = User.pluck(:id).sample
 
-#     incomes_expense = IncomesExpense.create!(
-#         dealt_on: dealt_on,
-#         income_expense_type: income_expense_type,
-#         company: company,
-#         amount: amount,
-#         category_id: category_id,
-#         user_id: user_id
-#     )
-#     puts "IncomesExpense #{incomes_expense.id} created!"
-# end
+    incomes_expense = IncomesExpense.create!(
+        dealt_on: dealt_on,
+        income_expense_type: income_expense_type,
+        company: company,
+        amount: amount,
+        category_id: category_id,
+        user_id: user_id
+    )
+    puts "IncomesExpense #{incomes_expense.id} created!"
+end
 
-# # 割勘記録を12個作成
-# 12.times do |n|
-#     date = Date.today - 1.year + n.months
-#     expense_record = ExpenseRecord.create!(
-#       year: date.year,
-#       month: date.month
-#     )
-#     puts "ExpenseRecord #{expense_record.id} created for #{date.strftime('%Y-%m')}"
-# end
+# 割勘記録を12個作成
+12.times do |n|
+    date = Date.today - 1.year + n.months
+    expense_record = ExpenseRecord.create!(
+      year: date.year,
+      month: date.month
+    )
+    puts "ExpenseRecord #{expense_record.id} created for #{date.strftime('%Y-%m')}"
+end
 
 # 割勘記録詳細を12個作成
 # ユーザーをランダムに選択する際の確率を設定するための配列
