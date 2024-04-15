@@ -2,6 +2,7 @@
 <html>
   <head>
     <title><%= t('shared_book.title') %></title>
+    <meta charset="utf-8">
     <meta name="description" content="SharedBookは複数人で共有できる家計簿です。収支一覧、カレンダー、グラフ表示も可能で、さらに割勘詳細を表示することにより各ユーザーの実際の負担金額等も確認できます。">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -18,17 +19,20 @@
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <!-- SB Admin 2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.4/css/sb-admin-2.min.css" rel="stylesheet">
-
+    
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css" rel="stylesheet">
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- DataTables JavaScript -->
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
@@ -300,28 +304,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="app/javascript/vendor/jquery/jquery.min.js"></script>
-    <script src="app/javascript/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Core plugin JavaScript-->
-    <script src="app/javascript/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- SB Admin 2 JavaScript -->
-      <script src="app/javascript/sb-admin-2/sb-admin-2.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="app/javascript/sb-admin-2/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="app/javascript/vendor/chart/Chart.min.js"></script>
-    <script src="app/javascript/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="app/javascript/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="app/javascript/demo/chart-area-demo.js"></script>
-    <script src="app/javascript/demo/chart-pie-demo.js"></script>
-    <script src="app/javascript/demo/datatables-demo.js"></script>
 
   </body>
 </html>
