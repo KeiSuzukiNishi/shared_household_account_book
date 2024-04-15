@@ -2,6 +2,16 @@
 ## 開発言語
 * Ruby: 3.0.1p64
 * Rails: 7.1.2
+## gem
+* devise
+* simple_calendar
+* jquery-rails
+* bootstrap
+* rails-i18n
+* cancancan
+* chartkick
+* font-awesome-rails
+* faker
 ## 実行手順
 ```
 $ git clone git@github.com:KeiSuzukiNishi/shared_household_account_book.git
