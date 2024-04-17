@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
     def set_locale
       I18n.locale = :ja
     end
+
+    def after_sign_in_path_for(resource)
+      incomes_expenses_path
+    end
 end

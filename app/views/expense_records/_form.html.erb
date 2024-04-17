@@ -1,5 +1,5 @@
 <%= form_for @expense_record || ExpenseRecord.new, url: @expense_record&.persisted? ? expense_record_path(@expense_record) : expense_records_path, method: @expense_record&.persisted? ? :patch : :post do |form| %>
-   <% if expense_record.errors.any? %>
+   <% if @expense_record.errors.any? %>
     <div style="color: red">
     
       <h2><%= t("errors.template.header", model: ExpenseRecord.model_name.human, count: @expense_record.errors.count) %>:</h2>

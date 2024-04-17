@@ -8,5 +8,12 @@ RSpec.describe '項目モデル機能', type: :model do
            expect(category).not_to be_valid
        end
     end
+
+    context '項目の名前がある場合' do
+      it 'バリデーションに成功する' do
+          category = FactoryBot.build(:category)
+          expect(category).to be_valid
+      end
+   end
   end
 end

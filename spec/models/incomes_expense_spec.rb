@@ -8,31 +8,32 @@ RSpec.describe '収支モデル機能', type: :model do
         expect(incomes_expense).not_to be_valid
       end
     end
-  end
-
-  describe 'バリデーションのテスト' do
+  
     context '収支種類が空の場合' do
       it 'バリデーションに失敗する' do
         incomes_expense = FactoryBot.build(:incomes_expense, income_expense_type: '')
         expect(incomes_expense).not_to be_valid
       end
     end
-  end
-
-  describe 'バリデーションのテスト' do
+  
     context '会社が空の場合' do
       it 'バリデーションに失敗する' do
         incomes_expense = FactoryBot.build(:incomes_expense, company: '')
         expect(incomes_expense).not_to be_valid
       end
     end
-  end
-
-  describe 'バリデーションのテスト' do
+  
     context '金額が空の場合' do
       it 'バリデーションに失敗する' do
         incomes_expense = FactoryBot.build(:incomes_expense, amount: '')
         expect(incomes_expense).not_to be_valid
+      end
+    end
+
+    context '入力項目がすべて埋まっている場合' do
+      it 'バリデーションに成功する' do
+        incomes_expense = FactoryBot.build(:incomes_expense)
+        expect(incomes_expense).to be_valid
       end
     end
   end
