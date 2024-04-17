@@ -10,6 +10,10 @@
     "startbootstrap-sb-admin-2": "^4.1.4"
   },
   "scripts": {
+    
+    "build:custom": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
+    "build:custom2": "esbuild app/javascript/vendor/*.js --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css ./app/assets/stylesheets/rails_admin.scss:./app/assets/builds/rails_admin.css --no-source-map --load-path=node_modules"
+
   }
 }
