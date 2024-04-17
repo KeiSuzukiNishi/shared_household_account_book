@@ -1,5 +1,8 @@
 example_id                                     | status | run_time        |
 ---------------------------------------------- | ------ | --------------- |
+./spec/models/category_spec.rb[1:1:1:1]        | passed | 0.10177 seconds |
+./spec/models/expense_record_spec.rb[1:1:1:1]  | passed | 0.11403 seconds |
+./spec/models/expense_record_spec.rb[1:2:1:1]  | passed | 0.00248 seconds |
 ./spec/models/incomes_expense_spec.rb[1:1:1:1] | passed | 0.00514 seconds |
 ./spec/models/incomes_expense_spec.rb[1:2:1:1] | passed | 0.00634 seconds |
 ./spec/models/incomes_expense_spec.rb[1:3:1:1] | passed | 0.00977 seconds |
