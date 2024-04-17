@@ -1,8 +1,13 @@
-example_id                          | status | run_time        |
------------------------------------ | ------ | --------------- |
-./spec/models/user_spec.rb[1:1:1:1] | passed | 0.18569 seconds |
-./spec/models/user_spec.rb[1:1:2:1] | passed | 0.00515 seconds |
-./spec/models/user_spec.rb[1:1:3:1] | passed | 0.00506 seconds |
-./spec/models/user_spec.rb[1:1:4:1] | passed | 0.02158 seconds |
-./spec/models/user_spec.rb[1:1:5:1] | passed | 0.36149 seconds |
-./spec/models/user_spec.rb[1:1:6:1] | passed | 0.00917 seconds |
+example_id                                     | status | run_time        |
+---------------------------------------------- | ------ | --------------- |
+./spec/models/incomes_expense_spec.rb[1:1:1:1] | passed | 0.00514 seconds |
+./spec/models/incomes_expense_spec.rb[1:2:1:1] | passed | 0.00634 seconds |
+./spec/models/incomes_expense_spec.rb[1:3:1:1] | passed | 0.00977 seconds |
+./spec/models/incomes_expense_spec.rb[1:4:1:1] | passed | 0.00431 seconds |
+./spec/models/incomes_expense_spec.rb[1:5:1:1] | passed | 0.55694 seconds |
+./spec/models/user_spec.rb[1:1:1:1]            | passed | 0.18569 seconds |
+./spec/models/user_spec.rb[1:1:2:1]            | passed | 0.00515 seconds |
+./spec/models/user_spec.rb[1:1:3:1]            | passed | 0.00506 seconds |
+./spec/models/user_spec.rb[1:1:4:1]            | passed | 0.02158 seconds |
+./spec/models/user_spec.rb[1:1:5:1]            | passed | 0.36149 seconds |
+./spec/models/user_spec.rb[1:1:6:1]            | passed | 0.00917 seconds |
