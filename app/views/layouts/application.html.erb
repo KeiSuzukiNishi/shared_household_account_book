@@ -44,20 +44,7 @@
   </head>
 
   <body>
-    <% if signed_in? %>
-      <% if current_user&.admin? %>
-        <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
-        <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
-        <%= link_to t("admin.admin_page"), rails_admin_path %></li>
-      <% else %>
-        <%= link_to t('shared_book.user_show'), user_path(current_user.id) %>
-        <%= link_to t('shared_book.sign_out'), destroy_user_session_path, method: :get %>
-      <% end %>
-    <% else %>
-    <%= link_to t('shared_book.sign_in'), new_user_session_path %>
-    <% end %>
-
-
+  
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
@@ -142,10 +129,10 @@
             <div id="content">
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <div>
-                        <p class="notice"><%= notice %></p>
-                        <p class="alert"><%= alert %></p>
-                    </div>
+
+                    <p class="notice"><%= notice %></p>
+                    <p class="alert"><%= alert %></p>
+
                     <!-- Sidebar Toggle (Topbar) -->
                     <form class="form-inline">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -158,56 +145,7 @@
 
                         <!-- Nav Item - Alerts -->
                         <% if signed_in? %>
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">3+</span>
-                                </a>
-                                <!-- Dropdown - Alerts -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="alertsDropdown">
-                                    <h6 class="dropdown-header">
-                                        Alerts Center
-                                    </h6>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-primary">
-                                                <i class="fas fa-file-alt text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 12, 2019</div>
-                                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-success">
-                                                <i class="fas fa-donate text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 7, 2019</div>
-                                            $290.29 has been deposited into your account!
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-warning">
-                                                <i class="fas fa-exclamation-triangle text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 2, 2019</div>
-                                            Spending Alert: We've noticed unusually high spending for your account.
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                </div>
-                            </li>
-
+                            
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -224,16 +162,16 @@
                                             <%= t('shared_book.user_show') %>
                                         </a>
                                         <a class="dropdown-item" href="<%= edit_user_registration_path %>">
-                                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            <i class="fas fa-wrench fa-sm fa-fw mr-2 text-gray-400"></i>
                                             <%= t('shared_book.user_setting') %>
                                         </a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete">
-                                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                             <%= t('shared_book.sign_out') %>
                                         </a>
                                         <a class="dropdown-item" href="<%= rails_admin_path %>" data-method="delete">
-                                            <i class="fa-solid fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            <i class="fas fa-unlock-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                             <%= t("admin.admin_page") %>
                                         </a>
                                     </div>
@@ -245,18 +183,33 @@
                                                 <%= t('shared_book.user_show') %>
                                             </a>
                                             <a class="dropdown-item" href="<%= edit_user_registration_path %>">
-                                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                <i class="fas fa-wrench fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 <%= t('shared_book.user_setting') %>
                                             </a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete">
-                                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 <%= t('shared_book.sign_out') %>
                                             </a>
                                         </div>
                                 <% end %>
                             </li>
-                            
+                      <% else %>
+                            <div>
+                                <%= link_to new_user_registration_path, class: "btn btn-success btn-icon-split" do %>
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-user-plus"></i>
+                                </span>
+                                <span class="text"><%= t('shared_book.sign_up') %></span>
+                                <% end %>
+                                
+                                <%= link_to new_user_session_path, class: "btn btn-info btn-icon-split" do %>
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </span>
+                                <span class="text"><%= t('shared_book.sign_in') %></span>
+                                <% end %>
+                            </div>
                         <% end %>
                     </ul>
                 </nav>
