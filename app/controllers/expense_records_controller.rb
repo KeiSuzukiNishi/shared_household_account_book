@@ -1,4 +1,6 @@
 class ExpenseRecordsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @users = User.all
     @expense_records_by_month = {}

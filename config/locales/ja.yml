@@ -177,6 +177,8 @@ ja:
     you_can_see_monthly_burden_amount_for_each_by_entering_yearly_salary: 各ユーザーの年収を入力するだけでそれぞれの比率で算出した月間負担金額がすぐに分かる。
     lets_create_accounting_book_with_sharedbook_righ_now: さあ今すぐSharedBookで家計簿をシェアして作ろう！
     menu: メニュー
+    could_not_access_other_users_account: 他のユーザーの情報にアクセスすることはできません。
+    there_is_no_user: ユーザーが見つかりません。
   simple_calendar:
     previous: "<<"
     next: ">>"
