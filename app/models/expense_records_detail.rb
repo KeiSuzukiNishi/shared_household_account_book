@@ -5,5 +5,5 @@ class ExpenseRecordsDetail < ApplicationRecord
     # validates :total_amount, presence: true
     # validates :burden_amount, presence: true
     # validates :difference, presence: true
-    # validates :income, presence: true
+    validates :income, presence: true, numericality: { greater_than_or_equal_to: 0 }
   end

@@ -17,10 +17,10 @@ RSpec.describe 'ユーザ管理機能', type: :system do
       end
     end
 
-  #   context 'ログインせずにタスク一覧画面に遷移した場合' do
-  #     it 'ログイン画面に遷移し、「ログインしてください」というメッセージが表示される' do
+  #   context 'ログインせずに収入支出一覧画面に遷移した場合' do
+  #     it 'ログイン画面に遷移し、「ログインもしくはアカウント登録してください。」というメッセージが表示される' do
   #       visit tasks_path
-  #       expect(page).to have_content 'ログインしてください'
+  #       expect(page).to have_content 'ログインもしくはアカウント登録してください。'
   #     end
   #   end
   # end

@@ -27,20 +27,12 @@ class ExpenseRecordsController < ApplicationController
     @users = User.all
     @year = params[:expense_record][:year].to_i || Time.now.year
     @month = params[:expense_record][:month].to_i || Time.now.month
-    if @year.zero? || @month.zero?
-      redirect_to new_expense_record_path, alert: t('flash.expense_record_blank_year_month')
-      return
-    end
-
+  
     @total_expenses = @users.sum { |user| user.total_amount_by_month(@year, @month) }
     @results = []
     
     user_incomes = params[:income].values.reject(&:blank?).map(&:to_i)
-    if user_incomes.empty?
-      redirect_to new_expense_record_path, alert: t('flash.expense_record_blank_income')
-      return
-    end
-    
+    # reject(&:blank?)があることで空欄を回避している。これを削除すると@resultsがNaNになる。
     total_income = user_incomes.sum
   
     @results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
@@ -48,14 +40,10 @@ class ExpenseRecordsController < ApplicationController
     if ExpenseRecord.exists?(year: @year, month: @month)
       redirect_to new_expense_record_path, alert: t('flash.expense_record_existed')
     else
-
-      expense_record = ExpenseRecord.create!(
-        year: @year,
-        month: @month
-      )
-
+      @expense_record = ExpenseRecord.new(year: @year, month: @month)  # ここで@expense_recordを定義
+  
       @users.each_with_index do |user, index|
-        expense_record.expense_records_details.create!(
+        @expense_record.expense_records_details.build(
           user: user,
           ratio: @results[index],
           total_amount: user.total_amount_by_month(@year, @month),
@@ -64,7 +52,12 @@ class ExpenseRecordsController < ApplicationController
           income: user_incomes[index]
         )
       end
-      redirect_to expense_records_path
+      
+      if @expense_record.save
+        redirect_to expense_records_path
+      else
+        render :new
+      end
     end
   end
 
@@ -98,8 +91,9 @@ class ExpenseRecordsController < ApplicationController
   
     user_incomes = params[:income].values.map(&:to_i)
     total_income = user_incomes.sum
+    total_income = 1 if total_income.zero?  # もしtotal_incomeが0なら、デフォルト値として1を設定する
     results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
-  
+      
     expense_record.expense_records_details.each_with_index do |detail, index|
       user = detail.user
   

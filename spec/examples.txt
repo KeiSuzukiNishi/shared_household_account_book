@@ -17,4 +17,4 @@ example_id                                     | status | run_time        |
 ./spec/models/user_spec.rb[1:1:4:1]            | passed | 0.02158 seconds |
 ./spec/models/user_spec.rb[1:1:5:1]            | passed | 0.36149 seconds |
 ./spec/models/user_spec.rb[1:1:6:1]            | passed | 0.00917 seconds |
-./spec/system/users_spec.rb[1:1:1:1]           | passed | 0.87704 seconds |
+./spec/system/users_spec.rb[1:1:1:1]           | passed | 14.86 seconds   |

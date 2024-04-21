@@ -1,11 +1,11 @@
 <%= form_for @expense_record || ExpenseRecord.new, url: @expense_record&.persisted? ? expense_record_path(@expense_record) : expense_records_path, method: @expense_record&.persisted? ? :patch : :post do |form| %>
    <% if @expense_record.errors.any? %>
     <div style="color: red">
-    
+    <p>aaaaa</p>
       <h2><%= t("errors.template.header", model: ExpenseRecord.model_name.human, count: @expense_record.errors.count) %>:</h2>
 
       <ul>
-        <% expense_record.errors.each do |error| %>
+        <% @expense_record.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -16,17 +16,17 @@
       <label for="<%= "user_incomes_#{user.id}" %>">
         <%= "#{user.name}" %><%= t('shared_book.s_yearly_income') %>:
       </label>
-      <%= text_field :income, id: "user_incomes_#{user.id}" %><br>
+      <%= text_field :income, id: "user_incomes_#{user.id}", required: true %><br>
   <% end %>
 
      <ul>
     <li>
       <%= form.label :year, t('shared_book.year') %>
-      <%= form.select :year, (Date.today.year - 10..Date.today.year + 10).to_a, { prompt: t('shared_book.year') } %>
+      <%= form.select :year, (Date.today.year - 10..Date.today.year + 10).to_a, { prompt: t('shared_book.year') }, include_blank: false %>
     </li>
     <li>
       <%= form.label :month, t('shared_book.month') %>
-      <%= form.select :month, Date::MONTHNAMES.compact.each_with_index.map { |month, index| [month, index + 1] }, { prompt: t('shared_book.month') } %>
+      <%= form.select :month, Date::MONTHNAMES.compact.each_with_index.map { |month, index| [month, index + 1] }, { prompt: t('shared_book.month') }, include_blank: false %>
     </li>
   </ul>
 
