@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 
-RSpec.describe 'ユーザ管理機能', type: :system do
+RSpec.describe 'ユーザーモデル', type: :system do
   describe '登録機能' do
     context 'ユーザを登録した場合' do
       before do
@@ -76,67 +76,58 @@ RSpec.describe 'ユーザ管理機能', type: :system do
     end
   end
 
-  # describe '管理者機能' do
-  #   context '管理者がログインした場合' do
-  #     before do
-  #       @admin_user = FactoryBot.create(:admin_user)
-  #       visit new_session_path
-  #       fill_in 'session_email', with: @admin_user.email
-  #       fill_in 'session_password', with: @admin_user.password
-  #       click_button 'create-session'
-  #     end
-  #     it 'ユーザ一覧画面にアクセスできる' do
-  #       visit admin_users_path
-  #       expect(page).to have_content 'ユーザ一覧ページ'
-  #     end
-  #     it '管理者を登録できる' do
-  #       visit new_admin_user_path
-  #       fill_in 'user_name', with: 'New User'
-  #       fill_in 'user_email', with: 'newuser@example.com'
-  #       fill_in 'user_password', with: 'newpassword'
-  #       fill_in 'user_password_confirmation', with: 'newpassword'
-  #       check 'user_admin'
-  #       click_button 'create-user'
-  #       expect(page).to have_content 'ユーザを登録しました'
-  #     end
-  #     it 'ユーザ詳細画面にアクセスできる' do
-  #       user = FactoryBot.create(:user)
-  #       visit admin_user_path(user)
-  #       expect(page).to have_content 'ユーザ詳細ページ'
-  #     end
-  #     it 'ユーザ編集画面から、自分以外のユーザを編集できる' do
-  #       user = FactoryBot.create(:user)
-  #       user_id = user.id
-  #       visit edit_admin_user_path(user)
-  #       fill_in 'user_name', with: 'Updated Name'
-  #       fill_in 'user_password', with: 'UserTest'
-  #       fill_in 'user_password_confirmation', with: 'UserTest'
-  #       click_button 'update-user' 
-  #       expect(page).to have_content("Updated Name")
-  #     end      
-  #     it 'ユーザを削除できる' do
-  #       user = FactoryBot.create(:user, name: 'DestroyUser')
-  #       visit admin_users_path
-  #       within('table#user-table') do
-  #         row = find('tr', text: user.name)
-  #         row.find_link(I18n.t("destroy")).click
-  #       end
-  #       expect(page).to have_content 'ユーザを削除しました'
-  #     end
-  #   end
+  describe '管理者機能' do
+    context '管理者がログインした場合' do
+      before do
+        @admin_user = FactoryBot.create(:admin_user)
+        visit new_user_session_path
+        fill_in 'user_email', with: @admin_user.email
+        fill_in 'user_password', with: @admin_user.password
+        click_button 'create-session'
+      end
+      it 'サイト管理画面にアクセスできる' do
+        visit rails_admin_path
+        expect(page).to have_content 'サイト管理'
+      end
+    end
 
-  #   context '一般ユーザがユーザ一覧画面にアクセスした場合' do
-  #     before do
-  #       user = FactoryBot.create(:user)
-  #       visit new_session_path
-  #       fill_in 'session_email', with: user.email
-  #       fill_in 'session_password', with: user.password
-  #       click_button 'create-session'
-  #       visit admin_users_path
-  #     end
-  #     it 'タスク一覧画面に遷移し、「管理者以外アクセスできません」というエラーメッセージが表示される' do
-  #       expect(page).to have_content 'タスク一覧ページ'
-  #       expect(page).to have_content'管理者以外アクセスできません'
-  #     end
-  #   end
+    context '一般ユーザがユーザ一覧画面にアクセスした場合' do
+      before do
+        user = FactoryBot.create(:user)
+        visit new_user_session_path
+        fill_in 'user_email', with: user.email
+        fill_in 'user_password', with: user.password
+        click_button 'create-session'
+        visit rails_admin_path
+      end
+      # it 'タスク一覧画面に遷移し、「管理者以外アクセスできません」というエラーメッセージが表示される' do
+      #   expect(page).to have_content 'タスク一覧ページ'
+      #   expect(page).to have_content'管理者以外アクセスできません'
+      # end
+    end
+  end
+
+  describe "CRUD機能" do
+    it "新規ユーザー作成" do
+      user = FactoryBot.create(:user)
+      expect(User.count).to eq(1)
+    end
+
+    it "既存ユーザーの読み取り" do
+      user = FactoryBot.create(:user, email: "test@example.com")
+      expect(User.find_by(email: "test@example.com")).to eq(user)
+    end
+
+    it "既存ユーザーの更新" do
+      user = FactoryBot.create(:user)
+      user.update(email: "new@example.com")
+      expect(User.find_by(email: "new@example.com")).to eq(user)
+    end
+
+    it "既存ユーザーの削除" do
+      user = FactoryBot.create(:user, email: "test@example.com")
+      user.destroy
+      expect(User.find_by(email: "test@example.com")).to be_nil
+    end
+  end
 end
