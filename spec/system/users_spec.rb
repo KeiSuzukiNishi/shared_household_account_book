@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 
-RSpec.describe 'ユーザーモデル', type: :system do
+RSpec.describe User, type: :system do
   describe '登録機能' do
     context 'ユーザを登録した場合' do
       before do

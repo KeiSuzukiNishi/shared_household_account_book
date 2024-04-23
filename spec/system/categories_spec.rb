@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "項目モデル", type: :model do
+RSpec.describe Category, type: :model do
   describe "CRUD機能" do
     it "新規項目作成" do
       category = FactoryBot.create(:category)

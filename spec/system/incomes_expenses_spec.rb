@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "収支モデル", type: :system do
+RSpec.describe IncomesExpense, type: :system do
   describe "CRUD機能" do
     it "新規収支作成" do
       incomes_expense = FactoryBot.create(:incomes_expense)
