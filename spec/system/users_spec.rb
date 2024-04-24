@@ -100,8 +100,8 @@ RSpec.describe User, type: :system do
         click_button 'create-session'
         visit rails_admin_path
       end
-      # it 'タスク一覧画面に遷移し、「管理者以外アクセスできません」というエラーメッセージが表示される' do
-      #   expect(page).to have_content 'タスク一覧ページ'
+      # it '収入支出一覧画面に遷移し、「管理者以外アクセスできません」というエラーメッセージが表示される' do
+      #   expect(page).to have_content '収入支出一覧ページ'
       #   expect(page).to have_content'管理者以外アクセスできません'
       # end
     end
