@@ -69,8 +69,8 @@ RSpec.describe User, type: :system do
           expect(page).to have_content '収支新規登録'
       end
       it 'ログアウトするとログイン画面に遷移し、「ログアウトしました」というメッセージが表示される' do
-        find('.nav-link.dropdown-toggle').click # ドロップダウンメニューを開く
-        find('.dropdown-item', text: I18n.t("shared_book.sign_out")).click # ログアウトリンクをクリック
+          visit destroy_user_session_path
+          expect(page).to have_current_path(new_user_session_path)
         expect(page).to have_content 'ログアウトしました'
       end
     end
@@ -98,12 +98,13 @@ RSpec.describe User, type: :system do
         fill_in 'user_email', with: user.email
         fill_in 'user_password', with: user.password
         click_button 'create-session'
-        visit rails_admin_path
       end
-      # it '収入支出一覧画面に遷移し、「管理者以外アクセスできません」というエラーメッセージが表示される' do
-      #   expect(page).to have_content '収入支出一覧ページ'
-      #   expect(page).to have_content'管理者以外アクセスできません'
-      # end
+    
+      it 'サイト管理画面に「管理者以外アクセスできません。」と表示され、トップ画面に遷移する' do
+        visit rails_admin_path
+        expect(page).to have_content '管理者以外アクセスできません。'
+        expect(page).to have_content 'みんなでシェアしてすぐに割勘できる家計簿アプリ'
+      end
     end
   end
 

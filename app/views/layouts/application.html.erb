@@ -134,7 +134,10 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
+<a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete" id="sign-out">
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                <%= t('shared_book.sign_out') %>
+                                            </a>
                         <!-- Nav Item - Alerts -->
                         <% if signed_in? %>
                             
@@ -148,7 +151,7 @@
                                 <!-- Dropdown - User Information -->
                                 <% if current_user&.admin? %>
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                        aria-labelledby="userDropdown">
+                                        aria-labelledby="userDropdown" id="user-dropdown-menu">
                                         <a class="dropdown-item" href="<%= user_path(current_user.id) %>">
                                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                             <%= t('shared_book.user_show') %>
@@ -158,10 +161,12 @@
                                             <%= t('shared_book.user_setting') %>
                                         </a>
                                         <div class="dropdown-divider"></div>
+                                        <!--
                                         <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete" id="sign-out">
                                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                             <%= t('shared_book.sign_out') %>
                                         </a>
+                                        -->
                                         <a class="dropdown-item" href="<%= rails_admin_path %>" data-method="delete">
                                             <i class="fas fa-unlock-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                             <%= t("admin.admin_page") %>
@@ -179,10 +184,12 @@
                                                 <%= t('shared_book.user_setting') %>
                                             </a>
                                             <div class="dropdown-divider"></div>
+                                            <!--
                                             <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete" id="sign-out">
                                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 <%= t('shared_book.sign_out') %>
                                             </a>
+                                             -->
                                         </div>
                                 <% end %>
                             </li>
