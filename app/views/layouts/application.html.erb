@@ -28,14 +28,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <!-- SB Admin 2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.4/css/sb-admin-2.min.css" rel="stylesheet">
-    
+    <!-- <link href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.4/css/sb-admin-2.min.css" rel="stylesheet"> -->
+    <%= stylesheet_link_tag 'sb-admin-2.min', media: 'all' %>
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css" rel="stylesheet">
 
   </head>
 
-  <body>
+    <body id="page-top">
+
   
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -47,7 +48,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-share-alt"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3"><%= t('shared_book.title').downcase %></div>
+                <div class="sidebar-brand-text mx-3"><%= t('shared_book.title') %></div>
             <% end %>
 
             <!-- Divider -->
@@ -107,9 +108,12 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+<div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0 btn-primary" id="sidebarToggle"> <!-- btn-primaryを追加して青色に -->
+        <i class="fas fa-angle-left text-white"></i> <!-- text-whiteを追加して白色に -->
+        <i class="fas fa-angle-right text-white"></i> <!-- text-whiteを追加して白色に -->
+    </button>
+</div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -134,10 +138,7 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-<a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete" id="sign-out">
-                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                <%= t('shared_book.sign_out') %>
-                                            </a>
+
                         <!-- Nav Item - Alerts -->
                         <% if signed_in? %>
                             
@@ -161,12 +162,10 @@
                                             <%= t('shared_book.user_setting') %>
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <!--
                                         <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete" id="sign-out">
                                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                             <%= t('shared_book.sign_out') %>
                                         </a>
-                                        -->
                                         <a class="dropdown-item" href="<%= rails_admin_path %>" data-method="delete">
                                             <i class="fas fa-unlock-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                             <%= t("admin.admin_page") %>
@@ -184,12 +183,10 @@
                                                 <%= t('shared_book.user_setting') %>
                                             </a>
                                             <div class="dropdown-divider"></div>
-                                            <!--
                                             <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="delete" id="sign-out">
                                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 <%= t('shared_book.sign_out') %>
                                             </a>
-                                             -->
                                         </div>
                                 <% end %>
                             </li>

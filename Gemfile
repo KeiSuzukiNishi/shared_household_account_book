@@ -82,7 +82,6 @@ gem 'bootstrap', '~> 5.0.0'
 gem 'mini_racer'
 gem 'rails-i18n'
 gem 'rails_admin'
-gem "sassc-rails"
 gem 'cancancan'
 gem 'chartkick'
 gem 'groupdate'
@@ -90,3 +89,5 @@ gem 'bootstrap_sb_admin_base_v2', '~> 0.3.6'
 gem 'font-awesome-rails'
 gem 'kaminari'
 gem 'faker'
+gem "webpacker", "~> 5.4"
+gem "cssbundling-rails"
