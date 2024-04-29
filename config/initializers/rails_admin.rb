@@ -39,4 +39,12 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+
+  config.authenticate_with do
+    unless current_user.try(:admin?)
+      flash[:notice] = t('shared_book.ony_admin_can_access')
+      redirect_to main_app.root_path
+    end
+  end
 end

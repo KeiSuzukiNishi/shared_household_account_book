@@ -61,4 +61,10 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # テスト環境ではpry-railsを読み込む
+  config.after_initialize do
+    Pry.config.should_load_rc = false
+    Pry.config.should_load_local_rc = false
+  end
 end

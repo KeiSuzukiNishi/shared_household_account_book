@@ -1,4 +1,6 @@
 class ChartsController < ApplicationController
+    before_action :authenticate_user!
+    
     def pie_chart_monthly
       # フォームからのパラメータで対象年月を取得（デフォルトは現在の年月）
       selected_year = params[:selected_year].presence || Date.today.year
