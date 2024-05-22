@@ -1,6 +1,6 @@
 # README
 ## 開発言語
-* Ruby: 3.0.1p64
+* Ruby: 3.2.2p64
 * Rails: 7.1.2
 ## 導入Gem
 * devise

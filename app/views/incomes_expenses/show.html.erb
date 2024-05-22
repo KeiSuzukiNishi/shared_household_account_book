@@ -54,12 +54,7 @@
                 <td><%= @incomes_expense.remarks %></td>
                 <td><%= number_with_delimiter(@incomes_expense.amount) %></td>
                 <td>
-                  <% if @incomes_expense.image.attached? %>
-                    <div>
-                      <strong><%= t('shared_book.image') %>:</strong> 
-                      <%= link_to t('shared_book.view_image'), @incomes_expense.image %>
-                    </div>
-                  <% end %>
+                  <%= link_to t('shared_book.view_image'), show_image_incomes_expense_path(@incomes_expense) if @incomes_expense.image.attached? %>
                 </td>
                 <td><%= link_to t('shared_book.edit'), edit_incomes_expense_path(@incomes_expense), class: "btn btn-outline-info btn-sm" %></td>
                 <td><%= button_to t('shared_book.destroy'), @incomes_expense, method: :delete, class: "btn btn-outline-dark btn-sm" %></td>
