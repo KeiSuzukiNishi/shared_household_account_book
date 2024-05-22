@@ -180,6 +180,7 @@ ja:
     could_not_access_other_users_account: 他のユーザーの情報にアクセスすることはできません。
     there_is_no_user: ユーザーが見つかりません。
     ony_admin_can_access: 管理者以外アクセスできません。
+    reciept_image: レシート画像
   simple_calendar:
     previous: "<<"
     next: ">>"

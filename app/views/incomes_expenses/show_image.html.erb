@@ -1,0 +1,30 @@
+<style>
+    .table-sm td, .table-sm th {
+        font-size: 14px;
+    }
+</style>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="row mb-3">
+    <div class="col">
+      <h1 class="h3 mb-2 text-gray-800"><%= t('shared_book.reciept_image') %></h1>
+    </div>
+    <div class="col text-right">
+        <%= link_to t('shared_book.incomes_expenses_index'), incomes_expenses_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  <!-- Data Details -->
+  <div class="card shadow mb-4">
+      <div class="card-body">
+        <div class="table-responsive">
+            <%= image_tag @incomes_expense.image %>
+        </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->

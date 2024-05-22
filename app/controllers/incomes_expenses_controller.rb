@@ -23,6 +23,7 @@ class IncomesExpensesController < ApplicationController
 
   def create
     @incomes_expense = IncomesExpense.new(incomes_expense_params)
+    @incomes_expense.user = current_user
     @categories = Category.all
 
     respond_to do |format|
@@ -42,13 +43,6 @@ class IncomesExpensesController < ApplicationController
     @categories = Category.all
     render 'calendar'
   end
-  
-  # def day
-  #   @date = params.fetch(:date, Date.today).to_date
-  #   @incomes_expenses = IncomesExpense.where(starts_at: @date.beginning_of_day..@date.end_of_day)
-  #   @categories = Category.all
-  #   render 'day'
-  # end
 
   def update
     respond_to do |format|
@@ -70,7 +64,9 @@ class IncomesExpensesController < ApplicationController
     end
   end
 
-
+  def show_image
+    @incomes_expense = IncomesExpense.find(params[:id])
+  end
 
 
   private
