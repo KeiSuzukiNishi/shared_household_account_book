@@ -7,6 +7,7 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}   # 5
 set :keep_releases, 5   # 6
 set :rbenv_ruby, '3.2.2'    # 7
 set :log_level, :info   # 8
+set :branch, 'main'
 # set :rbenv_version, '3.3.0'
 
 after 'deploy:published', 'deploy:seed'   # 9
