@@ -14,7 +14,7 @@ after 'deploy:published', 'deploy:seed'   # 9
 after 'deploy:finished', 'deploy:restart'   # 10
 
 namespace :deploy do
-  before 'deploy:assets:precompile'
+  # before 'deploy:assets:precompile'
   namespace :assets do
     task :precompile do
       on roles(:web) do
