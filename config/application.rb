@@ -15,5 +15,6 @@ module SharedHouseholdAccountBook
     config.generators do |g|
       g.test_framework :rspec
     end
+    config.assets.css_compressor = nil
   end
 end
