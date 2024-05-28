@@ -14,6 +14,19 @@ after 'deploy:published', 'deploy:seed'   # 9
 after 'deploy:finished', 'deploy:restart'   # 10
 
 namespace :deploy do
+  namespace :assets do
+    task :precompile do
+      on roles(:web) do
+        within release_path do
+          # 既存のプリコンパイルタスク
+          execute :rake, 'assets:precompile'
+
+          # 新しく追加するコマンド
+          execute :yarn, 'run build:css'
+        end
+      end
+    end
+  end
   desc 'Run seed'
   task :seed do
     on roles(:db) do
