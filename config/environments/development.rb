@@ -75,5 +75,5 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :letter_opener_web
-  config.web_console.whitelisted_ips = '127.0.0.1'
+  config.web_console.allowed_ips = '127.0.0.1'
 end
