@@ -23,7 +23,7 @@ namespace :deploy do
           execute :rake, 'assets:precompile'
 
           # 新しく追加するコマンド
-          execute :yarn, 'run build:css'
+          # execute :yarn, 'run build:css'
           execute :yarn, 'run webpack'
         end
       end
