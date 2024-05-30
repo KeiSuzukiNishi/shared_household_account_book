@@ -7,13 +7,14 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}   # 5
 set :keep_releases, 5   # 6
 set :rbenv_ruby, '3.2.2'    # 7
 set :log_level, :info   # 8
-set :branch, 'main'
+set :branch, 'aws'
 # set :rbenv_version, '3.3.0'
 
 after 'deploy:published', 'deploy:seed'   # 9
 after 'deploy:finished', 'deploy:restart'   # 10
 
 namespace :deploy do
+  # before 'deploy:assets:precompile'
   namespace :assets do
     task :precompile do
       on roles(:web) do
@@ -22,7 +23,8 @@ namespace :deploy do
           execute :rake, 'assets:precompile'
 
           # 新しく追加するコマンド
-          execute :yarn, 'run build:css'
+          # execute :yarn, 'run build:css'
+          execute :yarn, 'run webpack'
         end
       end
     end
