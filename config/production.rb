@@ -54,7 +54,7 @@ server "52.197.39.153",
   roles: %w{web db app},
   ssh_options: {
     user: "ec2-user", # overrides user setting above
-    keys: %w(/home/keisuzuki/.ssh/shared_book.pem),
+    keys: %w(~/.ssh/shared_book.pem),
     forward_agent: false,
     auth_methods: %w(publickey password)
     # password: "please use keys"
