@@ -95,5 +95,5 @@ gem 'bootstrap_sb_admin_base_v2', '~> 0.3.6'
 gem 'font-awesome-rails'
 gem 'kaminari'
 gem 'faker'
-gem "webpacker", "~> 5.4"
+# gem "webpacker", "~> 5.4"
 gem "cssbundling-rails"
