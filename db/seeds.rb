@@ -1,31 +1,47 @@
 # ユーザーを4人作成
 4.times do |n|
-    user = User.find_or_create_by!(email: "user#{n+1}@example.com") do |u|
-      u.name = "user#{n+1}"
-      u.password = "password123"
-      u.password_confirmation = "password123"
+    unless User.exists?(email: "user#{n+1}@example.com")
+      user = User.create!(
+        name: "user#{n+1}",
+        email: "user#{n+1}@example.com",
+        password: "password123", 
+        password_confirmation: "password123" 
+      )
+      puts "User #{user.email} created!"
+    else
+      puts "User user#{n+1}@example.com already exists!"
     end
-    puts "User #{user.email} created!"
   end
   
   # 管理者を2人作成
   2.times do |n|
-    admin = User.find_or_create_by!(email: "admin#{n+1}@example.com") do |a|
-      a.name = "admin#{n+1}"
-      a.password = "password123"
-      a.password_confirmation = "password123"
-      a.admin = true # 管理者権限を付与
+    unless User.exists?(email: "admin#{n+1}@example.com")
+      admin = User.create!(
+        name: "admin#{n+1}",
+        email: "admin#{n+1}@example.com",
+        password: "password123", 
+        password_confirmation: "password123", 
+        admin: true # 管理者権限を付与
+      )
+      puts "Admin #{admin.email} created!"
+    else
+      puts "Admin admin#{n+1}@example.com already exists!"
     end
-    puts "Admin #{admin.email} created!"
   end
   
   # 項目を10個作成
   10.times do |n|
-    category = Category.find_or_create_by!(name: "category#{n+1}")
-    puts "Category #{category.name} created!"
+    unless Category.exists?(name: "category#{n+1}")
+      category = Category.create!(
+        name: "category#{n+1}"
+      )
+      puts "Category #{category.name} created!"
+    else
+      puts "Category category#{n+1} already exists!"
+    end
   end
   
-  # 収支を50個作成
+  # 収支を100個作成
   100.times do |n|
     dealt_on = Faker::Date.between(from: 1.year.ago, to: Date.today)
     income_expense_type = ["収入", "支出"].sample
@@ -48,7 +64,7 @@
   # 割勘記録を12個作成
   12.times do |n|
     date = Date.today - 1.year + n.months
-    expense_record = ExpenseRecord.find_or_create_by!(
+    expense_record = ExpenseRecord.create!(
       year: date.year,
       month: date.month
     )
@@ -66,7 +82,7 @@
   
   12.times do |n|
     date = Date.today - 1.year + n.months
-    expense_record = ExpenseRecord.find_or_create_by!(
+    expense_record = ExpenseRecord.create!(
       year: date.year,
       month: date.month
     )
@@ -111,7 +127,7 @@
       # 差額を計算
       difference = total_amount - burden_amount
   
-      user_ratio = (user_ratio * 100).round
+      user_ratio = user_ratio * 100.round
   
       # 割り勘記録詳細を作成
       ExpenseRecordsDetail.create!(
