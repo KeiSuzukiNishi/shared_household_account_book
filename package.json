@@ -1,4 +1,6 @@
 {
+  "name": "shared_household_account_book",
+  "private": true,
   "dependencies": {
     "autoprefixer": "^10.4.19",
     "bootstrap": "4.5.0",
