@@ -97,3 +97,5 @@ gem 'kaminari'
 gem 'faker'
 # gem "webpacker", "~> 5.4"
 gem "cssbundling-rails"
+gem 'aws-sdk-s3', require: false
+gem 'dotenv-rails'
