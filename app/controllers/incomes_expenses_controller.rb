@@ -66,6 +66,7 @@ class IncomesExpensesController < ApplicationController
 
   def show_image
     @incomes_expense = IncomesExpense.find(params[:id])
+    @image_url = url_for(@incomes_expense.image)
   end
 
 
