@@ -12,6 +12,7 @@ module SharedHouseholdAccountBook
     config.i18n.available_locales = [:ja, :en]
     config.exceptions_app = self.routes
     config.time_zone = 'Asia/Tokyo'
+    config.active_storage.variant_processor = :mini_magick
     config.generators do |g|
       g.test_framework :rspec
     end

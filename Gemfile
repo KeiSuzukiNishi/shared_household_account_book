@@ -99,3 +99,4 @@ gem 'faker'
 gem "cssbundling-rails"
 gem 'aws-sdk-s3', require: false
 gem 'dotenv-rails'
+gem 'mini_magick', '~> 4.11'

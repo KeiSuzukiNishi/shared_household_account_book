@@ -444,6 +444,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   letter_opener_web
+  mini_magick (~> 4.11)
   mini_racer
   pg (~> 1.1)
   pry-rails

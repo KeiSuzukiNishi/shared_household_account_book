@@ -22,6 +22,7 @@
       <div class="card-body">
         <div class="table-responsive">
             <%= image_tag @image_url %>
+            <%= image_tag @incomes_expense.image.variant(resize_to_limit: [100, 100]) if @incomes_expense.image.attached? %>
         </div>
     </div>
   </div>
