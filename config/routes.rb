@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'charts/column_chart_yearly', to: 'charts#column_chart_yearly', as: 'column_chart_yearly'
 
   get '/404', to: 'errors#not_found'
-  get '*path', to: 'errors#not_found'
+  # get '*path', to: 'errors#not_found'
   get '/test_500', to: 'test#test_500'
 
 end
