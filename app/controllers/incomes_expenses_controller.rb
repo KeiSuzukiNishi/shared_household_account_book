@@ -66,6 +66,11 @@ class IncomesExpensesController < ApplicationController
 
   def show_image
     @incomes_expense = IncomesExpense.find(params[:id])
+    if @incomes_expense.image.attached?
+      @image_url = rails_blob_path(@incomes_expense.image, only_path: true)
+    else
+      @image_url = nil
+    end
   end
 
 

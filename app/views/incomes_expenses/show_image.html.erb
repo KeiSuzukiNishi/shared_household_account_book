@@ -21,7 +21,8 @@
   <div class="card shadow mb-4">
       <div class="card-body">
         <div class="table-responsive">
-            <%= image_tag @incomes_expense.image %>
+            <%= image_tag @image_url %>
+            <%#= image_tag @incomes_expense.image.variant(resize_to_limit: [300, 300]) if @incomes_expense.image.attached? %>
         </div>
     </div>
   </div>
