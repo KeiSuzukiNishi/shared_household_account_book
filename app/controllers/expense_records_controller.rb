@@ -37,7 +37,7 @@ class ExpenseRecordsController < ApplicationController
     # reject(&:blank?)があることで空欄を回避している。これを削除すると@resultsがNaNになる。
     total_income = user_incomes.sum
   
-    @results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100).round }
+    @results = user_incomes.map { |income| (income.to_f / total_income.to_f * 100) }
     
     if ExpenseRecord.exists?(year: @year, month: @month)
       redirect_to new_expense_record_path, alert: t('flash.expense_record_existed')
