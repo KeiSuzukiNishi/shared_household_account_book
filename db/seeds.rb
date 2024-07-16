@@ -1,5 +1,5 @@
-# ユーザーを4人作成
-4.times do |n|
+# ユーザーを2人作成
+2.times do |n|
     unless User.exists?(email: "user#{n+1}@example.com")
       user = User.create!(
         name: "user#{n+1}",
