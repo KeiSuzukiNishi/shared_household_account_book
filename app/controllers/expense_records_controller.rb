@@ -32,7 +32,7 @@ class ExpenseRecordsController < ApplicationController
   
     @total_expenses = @users.sum { |user| user.total_amount_by_month(@year, @month) }
     @results = []
-    biinding.pry
+    # biinding.pry
     user_incomes = params[:income].values.reject(&:blank?).map(&:to_i)
     # reject(&:blank?)があることで空欄を回避している。これを削除すると@resultsがNaNになる。
     total_income = user_incomes.sum
