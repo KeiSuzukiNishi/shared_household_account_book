@@ -255,5 +255,12 @@
     <%= javascript_include_tag 'chartkick', 'Chart.bundle' %>
     <%= javascript_include_tag 'vendor/bootstrap.bundle.min' %>
     <%= javascript_include_tag 'vendor/sb-admin-2.min' %>
+
+    <!-- Ensure jQuery is available before executing other scripts -->
+    <script>
+      $(document).ready(function() {
+        $('#example').DataTable();
+      });
+    </script>
   </body>
 </html>
