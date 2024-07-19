@@ -8,3 +8,5 @@ pin "@rails/ujs", to: "https://ga.jspm.io/npm:@rails/ujs@6.1.7/lib/assets/compil
 pin "bootstrap", to: "https://ga.jspm.io/npm:bootstrap@5.3.2/dist/js/bootstrap.esm.js"
 pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.7.1/dist/jquery.js"
 pin "jquery-ui", to: "https://ga.jspm.io/npm:jquery-ui@1.13.2/"
+pin "jquery-easing", to: "https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"
+pin "datatables", to: "https://cdn.datatables.net/2.0.3/js/jquery.dataTables.min.js"
