@@ -1,5 +1,5 @@
-# ユーザーを4人作成
-4.times do |n|
+# ユーザーを2人作成
+2.times do |n|
     unless User.exists?(email: "user#{n+1}@example.com")
       user = User.create!(
         name: "user#{n+1}",
@@ -77,9 +77,6 @@
   
   users = User.all
   
-  # 仮のレコードのIDを保持する配列を初期化
-  temporary_record_ids = []
-  
   12.times do |n|
     date = Date.today - 1.year + n.months
     expense_record = ExpenseRecord.create!(
@@ -94,6 +91,10 @@
     num_users = rand(2..6)
     selected_users = users.sample(num_users, random: Random.new(user_probabilities.hash))
   
+    # 仮のレコードのIDを保持する配列を初期化
+    temporary_record_ids = []
+    user_expenses = {}
+
     selected_users.each do |user|
       # ランダムな収入金額を設定（15万円〜30万円）
       income = rand(150000..300000)
@@ -109,25 +110,30 @@
         income: income
       )
   
+      # 各ユーザーのtotal_amountを計算
+      total_amount = rand(50000..200000)
+      user_expenses[user.id] = total_amount
+
       # 仮のレコードのIDを配列に追加
       temporary_record_ids << temporary_record.id
     end
-  
+
+    # 全ユーザーの合計支出金額を計算
+    total_expenses_of_month = user_expenses.values.sum
+
     selected_users.each do |user|
-      # 合計支出金額のランダムな設定
-      total_amount = rand(50000..200000)
-  
       # 各ユーザーの収入に対するratioを計算
       user_income = ExpenseRecordsDetail.where(expense_record: expense_record, user: user).pluck(:income).first
       user_ratio = user_income.to_f / total_income_of_month.to_f
   
       # 負担金額を計算
-      burden_amount = (user_ratio * total_amount).round
+      burden_amount = (user_ratio * total_expenses_of_month).round
   
       # 差額を計算
+      total_amount = user_expenses[user.id]
       difference = total_amount - burden_amount
   
-      user_ratio = user_ratio * 100.round
+      user_ratio = user_ratio * 100
   
       # 割り勘記録詳細を作成
       ExpenseRecordsDetail.create!(

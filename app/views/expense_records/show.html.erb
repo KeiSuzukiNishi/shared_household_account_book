@@ -19,7 +19,7 @@
         <td><%= detail.expense_record.year %></td>
         <td><%= detail.expense_record.month %></td>
         <td><%= number_with_delimiter(detail.income) %></td>
-        <td><%= detail.ratio %>%</td>
+        <td><%= detail.ratio.round %>%</td>
         <td><%= number_with_delimiter(detail.total_amount) %></td>
         <td><%= number_with_delimiter(detail.burden_amount) %></td>
         <td><%= number_with_delimiter(detail.difference) %></td>
