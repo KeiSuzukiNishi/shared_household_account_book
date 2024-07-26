@@ -13,6 +13,8 @@
 * chartkick
 * font-awesome-rails
 * faker
+* unicorn
+* font-awesome-rails
 ## 実行手順
 ```
 $ git clone git@github.com:KeiSuzukiNishi/shared_household_account_book.git
